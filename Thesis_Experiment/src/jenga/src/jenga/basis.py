@@ -107,6 +107,77 @@ class Task(ABC):
 
         return task_type
 
+
+    def create_data_preprocessor(self, categorical_feature_encoder_name: str, categorical_feature_encoder: BaseEstimator, numerical_feature_encoder_name:str, numerical_feature_encoder: BaseEstimator)  -> ColumnTransformer:
+        """
+        Creates a data_preprocessor, that transforms numerical and categorial features
+        Args:
+            train_data (Optional[pd.DataFrame], optional): Data to train. Defaults to None.
+            train_labels (Optional[pd.Series], optional): Labels to train. Defaults to None.
+            categorial_feature_encoder_name: Name of the categorical feature Encoder.
+            categorial_feature_encoder: Categorical feature Encoder extending the sklearn BaseEstimator.
+            numerical_feature_encoder_name: Name of the numerical feature Encoder.
+            numerical_feature_encoder: Numerial feature Encoder extending the sklearn BaseEstimator.
+
+            
+        Returns:
+            BaseEstimator: Trained model
+        """
+
+        categorical_preprocessing = Pipeline(
+            [
+                ('mark_missing', SimpleImputer(strategy='constant', fill_value='__NA__')),
+                (categorical_feature_encoder_name, categorical_feature_encoder())
+            ]
+        )
+
+        numerical_preprocessing = Pipeline(
+            [
+                ('mark_missing', SimpleImputer(strategy='constant', fill_value=0)),
+                (numerical_feature_encoder_name,  numerical_feature_encoder())
+            ]
+        )
+
+        feature_transformation = ColumnTransformer(transformers=[
+                ('categorical_features', categorical_preprocessing, self.categorical_columns),
+                ('scaled_numeric', numerical_preprocessing, self.numerical_columns)
+            ]
+        )
+
+        return feature_transformation
+
+
+    def fit_model(feature_transformation: ColumnTransformer, self, train_data: Optional[pd.DataFrame] = None, train_labels: Optional[pd.Series] = None) -> BaseEstimator:
+        """
+        Fit a model. If no data is given (default), it uses the task's train data and returns a model`. \
+            If data is given, it trains this data.
+
+        Args:
+            train_data (Optional[pd.DataFrame], optional): Data to train. Defaults to None.
+            train_labels (Optional[pd.Series], optional): Labels to train. Defaults to None.
+            feature_transformation: defines a ColumnTransformer as definded in sklearn library.
+
+        Returns:
+            BaseEstimator: Trained model
+        """
+
+        train_data = self.train_data.copy()
+        train_labels = self.train_labels.copy()
+
+        for col in self.categorical_columns:
+            train_data[col] = train_data[col].astype(str)
+
+        param_grid, pipeline, scorer = self._get_pipeline_grid_scorer_tuple(feature_transformation)
+        refit = list(scorer.keys())[0]
+
+        search = GridSearchCV(pipeline, param_grid, scoring=scorer, n_jobs=-1, refit=refit)
+        model = search.fit(train_data, train_labels).best_estimator_
+
+        return model
+
+
+
+
     def fit_baseline_model(self, train_data: Optional[pd.DataFrame] = None, train_labels: Optional[pd.Series] = None) -> BaseEstimator:
         """
         Fit a baseline model. If no data is given (default), it uses the task's train data and creates the attribute `_baseline_model`. \
