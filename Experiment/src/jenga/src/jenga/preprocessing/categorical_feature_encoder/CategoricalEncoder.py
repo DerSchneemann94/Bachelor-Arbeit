@@ -7,8 +7,8 @@ from sklearn.preprocessing import StandardScaler
 
 
 categorical_encoder_dict = {
-    "one-hot" : OneHotEncoder,
-    "ordinal" : OrdinalEncoder
+    "one_hot_encode" : OneHotEncoder,
+    "ordinal_encode" : OrdinalEncoder
 }
 
 numerical_encoder_dict = {

@@ -26,8 +26,8 @@ class CategoricalFeatureEncodingExperiment(object):
         task_id_class_tuples: List[Tuple[int, Callable[..., OpenMLTask]]],
         strategies: List[str],
         num_repetitions: int,
-        numerical_feature_encoder_name = Encoder.getNumericalEncoder("scaling"),
-        categorical_feature_encoder_name = Encoder.getCategoricalEncoder("ordinal"),
+        numerical_feature_encoder_name = "scaling",
+        categorical_feature_encoder_name = "ordinal_encode",
         base_path: str = 'results',
         timestamp: Optional[str] = None,
     ):
@@ -60,9 +60,13 @@ class CategoricalFeatureEncodingExperiment(object):
         if self._timestamp is None:
             self._timestamp = datetime.now().strftime("%Y-%m-%d_%H:%M")
 
-
+        experiment_path = self._base_path / timestamp
+        if experiment_path.exists():
+            raise ValueError(f"Experiment already exist")
 
         self._base_path = self._base_path / self._timestamp / self._categorical_feature_encoder_name
+        
+        
 
 
     def run(self):

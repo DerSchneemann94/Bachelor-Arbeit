@@ -1,4 +1,4 @@
-name: Thesis
+name: Experiment
 channels:
   - defaults
   - conda-forge

@@ -1,0 +1,4 @@
+,baselineone-hot,encoderordinal
+F1_micro,0.0,3.1031676915590914e-17
+F1_macro,0.0,1.5515838457795457e-17
+F1_weighted,0.0,0.0

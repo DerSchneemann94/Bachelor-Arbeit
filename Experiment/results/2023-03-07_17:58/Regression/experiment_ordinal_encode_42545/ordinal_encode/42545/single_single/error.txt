@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/Experiments/CategoricalFeatureEncodingExperiment.py", line 79, in run
+    evaluator = self.strategy_to_EvaluatorClass[strategy](
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/Evaluation/Evaluation.py", line 234, in __init__
+    super().__init__(
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/Evaluation/Evaluation.py", line 123, in __init__
+    self._task.fit_baseline_model()
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/jenga/src/jenga/basis.py", line 233, in fit_baseline_model
+    model = search.fit(train_data, train_labels).best_estimator_
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/model_selection/_search.py", line 909, in fit
+    self.best_estimator_.fit(X, y, **fit_params)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/pipeline.py", line 405, in fit
+    self._final_estimator.fit(Xt, y, **fit_params_last_step)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/linear_model/_stochastic_gradient.py", line 1583, in fit
+    self._validate_params()
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/base.py", line 581, in _validate_params
+    validate_parameter_constraints(
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/utils/_param_validation.py", line 97, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'loss' parameter of SGDRegressor must be a str among {'squared_error', 'huber', 'squared_epsilon_insensitive', 'epsilon_insensitive'}. Got 'squared_loss' instead.

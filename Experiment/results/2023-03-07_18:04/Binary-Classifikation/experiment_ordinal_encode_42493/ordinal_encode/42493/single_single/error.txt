@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/Experiments/CategoricalFeatureEncodingExperiment.py", line 87, in run
+    evaluator.evaluate(self._num_repetitions)
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/Evaluation/Evaluation.py", line 142, in evaluate
+    result_temp = EvaluationResult(self._task, self._categorical_feature_encoder_name)
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/Evaluation/Evaluation.py", line 38, in __init__
+    self._baseline_performance = self._task.get_baseline_performance()
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/jenga/src/jenga/basis.py", line 403, in get_baseline_performance
+    predictions = self._baseline_model.predict(self.test_data)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/pipeline.py", line 480, in predict
+    Xt = transform.transform(Xt)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/utils/_set_output.py", line 142, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/compose/_column_transformer.py", line 800, in transform
+    Xs = self._fit_transform(
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/compose/_column_transformer.py", line 658, in _fit_transform
+    return Parallel(n_jobs=self.n_jobs)(
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/utils/parallel.py", line 63, in __call__
+    return super().__call__(iterable_with_config)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/parallel.py", line 1048, in __call__
+    if self.dispatch_one_batch(iterator):
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/parallel.py", line 864, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/parallel.py", line 782, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/parallel.py", line 263, in __call__
+    return [func(*args, **kwargs)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/parallel.py", line 263, in <listcomp>
+    return [func(*args, **kwargs)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/utils/parallel.py", line 123, in __call__
+    return self.function(*args, **kwargs)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/pipeline.py", line 876, in _transform_one
+    res = transformer.transform(X)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/pipeline.py", line 658, in transform
+    Xt = transform.transform(Xt)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/utils/_set_output.py", line 142, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/preprocessing/_encoders.py", line 877, in transform
+    X_int, X_mask = self._transform(
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/preprocessing/_encoders.py", line 174, in _transform
+    raise ValueError(msg)
+ValueError: Found unknown categories ['6228', '5369', '3511', '3312', '2090', '5389', '5361', '4145', '3741', '6875', '4335', '2440', '3227', '4725', '5341', '4845', '6318', '7041', '2358', '5116', '5400', '5118', '7116', '3299', '5972', '7052', '2260', '2983', '4452', '1651', '5952', '292', '7356', '5457', '4281', '2230', '5066', '5489', '4292', '7264', '4638', '4525', '3857', '1189', '6601', '3217', '4533', '4714', '6997', '1683', '3918', '4849', '352', '4829', '7341', '4301', '1658', '5023', '3244', '3291', '1366', '3996', '4951', '1573', '4758', '905', '4014', '2213', '4030', '3610', '4477', '3318', '5511', '5984', '6987', '5320', '5418', '3866', '6451', '5942', '6458', '3664', '3734', '7046', '7755', '6694', '2693', '4556', '5456', '3402', '4429', '2240', '4770', '1780', '4942', '2489', '5171', '7284', '6831', '6972', '5351', '7281', '3092', '6965', '4563', '749', '3924', '5533', '886', '7097', '7295', '4463', '3429', '5207', '6991', '4121', '3396', '813', '4842', '5168', '5042', '3598', '4741', '1633', '5903', '1957', '6545', '4138', '2221', '1830', '4331', '4270', '4784', '1915', '3487', '7796', '4734', '6261', '1816', '3862', '3388', '1319', '5276', '2234', '5372', '3269', '5253', '1985', '5329', '4589', '3091', '3635', '1934', '4520', '1226', '4210', '3689', '5048', '3693', '213', '3192', '4553', '1362', '1473', '6644', '6412', '5980', '7289', '5236', '5070', '1343', '3948', '2998', '911', '2204', '1307', '2075', '4530', '2110', '6983', '7121', '1306', '4945', '7805', '3435', '2414', '5441', '4887', '4170', '913', '5028', '4688', '4140', '6896', '6260', '1818', '3507', '5397', '1257', '2151', '4609', '4357', '974', '5440', '4699', '1376', '5211', '5922', '5068', '5548', '7801', '4016', '4339', '3267', '3988', '1312', '4611', '7252', '3892', '6963', '4334', '5283', '3201', '3512', '3502', '1706', '7019'] in column 1 during transform

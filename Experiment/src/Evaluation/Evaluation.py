@@ -51,12 +51,12 @@ class EvaluationResult(object):
 
         dataframe = pd.DataFrame(
                 {
-                    "baseline" + self._task.baseline_categorical_feature_encoder_name: {
+                    "baseline: " + self._task.baseline_categorical_feature_encoder_name: {
                         self._baseline_metric[0]: self._baseline_performance[0],
                         self._baseline_metric[1]: self._baseline_performance[1],
                         self._baseline_metric[2]: self._baseline_performance[2]
                     },
-                    "encoder" + self.categorical_feature_encoder_name: {
+                    "encoder: " + self.categorical_feature_encoder_name: {
                         self._baseline_metric[0]: score_on_encoded[0],
                         self._baseline_metric[1]: score_on_encoded[1],
                         self._baseline_metric[2]: score_on_encoded[2]

@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/Experiments/CategoricalFeatureEncodingExperiment.py", line 87, in run
+    evaluator.evaluate(self._num_repetitions)
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/Evaluation/Evaluation.py", line 142, in evaluate
+    result_temp = EvaluationResult(self._task, self._categorical_feature_encoder_name)
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/Evaluation/Evaluation.py", line 38, in __init__
+    self._baseline_performance = self._task.get_baseline_performance()
+  File "/home/drothenberger/Bachelor/teilautomatische-Enkodierung-Code/Experiment/src/jenga/src/jenga/basis.py", line 525, in get_baseline_performance
+    predictions = self._baseline_model.predict(self.test_data)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/pipeline.py", line 480, in predict
+    Xt = transform.transform(Xt)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/utils/_set_output.py", line 142, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/compose/_column_transformer.py", line 800, in transform
+    Xs = self._fit_transform(
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/compose/_column_transformer.py", line 658, in _fit_transform
+    return Parallel(n_jobs=self.n_jobs)(
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/utils/parallel.py", line 63, in __call__
+    return super().__call__(iterable_with_config)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/parallel.py", line 1048, in __call__
+    if self.dispatch_one_batch(iterator):
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/parallel.py", line 864, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/parallel.py", line 782, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/parallel.py", line 263, in __call__
+    return [func(*args, **kwargs)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/joblib/parallel.py", line 263, in <listcomp>
+    return [func(*args, **kwargs)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/utils/parallel.py", line 123, in __call__
+    return self.function(*args, **kwargs)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/pipeline.py", line 876, in _transform_one
+    res = transformer.transform(X)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/pipeline.py", line 658, in transform
+    Xt = transform.transform(Xt)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/utils/_set_output.py", line 142, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/preprocessing/_encoders.py", line 877, in transform
+    X_int, X_mask = self._transform(
+  File "/home/drothenberger/.conda/envs/Thesis/lib/python3.8/site-packages/sklearn/preprocessing/_encoders.py", line 174, in _transform
+    raise ValueError(msg)
+ValueError: Found unknown categories ['    002908ch'] in column 0 during transform

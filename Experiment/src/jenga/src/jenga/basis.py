@@ -35,7 +35,7 @@ class Task(ABC):
         text_columns: List[str] = [],
         is_image_data: bool = False,
         seed: Optional[int] = None,
-        baseline_categorical_feature_encoder_name: str = "one-hot",
+        baseline_categorical_feature_encoder_name: str = "one_hot_encode",
         baseline_categorical_feature_encoder: BaseEstimator = OneHotEncoder,
     ):
         """
@@ -615,7 +615,7 @@ class RegressionTask(Task):
         """
 
         param_grid = {
-            'learner__loss': ['squared_loss', 'huber'],
+            'learner__loss': ['squared_error', 'huber'],
             'learner__penalty': ['l2'],
             'learner__alpha': [0.00001, 0.0001, 0.001, 0.01]
         }
