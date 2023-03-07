@@ -1,0 +1,18 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": ["737", "mode", "experiment_debug", "--missing-fractions", "0.01,0.1,0.3,0.5", "--missing-types", "MCAR,MNAR,MAR", "--strategies", "single_single,single_all", "--num-repetitions", "3", "--base-path", "../results"],
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "~/Schreibtisch/Bachelor/teilautomatische-Enkodierung-Code"
+        }
+    ]
+}

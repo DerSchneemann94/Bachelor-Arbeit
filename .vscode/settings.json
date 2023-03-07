@@ -1,5 +1,3 @@
 {
-    "python.analysis.extraPaths": [
-        "./Thesis_Experiment/src/jenga/src"
-    ]
+    
 }
