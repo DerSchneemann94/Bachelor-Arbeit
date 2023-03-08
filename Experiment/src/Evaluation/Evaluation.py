@@ -190,8 +190,6 @@ class Evaluator(object):
     def _save_results(self):
         if self._path is not None:
             #print("Path:  ", self._path)
-            current_working_directory = Path(__file__).resolve()
-            print("current_working_directory2:  ", current_working_directory)
             self._path.mkdir(parents=True, exist_ok=True)
             #Mean results
             self._result.downstream_performance.to_csv(self._path / f"downstream_performance_mean.csv")

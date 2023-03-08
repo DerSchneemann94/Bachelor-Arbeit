@@ -1,0 +1,4 @@
+,baseline: one_hot_encode,encoder: ordinal_encode
+F1_micro,0.869,0.701
+F1_macro,0.6641361504875154,0.5860279590347668
+F1_weighted,0.8529991103453757,0.7431055102586149

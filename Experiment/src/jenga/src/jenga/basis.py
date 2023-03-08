@@ -209,7 +209,7 @@ class Task(ABC):
         categorical_preprocessing = Pipeline(
             [
                 ('mark_missing', SimpleImputer(strategy='constant', fill_value='__NA__')),
-                (self.baseline_categorical_feature_encoder_name, self.baseline_categorical_feature_encoder())
+                (self.baseline_categorical_feature_encoder_name, self.baseline_categorical_feature_encoder(handle_unknown="ignore"))
             ]
         )
 
