@@ -52,7 +52,8 @@ MANIFEST
 .linked_env
 .vscode
 
-
+#Experiment results
+results/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/latex
