@@ -53,7 +53,7 @@ MANIFEST
 .vscode
 
 #Experiment results
-results/
+/results/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/latex
