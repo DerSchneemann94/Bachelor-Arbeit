@@ -1,3 +1,8 @@
+#Experiment results
+/results/*
+
+
+
 # Temporary and binary files
 *~
 *.py[cod]
@@ -51,7 +56,6 @@ MANIFEST
 
 .linked_env
 .vscode
-
 
 
 
