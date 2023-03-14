@@ -1,5 +1,5 @@
-from Datasets.DatabaseAccessor.DatabaseAccesorDaos.OpenMl import OpenMlAccessor
 from Datasets.DatabaseAccessor.DatabaseAccessorNotDefinedError import DatabaseAccessorNotDefinedError
+from Datasets.DatabaseAccessor.Implementations.OpenMl.OpenMlAccessor import OpenMlAccessor
 
 class DatabaseAccessor:
 
