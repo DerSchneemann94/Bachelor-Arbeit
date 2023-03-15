@@ -6,9 +6,9 @@ import pandas as pd
 from pathlib import Path
 from statistics import mean, stdev
 from typing import Callable, Dict, List, Optional, Tuple
-from jenga.src.jenga.corruptions.generic import MissingValues
-from jenga.src.jenga.tasks.openml import OpenMLTask
-from jenga.src.jenga.utils import BINARY_CLASSIFICATION, MULTI_CLASS_CLASSIFICATION, REGRESSION
+from jenga.corruptions.generic import MissingValues
+from jenga.tasks.openml import OpenMLTask
+from jenga.utils import BINARY_CLASSIFICATION, MULTI_CLASS_CLASSIFICATION, REGRESSION
 from numpy import nan
 from sklearn.metrics import f1_score, mean_absolute_error, mean_squared_error
 from sklearn.base import BaseEstimator

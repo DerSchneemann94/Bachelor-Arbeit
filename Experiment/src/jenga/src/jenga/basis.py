@@ -70,15 +70,15 @@ class Task(ABC):
         self.baseline_categorical_feature_encoder = baseline_categorical_feature_encoder
 
         # Fix random seeds for reproducibility
-        if self._seed:
-            random.seed(self._seed)
-            np.random.seed(self._seed)
+        # if self._seed:
+        #     random.seed(self._seed)
+        #     np.random.seed(self._seed)
 
-            try:
-                import tensorflow as tf
-                tf.random.set_seed(self._seed)
-            except ImportError:
-                pass
+        #     try:
+        #         import tensorflow as tf
+        #         tf.random.set_seed(self._seed)
+        #     except ImportError:
+        #         pass
 
     def _get_task_type_of_data(self) -> Optional[int]:
         """
@@ -585,7 +585,7 @@ class RegressionTask(Task):
         )
 
         self._task_type = REGRESSION
-        self._check_data()
+        #self._check_data()
 
     def _check_data(self):
         """

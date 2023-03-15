@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from Experiments.CategoricalFeatureEncodingExperiment import CategoricalFeatureEncodingExperiment
-from jenga.src.jenga.tasks.openml import OpenMLBinaryClassificationTask, OpenMLRegressionTask
+from jenga.tasks.openml import OpenMLBinaryClassificationTask, OpenMLRegressionTask
 
 experiment_path = Path("/results") / "experiment_debug" / "737"
 

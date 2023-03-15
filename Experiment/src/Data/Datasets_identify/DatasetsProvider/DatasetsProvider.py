@@ -1,4 +1,4 @@
-from Data.Datasets.DatasetsProvider.DataBaseProviderNotFroundError import DataBaseProviderNotFroundError
+from Data.Datasets_identify.DatasetsProvider.DataBaseProviderNotFroundError import DataBaseProviderNotFroundError
 
 class DatasetsProvider():
     

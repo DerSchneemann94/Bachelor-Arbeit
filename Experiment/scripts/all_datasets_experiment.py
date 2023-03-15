@@ -25,7 +25,7 @@ openml_datasets = [
 ]
 
 categorical_feature_encoder_name = "ordinal_encode"
-timestamp = datetime.now().strftime("%Y-%m-%d_%H:%M")
+timestamp = datetime.now().strftime("%Y-%m-%d_%H.%M")
 strategies = ["single_single"]
 number_of_repetions = 2
 numerical_feature_encoder_name="scaling"

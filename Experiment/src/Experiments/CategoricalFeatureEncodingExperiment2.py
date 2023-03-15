@@ -7,20 +7,21 @@ import traceback
 from datetime import datetime
 from pathlib import Path
 from typing import Callable, Dict, List, Optional, Tuple
-from jenga.src.jenga.preprocessing.categorical_feature_encoder.CategoricalEncoder import Encoder
-from jenga.src.jenga.tasks.ExternalDataTask import ExternalDataTask
+from jenga.preprocessing.categorical_feature_encoder.CategoricalEncoder import Encoder
+from jenga.tasks.ExternalDataTask import ExternalDataTask
 
 import joblib
 import pandas as pd
 from Evaluation.Evaluation import EvaluationResult, MultipleColumnsAllMissingEvaluator, MultipleColumnsEvaluator, SingleColumnAllMissingEvaluator, SingleColumnEvaluator
 from utils import get_project_root
 
-
 logger = logging.getLogger()
 
 class CategoricalFeatureEncodingExperiment2(object):
     def __init__(
         self,
+        data: pd.DataFrame,
+        labels: pd.Series,
         task_id_class_tuples: List[Tuple[int, Callable[..., ExternalDataTask]]],
         strategies: List[str],
         num_repetitions: int,
@@ -37,6 +38,8 @@ class CategoricalFeatureEncodingExperiment2(object):
             "multiple_all": MultipleColumnsAllMissingEvaluator
         }
 
+        self._data = data
+        self._labels = labels
         self._task_id_class_tuples = task_id_class_tuples
         self._strategies = strategies
         self._num_repetitions = num_repetitions
@@ -67,7 +70,7 @@ class CategoricalFeatureEncodingExperiment2(object):
     def run(self):
         for task_id, task_class in self._task_id_class_tuples:
             self._result[task_id] = {}
-            task = task_class(openml_id=task_id)
+            task = task_class(data=self._data, labels=self._labels)
             for strategy in self._strategies:
                 experiment_path = self._base_path / f"{task_id}" / f"{strategy}"
                 try:

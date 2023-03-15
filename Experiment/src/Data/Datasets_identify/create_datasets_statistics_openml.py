@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 from typing import List
-from Data.Datasets.DatabaseAccessor.DatabaseIdentifier import DatabaseIdentifierInterface
-from Data.Datasets.Model.CategoricalFeatureCharacteristics import CategorialFeatureCharacteristics
+from Data.Datasets_identify.DatabaseAccessor.DatabaseIdentifier import DatabaseIdentifierInterface
+from Data.Datasets_identify.Model.CategoricalFeatureCharacteristics import CategorialFeatureCharacteristics
 import pandas as pd 
 import typer
 from sklearn.datasets import fetch_openml

@@ -58,7 +58,7 @@ class CategoricalFeatureEncodingExperiment(object):
         self._base_path = project_root / base_path
 
         if self._timestamp is None:
-            self._timestamp = datetime.now().strftime("%Y-%m-%d_%H:%M")
+            self._timestamp = datetime.now().strftime("%Y-%m-%d_%H.%M")
 
         experiment_path = self._base_path / timestamp
         if experiment_path.exists():
@@ -66,8 +66,6 @@ class CategoricalFeatureEncodingExperiment(object):
 
         self._base_path = self._base_path / self._timestamp / self._categorical_feature_encoder_name
         
-        
-
 
     def run(self):
         for task_id, task_class in self._task_id_class_tuples:

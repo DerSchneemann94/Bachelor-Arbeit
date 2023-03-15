@@ -1,7 +1,7 @@
 {
     "nursery-data": {
         "path": "nursery_data/nursery.txt",
-        "target": "health",
+        "target": "nursery",
         "type": "Multiple-Classification"
     } 
 }
