@@ -1,9 +1,7 @@
-from typing import Optional
-
 import pandas as pd
+from typing import Optional
 from sklearn.datasets import fetch_openml
 from sklearn.model_selection import train_test_split
-
 from ..basis import (
     BinaryClassificationTask,
     MultiClassClassificationTask,
@@ -12,9 +10,8 @@ from ..basis import (
 )
 
 
-class OpenMLTask(Task):
-
-    def __init__(self, openml_id: int, train_data, test_data, train_labels, test_labels, categorical_columns, numerical_columns, seed: Optional[int] = None):
+class ExternalDataTask(Task):
+    def __init__(self, train_data, test_data, train_labels, test_labels, categorical_columns, numerical_columns, seed: Optional[int] = None):
         """
         Base class for task that get data from [OpenML](https://www.openml.org).
 
@@ -36,25 +33,22 @@ class OpenMLTask(Task):
         )
 
 
-class OpenMLRegressionTask(OpenMLTask, RegressionTask):
+class ExternalDataMLRegressionTask(ExternalDataTask, RegressionTask):
     """
     Class that represents a regression task and gets data from [OpenML](https://www.openml.org).
     """
-
     pass
 
 
-class OpenMLMultiClassClassificationTask(OpenMLTask, MultiClassClassificationTask):
+class ExternalDataMultiClassClassificationTask(ExternalDataTask, MultiClassClassificationTask):
     """
     Class that represents a multi-class classification task and gets data from [OpenML](https://www.openml.org).
     """
-
     pass
 
 
-class OpenMLBinaryClassificationTask(OpenMLTask, BinaryClassificationTask):
+class ExternalDataBinaryClassificationTask(ExternalDataTask, BinaryClassificationTask):
     """
     Class that represents a binary classification task and gets data from [OpenML](https://www.openml.org).
     """
-
     pass

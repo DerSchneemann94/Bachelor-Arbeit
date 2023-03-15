@@ -7,8 +7,8 @@ import traceback
 from datetime import datetime
 from pathlib import Path
 from typing import Callable, Dict, List, Optional, Tuple
-from jenga.src.jenga.preprocessing.categorical_feature_encoder.CategoricalEncoder import Encoder
-from jenga.src.jenga.tasks.openml import OpenMLTask
+from jenga.preprocessing.categorical_feature_encoder.CategoricalEncoder import Encoder
+from jenga.tasks.openml import OpenMLTask
 
 import joblib
 import pandas as pd

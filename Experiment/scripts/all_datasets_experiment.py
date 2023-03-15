@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 from Experiments.CategoricalFeatureEncodingExperiment import CategoricalFeatureEncodingExperiment
-from jenga.src.jenga.tasks.openml import OpenMLBinaryClassificationTask, OpenMLMultiClassClassificationTask, OpenMLRegressionTask
+from jenga.tasks.openml import OpenMLBinaryClassificationTask, OpenMLMultiClassClassificationTask, OpenMLRegressionTask
 from utils import get_project_root
 
 project_root = get_project_root()

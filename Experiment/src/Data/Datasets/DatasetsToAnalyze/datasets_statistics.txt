@@ -1,0 +1,82 @@
+1. Car Evaluation Data-set: 
+https://archive.ics.uci.edu/ml/datasets/Car+Evaluation
+    1700 instances
+    7 features:
+        4 ordinal, 3 ????
+    cardinality:
+        [4, 4, 4, 4, 3, 3, 3]
+
+2. Titanic Dataset:
+https://www.kaggle.com/c/titanic/data?select=test.csv
+    891 instances
+    11 features: 
+        6 categorical:
+            1 ordinal 5 nominal
+        missingness in cabin and age
+    cardinality: 
+        [2, 3, 2, ~890, 91, 3]
+
+3. Bank Data Set:
+https://archive.ics.uci.edu/ml/datasets/Bank+Marketing
+    45211 instances
+    17 features:
+        10 categorical features:
+            2 ordinal features
+    cardinality:
+        [2, 12, 3, 4, 2, 2, 3, 12, 4, 2]
+
+4. Nursery Data Set:
+https://archive.ics.uci.edu/ml/datasets/Nursery
+    12960 instances
+    8 features:
+        8 ordinal
+    cardinality:
+        [3, 5, 4, 4, 3, 2, 3, 3]    
+
+5. Womens-E-Commerce-Clothing-Rating:
+https://www.openml.org/search?type=data&status=active&qualities.NumberOfInstances=gte_0&id=43663
+    32561 instances 
+    11 features:
+        1 ordinal 
+
+6. skillcraft1:
+https://www.openml.org/search?type=data&status=active&qualities.NumberOfInstances=gte_0&id=42918
+    
+    20 features:
+        1 ordinal
+
+7. Adult-Data-Set:
+https://archive.ics.uci.edu/ml/datasets/Adult
+    ~48000 instances
+    14 features:    
+        8 categorical:
+            1 ordinal 
+    cardinality:
+         [8, 16, 7, 14, 6, 5, 2, 41]
+
+8. US Military Demogrpahics:
+https://vincentarelbundock.github.io/Rdatasets/articles/data.html
+    1,414,593 instances
+    6 features:
+        6 categorical
+             1 ordinal
+    cardinality: 
+        [2, 4, 2, 7, 2, 10]
+
+9. Movie Ratings:
+https://vincentarelbundock.github.io/Rdatasets/articles/data.html
+    100,004 instances
+    7 features:
+        5 categorical
+            1 ordinal
+    cardinality:
+        [?, ?, ?, ?, 5]
+
+10. University Lecture/Instructor Evaluations by Students at ETH:
+https://vincentarelbundock.github.io/Rdatasets/articles/data.html
+    73421 instances
+    7 features
+        5 categorical:
+            2 ordinal
+    cardinality:
+        [2972, 1128, 4, 6, 2, 14, 5]        

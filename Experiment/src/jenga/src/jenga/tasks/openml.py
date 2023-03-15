@@ -1,9 +1,7 @@
-from typing import Optional
-
 import pandas as pd
+from typing import Optional
 from sklearn.datasets import fetch_openml
 from sklearn.model_selection import train_test_split
-
 from ..basis import (
     BinaryClassificationTask,
     MultiClassClassificationTask,
@@ -11,9 +9,7 @@ from ..basis import (
     Task
 )
 
-
 class OpenMLTask(Task):
-
     def __init__(self, openml_id: int, train_size: float = 0.8, seed: Optional[int] = None):
         """
         Base class for task that get data from [OpenML](https://www.openml.org).
@@ -52,7 +48,6 @@ class OpenMLRegressionTask(OpenMLTask, RegressionTask):
     """
     Class that represents a regression task and gets data from [OpenML](https://www.openml.org).
     """
-
     pass
 
 
@@ -60,7 +55,6 @@ class OpenMLMultiClassClassificationTask(OpenMLTask, MultiClassClassificationTas
     """
     Class that represents a multi-class classification task and gets data from [OpenML](https://www.openml.org).
     """
-
     pass
 
 
@@ -68,5 +62,4 @@ class OpenMLBinaryClassificationTask(OpenMLTask, BinaryClassificationTask):
     """
     Class that represents a binary classification task and gets data from [OpenML](https://www.openml.org).
     """
-
     pass
