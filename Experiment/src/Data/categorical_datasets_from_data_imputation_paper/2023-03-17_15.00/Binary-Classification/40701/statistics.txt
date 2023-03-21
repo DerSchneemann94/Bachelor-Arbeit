@@ -1,0 +1,5 @@
+Cardinality of categorical features:
+area_code: 3
+international_plan: 2
+voice_mail_plan: 2
+number_customer_service_calls: 10

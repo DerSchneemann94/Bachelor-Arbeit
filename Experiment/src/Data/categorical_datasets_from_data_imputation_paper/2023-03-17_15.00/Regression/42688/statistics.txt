@@ -1,0 +1,5 @@
+Cardinality of categorical features:
+city: 5
+floor: 35
+animal: 2
+furniture: 2

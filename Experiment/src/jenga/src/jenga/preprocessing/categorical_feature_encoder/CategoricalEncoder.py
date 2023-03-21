@@ -1,4 +1,4 @@
-from category_encoders import OneHotEncoder, OrdinalEncoder
+from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder
 from jenga.preprocessing.categorical_feature_encoder.CategoricalEncoderNotDefinedError import CategoricalEncoderNotDefinedError
 from jenga.preprocessing.categorical_feature_encoder.NumericalEncoderNotDefinedError import NumericalEncoderNotDefinedError
 from sklearn.preprocessing import StandardScaler
@@ -7,8 +7,8 @@ from sklearn.preprocessing import StandardScaler
 
 
 categorical_encoder_dict = {
-    "one_hot_encode" : OneHotEncoder,
-    "ordinal_encode" : OrdinalEncoder
+    "one_hot_encode" : OneHotEncoder(handle_unknown="ignore"),
+    "ordinal_encode" : OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)
 }
 
 numerical_encoder_dict = {

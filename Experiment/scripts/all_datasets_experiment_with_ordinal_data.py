@@ -2,13 +2,14 @@ import json
 from datetime import datetime
 from pathlib import Path
 from Data.Datasets_internal.PandasDataFrameCreator import PandaDataFrameCreator
-from Experiments.CategoricalFeatureEncodingExperiment2 import CategoricalFeatureEncodingExperiment2
+from Experiments.CategoricalFeatureEncodingExperiment_2 import CategoricalFeatureEncodingExperiment_2
 from jenga.tasks.ExternalDataTask import ExternalDataBinaryClassificationTask, ExternalDataMultiClassClassificationTask, ExternalDataMLRegressionTask
 from utils import get_project_root
 
 project_root = get_project_root()
 datasets_path = project_root / "src/Data/Datasets_identify/DatasetsToAnalyze/refractored_datasets"
 datasets_metadata_path = project_root / "src/Data/Datasets_identify/DatasetsToAnalyze/datasets_that_are_used_list.txt"
+
 
 task_dict = {
     "Regression":ExternalDataMLRegressionTask,
@@ -18,7 +19,7 @@ task_dict = {
 
 datasets = json.loads(datasets_metadata_path.read_text())
 categorical_feature_encoder_name = "ordinal_encode"
-timestamp = datetime.now().strftime("%Y-%m-%d_%H:%M")
+timestamp = datetime.now().strftime("%Y-%m-%d_%H.%M")
 strategies = ["single_single"]
 number_of_repetions = 2
 numerical_feature_encoder_name="scaling"

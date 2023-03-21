@@ -1,0 +1,6 @@
+Cardinality of categorical features:
+Airline: 18
+Flight: 5857
+AirportFrom: 283
+AirportTo: 285
+DayOfWeek: 7

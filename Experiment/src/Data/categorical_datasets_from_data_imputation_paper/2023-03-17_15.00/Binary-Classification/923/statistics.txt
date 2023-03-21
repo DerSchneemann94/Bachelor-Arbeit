@@ -1,0 +1,2 @@
+Cardinality of categorical features:
+isns: 2

@@ -1,0 +1,8 @@
+Cardinality of categorical features:
+LOW: 2
+RACE: 3
+SMOKE: 2
+PTL: 4
+HT: 2
+UI: 2
+FTV: 6

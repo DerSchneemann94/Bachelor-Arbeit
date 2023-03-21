@@ -1,0 +1,7 @@
+Cardinality of categorical features:
+sex: 2
+age_cat_25-45: 2
+age_cat_Greaterthan45: 2
+age_cat_Lessthan25: 2
+race_African-American: 2
+race_Caucasian: 2

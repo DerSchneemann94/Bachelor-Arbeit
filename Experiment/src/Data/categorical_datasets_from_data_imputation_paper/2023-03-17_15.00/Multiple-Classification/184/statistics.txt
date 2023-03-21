@@ -1,0 +1,7 @@
+Cardinality of categorical features:
+white_king_col: 4
+white_king_row: 4
+white_rook_col: 8
+white_rook_row: 8
+black_king_col: 8
+black_king_row: 8

@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from typing import List, Tuple
 from Experiments.CategoricalFeatureEncodingExperiment import CategoricalFeatureEncodingExperiment
-from jenga.src.jenga.tasks.openml import OpenMLBinaryClassificationTask, OpenMLMultiClassClassificationTask, OpenMLRegressionTask, OpenMLTask
+from jenga.tasks.openml import OpenMLBinaryClassificationTask, OpenMLMultiClassClassificationTask, OpenMLRegressionTask, OpenMLTask
 import typer
 
 

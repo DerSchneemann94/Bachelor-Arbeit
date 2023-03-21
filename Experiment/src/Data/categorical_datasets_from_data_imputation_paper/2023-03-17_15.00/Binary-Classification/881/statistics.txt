@@ -1,0 +1,4 @@
+Cardinality of categorical features:
+x3: 3
+x7: 2
+x8: 2

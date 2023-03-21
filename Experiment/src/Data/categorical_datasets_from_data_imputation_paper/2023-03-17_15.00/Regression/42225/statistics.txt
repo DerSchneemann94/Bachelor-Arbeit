@@ -1,0 +1,4 @@
+Cardinality of categorical features:
+cut: 5
+color: 7
+clarity: 8

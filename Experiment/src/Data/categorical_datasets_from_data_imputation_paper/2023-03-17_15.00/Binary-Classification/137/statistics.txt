@@ -1,0 +1,10 @@
+Cardinality of categorical features:
+top-left-square: 3
+top-middle-square: 3
+top-right-square: 3
+middle-left-square: 3
+middle-middle-square: 3
+middle-right-square: 3
+bottom-left-square: 3
+bottom-middle-square: 3
+bottom-right-square: 3

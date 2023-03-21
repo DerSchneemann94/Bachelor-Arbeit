@@ -1,0 +1,25 @@
+Cardinality of categorical features:
+attribute#1: 2
+attribute#2: 2
+attribute#3: 2
+attribute#4: 2
+attribute#5: 2
+attribute#6: 2
+attribute#7: 2
+irrelevant1: 2
+irrelevant2: 2
+irrelevant3: 2
+irrelevant4: 2
+irrelevant5: 2
+irrelevant6: 2
+irrelevant7: 2
+irrelevant8: 2
+irrelevant9: 2
+irrelevant10: 2
+irrelevant11: 2
+irrelevant12: 2
+irrelevant13: 2
+irrelevant14: 2
+irrelevant15: 2
+irrelevant16: 2
+irrelevant17: 2

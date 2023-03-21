@@ -29,36 +29,44 @@ def analyze_data_sets(openml_ids):
         try:
             dataset = fetch_dataset_from_database(openml_id)
             dataset_categorical_characteristics = determine_categorical_feature_characteristics(dataset)
-            if not dataset_categorical_characteristics:
+            if dataset_categorical_characteristics:
                 dataset_statistics_collection[openml_id] = dataset_categorical_characteristics
         except Exception as error:
             unsuccessfull_datasets_ids.append(openml_id)
             #print("Dataset_Id: ", openml_id)
             raise error
+    return dataset_statistics_collection    
 
-    print("hi")
-
-def determine_categorical_feature_characteristics(dataset):
+def determine_categorical_feature_characteristics(dataset) -> List[CategorialFeatureCharacteristics]:
     categorical_columns = [
         column for column in dataset.columns
         if pd.api.types.is_categorical_dtype(dataset[column])
     ]
     categorical_features_characteristics: List[CategorialFeatureCharacteristics] = []
     for categorical_feature in categorical_columns:
-        ordered = False
+        feature = False
         cardinality = []
-        categorical_data = dataset[categorical_feature].dtype()
-        if categorical_data.ordered():
-            ordered = True
-        characteristics = CategorialFeatureCharacteristics(ordered, cardinality, categorical_feature)
+        feature = dataset[categorical_feature].dtype
+        if feature.ordered:
+            feature = True
+        characteristics = CategorialFeatureCharacteristics(feature, cardinality, categorical_feature)
         categorical_features_characteristics.append(characteristics)
     return categorical_features_characteristics
 
-def fetch_dataset_from_database(id: str):
+def fetch_dataset_from_database(id: str) -> pd.DataFrame:
     dataset, target_labels = fetch_openml(data_id=id, as_frame=True, return_X_y=True, cache=False)
     return dataset
 
 
+def safe_results(datasets_statistic):
+    with open(path_datasets_to_analyze / "datasetcharacteristics.txt", "a") as file:
+        for openml_id in datasets_statistic.keys():
+            file.write(openml_id + ":\n")
+            dataset_statistic = datasets_statistic[openml_id]
+            for feature_characteristic in dataset_statistic:
+                pass
+
+
 if __name__ == "__main__":
-    analyze_data_sets(binary_task_id_mappings)
-   
+   datasets_statistic = analyze_data_sets(binary_task_id_mappings)
+   safe_results(datasets_statistic)

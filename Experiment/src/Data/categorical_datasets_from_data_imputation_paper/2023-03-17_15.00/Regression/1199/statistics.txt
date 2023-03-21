@@ -1,0 +1,4 @@
+Cardinality of categorical features:
+still_alive: 2
+pericardial: 2
+alive_at_1: 2

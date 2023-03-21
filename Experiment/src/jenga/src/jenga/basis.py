@@ -34,7 +34,7 @@ class Task(ABC):
         numerical_columns: List[str] = [],
         text_columns: List[str] = [],
         is_image_data: bool = False,
-        seed: Optional[int] = None,
+        seed: Optional[int] = 42,
         baseline_categorical_feature_encoder_name: str = "one_hot_encode",
         baseline_categorical_feature_encoder: BaseEstimator = OneHotEncoder,
     ):
@@ -69,16 +69,16 @@ class Task(ABC):
         self.baseline_categorical_feature_encoder_name = baseline_categorical_feature_encoder_name
         self.baseline_categorical_feature_encoder = baseline_categorical_feature_encoder
 
-        # Fix random seeds for reproducibility
-        # if self._seed:
-        #     random.seed(self._seed)
-        #     np.random.seed(self._seed)
+        #Fix random seeds for reproducibility
+        if self._seed:
+            random.seed(self._seed)
+            np.random.seed(self._seed)
 
-        #     try:
-        #         import tensorflow as tf
-        #         tf.random.set_seed(self._seed)
-        #     except ImportError:
-        #         pass
+            try:
+                import tensorflow as tf
+                tf.random.set_seed(self._seed)
+            except ImportError:
+                pass
 
     def _get_task_type_of_data(self) -> Optional[int]:
         """
@@ -125,7 +125,7 @@ class Task(ABC):
         categorical_preprocessing = Pipeline(
             [
                 ('mark_missing', SimpleImputer(strategy='constant', fill_value='__NA__')),
-                (categorical_feature_encoder_name, categorical_feature_encoder())
+                (categorical_feature_encoder_name, categorical_feature_encoder)
             ]
         )
 
@@ -310,7 +310,7 @@ class BinaryClassificationTask(Task):
         numerical_columns: List[str] = [],
         text_columns: List[str] = [],
         is_image_data: bool = False,
-        seed: Optional[int] = None
+        seed: Optional[int] = 42
     ):
         """
         Class that represents a binary classification task. \
@@ -342,7 +342,7 @@ class BinaryClassificationTask(Task):
         )
 
         self._task_type = BINARY_CLASSIFICATION
-        self._check_data()
+        #self._check_data()
 
     def _check_data(self):
         """
@@ -429,7 +429,7 @@ class MultiClassClassificationTask(Task):
         numerical_columns: List[str] = [],
         text_columns: List[str] = [],
         is_image_data: bool = False,
-        seed: Optional[int] = None
+        seed: Optional[int] = 42
     ):
         """
         Class that represents a multi-class classification task. \
@@ -461,7 +461,7 @@ class MultiClassClassificationTask(Task):
         )
 
         self._task_type = MULTI_CLASS_CLASSIFICATION
-        self._check_data()
+        #self._check_data()
 
     def _check_data(self):
         """
@@ -554,7 +554,7 @@ class RegressionTask(Task):
         numerical_columns: List[str] = [],
         text_columns: List[str] = [],
         is_image_data: bool = False,
-        seed: Optional[int] = None
+        seed: Optional[int] = 42
     ):
         """
         Class that represents a regression task. Forces the `train_labels` and `test_labels` to be of a `numeric_dtype`.

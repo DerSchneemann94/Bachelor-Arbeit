@@ -1,0 +1,15 @@
+Cardinality of categorical features:
+V1: 62
+V3: 2
+V4: 2
+V5: 2
+V6: 2
+V7: 2
+V8: 2
+V9: 2
+V10: 2
+V11: 2
+V12: 2
+V13: 2
+V14: 2
+V15: 16

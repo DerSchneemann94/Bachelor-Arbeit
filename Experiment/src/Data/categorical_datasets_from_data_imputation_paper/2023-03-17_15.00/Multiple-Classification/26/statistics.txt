@@ -1,0 +1,9 @@
+Cardinality of categorical features:
+parents: 3
+has_nurs: 5
+form: 4
+children: 4
+housing: 3
+finance: 2
+social: 3
+health: 3

@@ -1,0 +1,5 @@
+Cardinality of categorical features:
+season: 4
+holiday: 2
+workingday: 2
+weather: 4
