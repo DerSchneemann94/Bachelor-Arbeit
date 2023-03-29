@@ -42,17 +42,17 @@ project_root = get_project_root()
 all_datasets = openml.tasks.list_tasks(output_format="dataframe")
 datasets = all_datasets.copy()
 # Datasets without missing values
-datasets = datasets[datasets["NumberOfInstancesWithMissingValues"] == 0]
+# datasets = datasets[datasets["NumberOfInstancesWithMissingValues"] == 0]
 # Active datasets
 datasets = datasets[datasets["status"] == "active"]
 # Rename 
 datasets = datasets.rename(columns={"NumberOfSymbolicFeatures": "NumberOfCategoricalFeatures"})
 # Only look at datasets with at least 5000 instances and at least 5 features
 datasets = datasets[datasets["NumberOfInstances"] >= 3000]
-datasets = datasets[datasets["NumberOfFeatures"] >= 5]
+datasets = datasets[datasets["NumberOfFeatures"] >= 3]
 # Datasetws with max 100k instances and 25 features
-datasets = datasets[datasets["NumberOfInstances"] <= 100000]
-datasets = datasets[datasets["NumberOfFeatures"] <= 25]
+# datasets = datasets[datasets["NumberOfInstances"] <= 100000]
+#datasets = datasets[datasets["NumberOfFeatures"] <= 25]
 # drop some corrupted datasets
 datasets = datasets[~datasets["NumberOfClasses"].isna()]
 # Can't work with sparse data
@@ -131,7 +131,7 @@ multiclass_classification = multiclass_classification.drop(columns=["number_of_v
 multiclass_classification = multiclass_classification.reset_index(drop=True)
 multiclass_classification[:50]
 
-assert (len(regression) + len(multiclass_classification) + len(binary_classification)) == 69
+#assert (len(regression) + len(multiclass_classification) + len(binary_classification)) == 69
 
 regression_for_paper = regression.copy()
 regression_for_paper = regression_for_paper[["did", "name", "NumberOfInstances", "NumberOfNumericFeatures", "NumberOfCategoricalFeatures"]]
@@ -148,7 +148,7 @@ regression_table = regression_for_paper.to_latex(
     caption="Regression datasets.",
     label="tab:regression_data"
 )
-Path(get_project_root / "Datasets/datasets/regression_table.tex").write_text(regression_table)
+Path(get_project_root() / "Datasets/datasets/regression_table.tex").write_text(regression_table)
 
 binary_classification_for_paper = binary_classification.copy()
 binary_classification_for_paper = binary_classification_for_paper[["did", "name", "NumberOfInstances", "NumberOfNumericFeatures", "NumberOfCategoricalFeatures"]]
@@ -165,7 +165,7 @@ bibinary_classification_table = binary_classification_for_paper.to_latex(
     caption="Binary classification datasets.",
     label="tab:binary_data"
 )
-Path(get_project_root / "Datasets/datasets/binary_table.tex").write_text(bibinary_classification_table)
+Path(get_project_root() / "Datasets/datasets/binary_table.tex").write_text(bibinary_classification_table)
 
 multiclass_classification_for_paper = multiclass_classification.copy()
 multiclass_classification_for_paper = multiclass_classification_for_paper[["did", "name", "NumberOfInstances", "NumberOfNumericFeatures", "NumberOfCategoricalFeatures"]]
@@ -182,6 +182,7 @@ multiclass_classification_table = multiclass_classification_for_paper.to_latex(
     caption="Multiclass classification datasets.",
     label="tab:multiclass_data"
 )
-Path(get_project_root / "Datasets/datasets/multiclass_table.tex").write_text(multiclass_classification_table)
+
+Path(get_project_root() / "Datasets/datasets/multiclass_table.tex").write_text(multiclass_classification_table)
 
 

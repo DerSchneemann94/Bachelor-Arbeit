@@ -1,0 +1,13 @@
+top-left-square:		cardinality-3,		ordinal-False
+top-middle-square:		cardinality-3,		ordinal-False
+top-right-square:		cardinality-3,		ordinal-False
+middle-left-square:		cardinality-3,		ordinal-False
+middle-middle-square:		cardinality-3,		ordinal-False
+middle-right-square:		cardinality-3,		ordinal-False
+bottom-left-square:		cardinality-3,		ordinal-False
+bottom-middle-square:		cardinality-3,		ordinal-False
+bottom-right-square:		cardinality-3,		ordinal-False
+features: 9
+instances: 39366
+ordinal_cardinality: []
+nominal_cardinality: ['3', '3', '3', '3', '3', '3', '3', '3', '3']

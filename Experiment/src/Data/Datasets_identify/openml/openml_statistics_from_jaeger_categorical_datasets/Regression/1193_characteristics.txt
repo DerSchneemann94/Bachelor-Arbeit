@@ -1,0 +1,11 @@
+LOW:		cardinality-2,		ordinal-False
+RACE:		cardinality-3,		ordinal-False
+SMOKE:		cardinality-2,		ordinal-False
+PTL:		cardinality-4,		ordinal-False
+HT:		cardinality-2,		ordinal-False
+UI:		cardinality-2,		ordinal-False
+FTV:		cardinality-6,		ordinal-False
+features: 9
+instances: 31104
+ordinal_cardinality: []
+nominal_cardinality: ['2', '3', '2', '4', '2', '2', '6']

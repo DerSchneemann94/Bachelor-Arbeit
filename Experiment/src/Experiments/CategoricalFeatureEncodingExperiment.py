@@ -97,7 +97,7 @@ class CategoricalFeatureEncodingExperiment(object):
         Path(self._base_path / f"{task_id}" / "evaluation_parameters.json").write_text(
             json.dumps(
                 {
-                    "encoder_name": self._categorical_feature_encoder.__name__,
+                    "encoder_name": self._categorical_feature_encoder_name,
                     "strategy": self._strategies
                 }
             )

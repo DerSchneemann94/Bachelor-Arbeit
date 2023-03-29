@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from Experiments.CategoricalFeatureEncodingExperiment import CategoricalFeatureEncodingExperiment
-from jenga.tasks.openml import OpenMLBinaryClassificationTask, OpenMLRegressionTask
+from jenga.tasks.openml import OpenMLBinaryClassificationTask, OpenMLRegressionTask, OpenMLMultiClassClassificationTask
 
 experiment_path = Path("/results") / "experiment_debug" / "737"
 
@@ -10,10 +10,10 @@ if experiment_path.exists():
 
 
 experiment = CategoricalFeatureEncodingExperiment(
-    task_id_class_tuples = [[42493, OpenMLBinaryClassificationTask]],
+    task_id_class_tuples = [[26, OpenMLMultiClassClassificationTask]],
     strategies=["single_single"],
     num_repetitions=2,
-    categorical_feature_encoder_name="one_hot_encode:",
+    categorical_feature_encoder_name="one_hot_encode",
     numerical_feature_encoder_name="scaling",
     timestamp="experiment_regression"
 )

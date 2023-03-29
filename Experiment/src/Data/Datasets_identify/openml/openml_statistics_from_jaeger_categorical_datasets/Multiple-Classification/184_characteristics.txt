@@ -1,0 +1,10 @@
+white_king_col:		cardinality-4,		ordinal-False
+white_king_row:		cardinality-4,		ordinal-False
+white_rook_col:		cardinality-8,		ordinal-False
+white_rook_row:		cardinality-8,		ordinal-False
+black_king_col:		cardinality-8,		ordinal-False
+black_king_row:		cardinality-8,		ordinal-False
+features: 6
+instances: 28056
+ordinal_cardinality: []
+nominal_cardinality: ['4', '4', '8', '8', '8', '8']

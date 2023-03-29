@@ -1,0 +1,5 @@
+day:		cardinality-7,		ordinal-False
+features: 8
+instances: 45312
+ordinal_cardinality: []
+nominal_cardinality: ['7']

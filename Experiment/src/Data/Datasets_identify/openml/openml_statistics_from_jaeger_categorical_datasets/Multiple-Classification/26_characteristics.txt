@@ -1,0 +1,12 @@
+parents:		cardinality-3,		ordinal-False
+has_nurs:		cardinality-5,		ordinal-False
+form:		cardinality-4,		ordinal-False
+children:		cardinality-4,		ordinal-False
+housing:		cardinality-3,		ordinal-False
+finance:		cardinality-2,		ordinal-False
+social:		cardinality-3,		ordinal-False
+health:		cardinality-3,		ordinal-False
+features: 8
+instances: 12960
+ordinal_cardinality: []
+nominal_cardinality: ['3', '5', '4', '4', '3', '2', '3', '3']

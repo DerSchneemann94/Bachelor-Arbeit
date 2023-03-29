@@ -1,5 +1,5 @@
-{
     "nursery-data": {
+{
         "path": "nursery_data/nursery.txt",
         "target": "nursery",
         "type": "Multiple-Classification"

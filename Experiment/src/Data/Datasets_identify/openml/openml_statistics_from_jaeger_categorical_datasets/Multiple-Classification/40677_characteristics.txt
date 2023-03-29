@@ -1,0 +1,28 @@
+attribute#1:		cardinality-2,		ordinal-False
+attribute#2:		cardinality-2,		ordinal-False
+attribute#3:		cardinality-2,		ordinal-False
+attribute#4:		cardinality-2,		ordinal-False
+attribute#5:		cardinality-2,		ordinal-False
+attribute#6:		cardinality-2,		ordinal-False
+attribute#7:		cardinality-2,		ordinal-False
+irrelevant1:		cardinality-2,		ordinal-False
+irrelevant2:		cardinality-2,		ordinal-False
+irrelevant3:		cardinality-2,		ordinal-False
+irrelevant4:		cardinality-2,		ordinal-False
+irrelevant5:		cardinality-2,		ordinal-False
+irrelevant6:		cardinality-2,		ordinal-False
+irrelevant7:		cardinality-2,		ordinal-False
+irrelevant8:		cardinality-2,		ordinal-False
+irrelevant9:		cardinality-2,		ordinal-False
+irrelevant10:		cardinality-2,		ordinal-False
+irrelevant11:		cardinality-2,		ordinal-False
+irrelevant12:		cardinality-2,		ordinal-False
+irrelevant13:		cardinality-2,		ordinal-False
+irrelevant14:		cardinality-2,		ordinal-False
+irrelevant15:		cardinality-2,		ordinal-False
+irrelevant16:		cardinality-2,		ordinal-False
+irrelevant17:		cardinality-2,		ordinal-False
+features: 24
+instances: 3200
+ordinal_cardinality: []
+nominal_cardinality: ['2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2']

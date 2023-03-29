@@ -1,0 +1,5 @@
+isns:		cardinality-2,		ordinal-False
+features: 4
+instances: 8641
+ordinal_cardinality: []
+nominal_cardinality: ['2']

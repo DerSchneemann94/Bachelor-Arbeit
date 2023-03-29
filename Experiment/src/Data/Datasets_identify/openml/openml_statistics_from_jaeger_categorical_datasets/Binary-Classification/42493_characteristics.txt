@@ -1,0 +1,9 @@
+Airline:		cardinality-18,		ordinal-False
+Flight:		cardinality-5857,		ordinal-False
+AirportFrom:		cardinality-283,		ordinal-False
+AirportTo:		cardinality-285,		ordinal-False
+DayOfWeek:		cardinality-7,		ordinal-False
+features: 7
+instances: 26969
+ordinal_cardinality: []
+nominal_cardinality: ['18', '5857', '283', '285', '7']

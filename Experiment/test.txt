@@ -1,0 +1,7 @@
+{
+"number_of_features": 2,
+"number_of_instances": 3,
+"number_of_missing_values": 3,
+"nominal_cardinality": 2,
+"ordinal_cardinality": 3
+}

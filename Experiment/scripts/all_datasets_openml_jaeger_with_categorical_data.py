@@ -30,7 +30,7 @@ task_dict = {
 categorical_feature_encoder_names = ["ordinal_encode","one_hot_encode"]
 timestamp = datetime.now().strftime("%Y-%m-%d_%H.%M")
 strategies = ["single_single"]
-number_of_repetions = 2
+number_of_repetions = 1
 numerical_feature_encoder_name="scaling"
 
 if __name__ == "__main__":
@@ -53,7 +53,8 @@ if __name__ == "__main__":
                     categorical_feature_encoder_names=categorical_feature_encoder_names,
                     numerical_feature_encoder_name=numerical_feature_encoder_name,
                     timestamp="experiment_" + "_" + str(openml_id),
-                    base_path="results/" + timestamp + "/" + task_type + "/" + openml_id
+                    base_path="results/" + timestamp + "/" + task_type + "/" + openml_id,
+                    seed=42
                     )
             try:   
                 experiment.run() 

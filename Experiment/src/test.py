@@ -1,10 +1,10 @@
-import os
+import json
 from jenga.tasks.ExternalDataTask import ExternalDataTask, ExternalDataMLRegressionTask
 import plotly.express as pl
 import pandas as pd
-import plotly.express as px
 from Experiments.CategoricalFeatureEncodingExperiment import read_experiment
 from pathlib import Path
+from sklearn.datasets import fetch_openml
 from utils import get_project_root
 
 
@@ -27,4 +27,21 @@ from utils import get_project_root
 # pd_dataframe.drop(columns="Unnamed")
 # px.line(pd_dataframe)
 
-task = ExternalDataMLRegressionTask(0,0,0,0,0,0,0)
+# path = get_project_root()
+# path = path / "test.txt"
+
+# statistics = {
+#             "number_of_features":2,
+#             "number_of_instances":3,
+#             "number_of_missing_values":3,
+#             "nominal_cardinality":2,
+#             "ordinal_cardinality":3
+#         }
+
+
+
+# # with path.open("a") as file:
+# #     json.dump(statistics, file)
+# path.write_text(json.dumps(statistics, indent=0))
+
+features, labels = fetch_openml(data_id=1414, as_frame=True, return_X_y=True, cache=False)

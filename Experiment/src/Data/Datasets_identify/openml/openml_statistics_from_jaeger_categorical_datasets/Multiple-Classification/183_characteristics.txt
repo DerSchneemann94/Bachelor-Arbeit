@@ -1,0 +1,5 @@
+Sex:		cardinality-3,		ordinal-False
+features: 8
+instances: 4177
+ordinal_cardinality: []
+nominal_cardinality: ['3']

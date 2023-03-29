@@ -75,7 +75,7 @@ class CategoricalFeatureEncodingExperiment_2(object):
     def run(self):
         for task_id, task_class in self._task_id_class_tuples:
             self._result[task_id] = {}
-            task = task_class(openml_id=task_id)
+            task = task_class(openml_id=task_id, seed=self._seed)
             for index in range(len(self._categorical_feature_encoders)):
                 categorical_feature_encoder = self._categorical_feature_encoders[index]
                 categorical_feature_encoder_name = self._categorical_feature_encoder_names[index]
@@ -88,7 +88,8 @@ class CategoricalFeatureEncodingExperiment_2(object):
                             categorical_feature_encoder=categorical_feature_encoder,
                             categorical_feature_encoder_name=categorical_feature_encoder_name,
                             numerical_feature_encoder=self._numerical_feature_encoder,
-                            numerical_feature_encoder_name=self._numerical_feature_encoder_name
+                            numerical_feature_encoder_name=self._numerical_feature_encoder_name,
+                            seed=self._seed
                             )
                         evaluator.evaluate(self._num_repetitions)
                         result = evaluator._result

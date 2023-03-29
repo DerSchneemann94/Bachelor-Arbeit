@@ -1,6 +1,7 @@
 import json
 import time
 import pandas as pd
+from jenga.utils import set_seed
 from pathlib import Path
 from statistics import mean, stdev
 from typing import Callable, Dict, List, Optional, Tuple
@@ -101,6 +102,7 @@ class Evaluator_without_Baseline(object):
         numerical_feature_encoder_name: str,
         numerical_feature_encoder: BaseEstimator,
         path: Optional[Path] = None,
+        seed: int = 42
     ):
         self._task = task
         self._result: Optional[Dict[str, EvaluationResult_without_baseline]] = None
@@ -109,6 +111,9 @@ class Evaluator_without_Baseline(object):
         self._numerical_feature_encoder_name = numerical_feature_encoder_name
         self._numerical_feature_encoder = numerical_feature_encoder
         self._path = path
+        self._seed = seed
+
+        set_seed(self._seed)
 
     @staticmethod
     def report_results(result_dictionary: Dict[str, EvaluationResult_without_baseline]) -> None:
@@ -213,6 +218,7 @@ class SingleColumnEvaluator_without_Baseline(Evaluator_without_Baseline):
         numerical_feature_encoder_name: str,
         numerical_feature_encoder: BaseEstimator,
         path: Optional[Path] = None,
+        seed: int = 42
         
     ):
 
@@ -222,7 +228,8 @@ class SingleColumnEvaluator_without_Baseline(Evaluator_without_Baseline):
             categorical_feature_encoder=categorical_feature_encoder,
             categorical_feature_encoder_name=categorical_feature_encoder_name,
             numerical_feature_encoder=numerical_feature_encoder,
-            numerical_feature_encoder_name=numerical_feature_encoder_name
+            numerical_feature_encoder_name=numerical_feature_encoder_name,
+            seed = seed
         )
 
 
@@ -239,6 +246,7 @@ class MultipleColumnsEvaluator_without_Baseline(Evaluator_without_Baseline):
         numerical_feature_encoder_name: str,
         numerical_feature_encoder: BaseEstimator,
         path: Optional[Path] = None,
+        seed: int = 42
     ):
 
         super().__init__(
@@ -247,7 +255,8 @@ class MultipleColumnsEvaluator_without_Baseline(Evaluator_without_Baseline):
             categorical_feature_encoder=categorical_feature_encoder,
             categorical_feature_encoder_name=categorical_feature_encoder_name,
             numerical_feature_encoder=numerical_feature_encoder,
-            numerical_feature_encoder_name=numerical_feature_encoder_name
+            numerical_feature_encoder_name=numerical_feature_encoder_name,
+            seed=seed
         )
 
 
@@ -264,6 +273,7 @@ class SingleColumnAllMissingEvaluator_without_Baseline(Evaluator_without_Baselin
         numerical_feature_encoder_name: str,
         numerical_feature_encoder: BaseEstimator,
         path: Optional[Path] = None,
+        seed: int = 42
     ):
 
         super().__init__(
@@ -272,7 +282,8 @@ class SingleColumnAllMissingEvaluator_without_Baseline(Evaluator_without_Baselin
             categorical_feature_encoder=categorical_feature_encoder,
             categorical_feature_encoder_name=categorical_feature_encoder_name,
             numerical_feature_encoder=numerical_feature_encoder,
-            numerical_feature_encoder_name=numerical_feature_encoder_name
+            numerical_feature_encoder_name=numerical_feature_encoder_name,
+            seed=seed
         )
 
 
@@ -289,6 +300,7 @@ class MultipleColumnsAllMissingEvaluator_without_Baseline(Evaluator_without_Base
         numerical_feature_encoder_name: str,
         numerical_feature_encoder: BaseEstimator,
         path: Optional[Path] = None,
+        seed: int = 42
     ):
 
         super().__init__(
@@ -297,5 +309,6 @@ class MultipleColumnsAllMissingEvaluator_without_Baseline(Evaluator_without_Base
             categorical_feature_encoder=categorical_feature_encoder,
             categorical_feature_encoder_name=categorical_feature_encoder_name,
             numerical_feature_encoder=numerical_feature_encoder,
-            numerical_feature_encoder_name=numerical_feature_encoder_name
+            numerical_feature_encoder_name=numerical_feature_encoder_name,
+            seed=seed
         )

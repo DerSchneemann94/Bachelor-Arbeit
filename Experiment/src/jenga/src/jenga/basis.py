@@ -380,7 +380,7 @@ class BinaryClassificationTask(Task):
         pipeline = Pipeline(
             [
                 ('features', feature_transformation),
-                ('learner', SGDClassifier(max_iter=1000, n_jobs=-1))
+                ('learner', SGDClassifier(max_iter=1000, n_jobs=-1, random_state=self._seed))
             ]
         )
 
@@ -499,7 +499,7 @@ class MultiClassClassificationTask(Task):
         pipeline = Pipeline(
             [
                 ('features', feature_transformation),
-                ('learner', SGDClassifier(max_iter=1000, n_jobs=-1))
+                ('learner', SGDClassifier(max_iter=1000, n_jobs=-1, random_state=self._seed))
             ]
         )
 
@@ -623,7 +623,7 @@ class RegressionTask(Task):
         pipeline = Pipeline(
             [
                 ('features', feature_transformation),
-                ('learner', SGDRegressor(max_iter=1000))
+                ('learner', SGDRegressor(max_iter=1000, random_state=self._seed))
             ]
         )
 

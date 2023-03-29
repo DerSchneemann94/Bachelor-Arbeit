@@ -1,0 +1,7 @@
+cut:		cardinality-5,		ordinal-False
+color:		cardinality-7,		ordinal-False
+clarity:		cardinality-8,		ordinal-False
+features: 9
+instances: 53940
+ordinal_cardinality: []
+nominal_cardinality: ['5', '7', '8']

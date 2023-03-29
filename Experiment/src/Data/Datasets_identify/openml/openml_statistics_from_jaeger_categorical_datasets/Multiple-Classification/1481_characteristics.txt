@@ -1,0 +1,7 @@
+V1:		cardinality-4,		ordinal-False
+V3:		cardinality-8,		ordinal-False
+V5:		cardinality-8,		ordinal-False
+features: 6
+instances: 28056
+ordinal_cardinality: []
+nominal_cardinality: ['4', '8', '8']

@@ -1,0 +1,10 @@
+sex:		cardinality-2,		ordinal-False
+age_cat_25-45:		cardinality-2,		ordinal-False
+age_cat_Greaterthan45:		cardinality-2,		ordinal-False
+age_cat_Lessthan25:		cardinality-2,		ordinal-False
+race_African-American:		cardinality-2,		ordinal-False
+race_Caucasian:		cardinality-2,		ordinal-False
+features: 13
+instances: 5278
+ordinal_cardinality: []
+nominal_cardinality: ['2', '2', '2', '2', '2', '2']

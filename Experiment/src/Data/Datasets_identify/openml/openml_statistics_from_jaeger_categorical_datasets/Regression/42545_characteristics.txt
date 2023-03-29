@@ -1,0 +1,5 @@
+Dia:		cardinality-183,		ordinal-False
+features: 6
+instances: 6277
+ordinal_cardinality: []
+nominal_cardinality: ['183']
