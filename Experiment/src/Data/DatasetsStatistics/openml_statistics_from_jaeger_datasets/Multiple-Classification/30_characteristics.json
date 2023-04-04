@@ -1,0 +1,32 @@
+{
+    "area": {
+        "type": "numeric"
+    },
+    "blackand": {
+        "type": "numeric"
+    },
+    "blackpix": {
+        "type": "numeric"
+    },
+    "eccen": {
+        "type": "numeric"
+    },
+    "height": {
+        "type": "numeric"
+    },
+    "lenght": {
+        "type": "numeric"
+    },
+    "mean_tr": {
+        "type": "numeric"
+    },
+    "p_and": {
+        "type": "numeric"
+    },
+    "p_black": {
+        "type": "numeric"
+    },
+    "wb_trans": {
+        "type": "numeric"
+    }
+}

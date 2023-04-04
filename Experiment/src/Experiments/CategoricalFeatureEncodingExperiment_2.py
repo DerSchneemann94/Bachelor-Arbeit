@@ -3,6 +3,7 @@ import logging
 import os
 import re
 import traceback
+from Data.DatasetsStatistics.DatasetStatisticsCreator import DatasetStatisticsCreator
 from jenga.utils import set_seed
 import joblib
 import pandas as pd
@@ -29,7 +30,7 @@ class CategoricalFeatureEncodingExperiment_2(object):
         numerical_feature_encoder_name = "scaling",
         categorical_feature_encoder_names: List[str] = ["ordinal_encode"],
         base_path: str = 'results',
-        timestamp: Optional[str] = None,
+        experiment_name: Optional[str] = None,
         seed: int = 42
     ):
         self.strategy_to_EvaluatorClass = {
@@ -48,9 +49,10 @@ class CategoricalFeatureEncodingExperiment_2(object):
         self._categorical_feature_encoders = getCategoricalEncoders(self._categorical_feature_encoder_names)   
         self._numerical_feature_encoder_name = numerical_feature_encoder_name
         self._numerical_feature_encoder = Encoder.getNumericalEncoder(self._numerical_feature_encoder_name) 
-        self._timestamp = timestamp
+        self._experiment_name = experiment_name
         self._result: Dict[int, Dict[str, Dict[float, Dict[str, EvaluationResult_without_baseline]]]] = dict()
         self._seed = seed
+        self._dataset_statistic_creator: DatasetStatisticsCreator = DatasetStatisticsCreator()
 
         valid_strategies = self.strategy_to_EvaluatorClass.keys()
         for strategy in self._strategies:
@@ -60,22 +62,23 @@ class CategoricalFeatureEncodingExperiment_2(object):
         project_root = get_project_root()
         self._base_path = project_root / base_path
 
-        if self._timestamp is None:
-            self._timestamp = datetime.now().strftime("%Y-%m-%d_%H:%M")
+        if self._experiment_name is None:
+            self._experiment_name = datetime.now().strftime("%Y-%m-%d_%H:%M")
 
         if self._seed:
             set_seed(self._seed)
 
         #experiment_path = self._base_path / timestamp
-        # if experiment_path.exists():
-        #     raise ValueError(f"Experiment already exist")
-
-        self._base_path = self._base_path / self._timestamp 
+        if self._base_path.exists():
+            raise ValueError(f"Experiment already exist")
+        else:
+            self._base_path.mkdir(parents=True, exist_ok=True)
 
     def run(self):
         for task_id, task_class in self._task_id_class_tuples:
             self._result[task_id] = {}
-            task = task_class(openml_id=task_id, seed=self._seed)
+            task: OpenMLTask = task_class(openml_id=task_id, seed=self._seed)
+            #self._dataset_statistic_creator.create_dataset_statistic_from_dataframe(task_id, self._base_path, task.train_data)
             for index in range(len(self._categorical_feature_encoders)):
                 categorical_feature_encoder = self._categorical_feature_encoders[index]
                 categorical_feature_encoder_name = self._categorical_feature_encoder_names[index]
@@ -89,9 +92,10 @@ class CategoricalFeatureEncodingExperiment_2(object):
                             categorical_feature_encoder_name=categorical_feature_encoder_name,
                             numerical_feature_encoder=self._numerical_feature_encoder,
                             numerical_feature_encoder_name=self._numerical_feature_encoder_name,
-                            seed=self._seed
+                            seed=self._seed,
+                            number_of_repetitions=self._num_repetitions
                             )
-                        evaluator.evaluate(self._num_repetitions)
+                        evaluator.evaluate()
                         result = evaluator._result
                     except Exception as error:
                         error = traceback.format_exc()

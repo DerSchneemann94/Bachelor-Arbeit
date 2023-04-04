@@ -1,0 +1,44 @@
+{
+    "coefficient1": {
+        "type": "numeric"
+    },
+    "coefficient10": {
+        "type": "numeric"
+    },
+    "coefficient11": {
+        "type": "numeric"
+    },
+    "coefficient12": {
+        "type": "numeric"
+    },
+    "coefficient2": {
+        "type": "numeric"
+    },
+    "coefficient3": {
+        "type": "numeric"
+    },
+    "coefficient4": {
+        "type": "numeric"
+    },
+    "coefficient5": {
+        "type": "numeric"
+    },
+    "coefficient6": {
+        "type": "numeric"
+    },
+    "coefficient7": {
+        "type": "numeric"
+    },
+    "coefficient8": {
+        "type": "numeric"
+    },
+    "coefficient9": {
+        "type": "numeric"
+    },
+    "frame": {
+        "type": "numeric"
+    },
+    "utterance": {
+        "type": "numeric"
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "Bare_Nuclei": {
+        "type": "numeric"
+    },
+    "Bland_Chromatin": {
+        "type": "numeric"
+    },
+    "Cell_Shape_Uniformity": {
+        "type": "numeric"
+    },
+    "Cell_Size_Uniformity": {
+        "type": "numeric"
+    },
+    "Clump_Thickness": {
+        "type": "numeric"
+    },
+    "Marginal_Adhesion": {
+        "type": "numeric"
+    },
+    "Mitoses": {
+        "type": "numeric"
+    },
+    "Normal_Nucleoli": {
+        "type": "numeric"
+    },
+    "Single_Epi_Cell_Size": {
+        "type": "numeric"
+    }
+}

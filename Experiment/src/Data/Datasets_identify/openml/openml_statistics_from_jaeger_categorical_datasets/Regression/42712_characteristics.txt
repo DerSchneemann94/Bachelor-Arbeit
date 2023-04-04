@@ -1,8 +1,0 @@
-season:		cardinality-4,		ordinal-False
-holiday:		cardinality-2,		ordinal-False
-workingday:		cardinality-2,		ordinal-False
-weather:		cardinality-4,		ordinal-False
-features: 12
-instances: 17379
-ordinal_cardinality: []
-nominal_cardinality: ['4', '2', '2', '4']

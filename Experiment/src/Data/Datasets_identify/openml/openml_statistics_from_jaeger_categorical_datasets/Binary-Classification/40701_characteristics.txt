@@ -1,8 +1,0 @@
-area_code:		cardinality-3,		ordinal-False
-international_plan:		cardinality-2,		ordinal-False
-voice_mail_plan:		cardinality-2,		ordinal-False
-number_customer_service_calls:		cardinality-10,		ordinal-False
-features: 20
-instances: 5000
-ordinal_cardinality: []
-nominal_cardinality: ['3', '2', '2', '10']

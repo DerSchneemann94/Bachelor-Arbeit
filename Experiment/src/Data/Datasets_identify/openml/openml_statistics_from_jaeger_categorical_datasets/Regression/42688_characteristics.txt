@@ -1,8 +1,0 @@
-city:		cardinality-5,		ordinal-False
-floor:		cardinality-35,		ordinal-False
-animal:		cardinality-2,		ordinal-False
-furniture:		cardinality-2,		ordinal-False
-features: 12
-instances: 10692
-ordinal_cardinality: []
-nominal_cardinality: ['5', '35', '2', '2']

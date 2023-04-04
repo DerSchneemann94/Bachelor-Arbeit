@@ -1,0 +1,23 @@
+{
+    "Actions_taken": {
+        "type": "numeric"
+    },
+    "Liberal": {
+        "type": "numeric"
+    },
+    "Lower_court_disagreement": {
+        "type": "numeric"
+    },
+    "Precedent_alteration": {
+        "type": "numeric"
+    },
+    "Unanimous": {
+        "type": "numeric"
+    },
+    "Unconstitutional": {
+        "type": "numeric"
+    },
+    "Year_of_decision": {
+        "type": "numeric"
+    }
+}

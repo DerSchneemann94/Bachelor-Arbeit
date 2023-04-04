@@ -1,7 +1,0 @@
-x3:		cardinality-3,		ordinal-False
-x7:		cardinality-2,		ordinal-False
-x8:		cardinality-2,		ordinal-False
-features: 10
-instances: 40768
-ordinal_cardinality: []
-nominal_cardinality: ['3', '2', '2']

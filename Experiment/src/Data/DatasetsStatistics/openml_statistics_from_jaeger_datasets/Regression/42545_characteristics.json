@@ -1,0 +1,22 @@
+{
+    "Dem": {
+        "type": "numeric"
+    },
+    "Dia": {
+        "cardinality": 183,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "Material": {
+        "type": "numeric"
+    },
+    "TEMP": {
+        "type": "numeric"
+    },
+    "adm": {
+        "type": "numeric"
+    },
+    "pp": {
+        "type": "numeric"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "end": {
+        "type": "numeric"
+    },
+    "event": {
+        "type": "numeric"
+    },
+    "id": {
+        "type": "numeric"
+    },
+    "size": {
+        "type": "numeric"
+    },
+    "start": {
+        "type": "numeric"
+    }
+}

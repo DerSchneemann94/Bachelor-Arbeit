@@ -1,0 +1,29 @@
+{
+    "ad_id": {
+        "type": "numeric"
+    },
+    "advertiser_id": {
+        "type": "numeric"
+    },
+    "depth": {
+        "type": "numeric"
+    },
+    "description_id": {
+        "type": "numeric"
+    },
+    "impression": {
+        "type": "numeric"
+    },
+    "keyword_id": {
+        "type": "numeric"
+    },
+    "position": {
+        "type": "numeric"
+    },
+    "title_id": {
+        "type": "numeric"
+    },
+    "user_id": {
+        "type": "numeric"
+    }
+}

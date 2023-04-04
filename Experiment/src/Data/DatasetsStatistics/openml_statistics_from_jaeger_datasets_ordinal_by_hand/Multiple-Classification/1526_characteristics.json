@@ -1,0 +1,14 @@
+{
+    "V1": {
+        "type": "numeric"
+    },
+    "V2": {
+        "type": "numeric"
+    },
+    "V3": {
+        "type": "numeric"
+    },
+    "V4": {
+        "type": "numeric"
+    }
+}

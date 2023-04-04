@@ -1,0 +1,26 @@
+{
+    "H15p1": {
+        "type": "numeric"
+    },
+    "H40p4": {
+        "type": "numeric"
+    },
+    "H5p2": {
+        "type": "numeric"
+    },
+    "P11p3": {
+        "type": "numeric"
+    },
+    "P16p2": {
+        "type": "numeric"
+    },
+    "P19p2": {
+        "type": "numeric"
+    },
+    "P3": {
+        "type": "numeric"
+    },
+    "P6p4": {
+        "type": "numeric"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "energy_deposit": {
+        "type": "numeric"
+    },
+    "event_id": {
+        "type": "numeric"
+    },
+    "relative_time": {
+        "type": "numeric"
+    },
+    "wire_id": {
+        "type": "numeric"
+    }
+}

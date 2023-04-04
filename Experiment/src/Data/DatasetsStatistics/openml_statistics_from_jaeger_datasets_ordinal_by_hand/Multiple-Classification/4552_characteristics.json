@@ -1,0 +1,87 @@
+{
+    "V1": {
+        "cardinality": 62,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V10": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V11": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V12": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V13": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V14": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V15": {
+        "cardinality": 16,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V16": {
+        "type": "categorical",
+        "ordinal": true,
+        "cardinality": 5,
+        "label": {
+            "1": 0,
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "5": 4
+        }
+    },
+    "V2": {
+        "type": "numeric"
+    },
+    "V3": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V4": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V5": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V6": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V7": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V8": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "V9": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    }
+}

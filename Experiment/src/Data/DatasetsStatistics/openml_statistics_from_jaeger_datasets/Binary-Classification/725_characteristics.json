@@ -1,0 +1,26 @@
+{
+    "a1cx": {
+        "type": "numeric"
+    },
+    "a1cy": {
+        "type": "numeric"
+    },
+    "a2pop": {
+        "type": "numeric"
+    },
+    "a3pop": {
+        "type": "numeric"
+    },
+    "b2x": {
+        "type": "numeric"
+    },
+    "b2y": {
+        "type": "numeric"
+    },
+    "mxql": {
+        "type": "numeric"
+    },
+    "temp": {
+        "type": "numeric"
+    }
+}

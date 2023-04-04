@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 from pathlib import Path
-from Data.Datasets_internal.PandasDataFrameCreator import PandaDataFrameCreator
+from Data.Datasets_internal.PandasDataFrameCreator import PandasDataFrameCreator
 from Experiments.CategoricalFeatureEncodingExperiment_2 import CategoricalFeatureEncodingExperiment_2
 from jenga.tasks.ExternalDataTask import ExternalDataBinaryClassificationTask, ExternalDataMultiClassClassificationTask, ExternalDataMLRegressionTask
 from utils import get_project_root
@@ -19,7 +19,7 @@ task_dict = {
 
 datasets = json.loads(datasets_metadata_path.read_text())
 categorical_feature_encoder_name = "ordinal_encode"
-timestamp = datetime.now().strftime("%Y-%m-%d_%H.%M")
+experiment_name = datetime.now().strftime("%Y-%m-%d_%H.%M")
 strategies = ["single_single"]
 number_of_repetions = 2
 numerical_feature_encoder_name="scaling"
@@ -31,8 +31,8 @@ for key in datasets.keys():
     task_class = task_dict[task_type]
     task_name = key
     dataset_path = datasets_path / dataset_metadata["path"]
-    dataframe = PandaDataFrameCreator.generate_dataframe_from_path(path=dataset_path)
-    data, labels = PandaDataFrameCreator.split_dataframe_into_data_and_labels(dataframe=dataframe, target=dataset_metadata["target"])
+    dataframe = PandasDataFrameCreator.generate_dataframe_from_paths(paths=dataset_path)
+    data, labels = PandasDataFrameCreator.split_dataframe_into_data_and_labels(dataframe=dataframe, target=dataset_metadata["target"])
     
     experiment = CategoricalFeatureEncodingExperiment2(
             task_id_class_tuples = [[task_name, task_class]],
@@ -43,7 +43,7 @@ for key in datasets.keys():
             categorical_feature_encoder_name=categorical_feature_encoder_name,
             numerical_feature_encoder_name=numerical_feature_encoder_name,
             timestamp="experiment_" + categorical_feature_encoder_name + "_" + str(task_name),
-            base_path="results/" + timestamp + "/" + task_name
+            base_path="results/" + experiment_name + "/" + task_name
             )
     try:   
         experiment.run() 

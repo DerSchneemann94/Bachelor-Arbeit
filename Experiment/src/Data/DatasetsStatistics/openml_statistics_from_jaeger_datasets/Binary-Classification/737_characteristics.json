@@ -1,0 +1,20 @@
+{
+    "EDUCATION": {
+        "type": "numeric"
+    },
+    "HOUSES": {
+        "type": "numeric"
+    },
+    "INCOME": {
+        "type": "numeric"
+    },
+    "POP": {
+        "type": "numeric"
+    },
+    "XCOORD": {
+        "type": "numeric"
+    },
+    "ln(VOTES/POP)": {
+        "type": "numeric"
+    }
+}

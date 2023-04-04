@@ -1,0 +1,35 @@
+{
+    "age": {
+        "type": "numeric"
+    },
+    "alive_at_1": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "epss": {
+        "type": "numeric"
+    },
+    "fractional": {
+        "type": "numeric"
+    },
+    "lvdd": {
+        "type": "numeric"
+    },
+    "pericardial": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "still_alive": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "wall_index": {
+        "type": "numeric"
+    },
+    "wall_score": {
+        "type": "numeric"
+    }
+}

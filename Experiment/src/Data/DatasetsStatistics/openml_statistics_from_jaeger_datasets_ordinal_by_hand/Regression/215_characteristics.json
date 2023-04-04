@@ -1,0 +1,32 @@
+{
+    "x1": {
+        "type": "numeric"
+    },
+    "x10": {
+        "type": "numeric"
+    },
+    "x2": {
+        "type": "numeric"
+    },
+    "x3": {
+        "type": "numeric"
+    },
+    "x4": {
+        "type": "numeric"
+    },
+    "x5": {
+        "type": "numeric"
+    },
+    "x6": {
+        "type": "numeric"
+    },
+    "x7": {
+        "type": "numeric"
+    },
+    "x8": {
+        "type": "numeric"
+    },
+    "x9": {
+        "type": "numeric"
+    }
+}

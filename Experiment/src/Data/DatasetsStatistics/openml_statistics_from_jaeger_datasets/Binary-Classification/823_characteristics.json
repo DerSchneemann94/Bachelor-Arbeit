@@ -1,0 +1,26 @@
+{
+    "households": {
+        "type": "numeric"
+    },
+    "housing_median_age": {
+        "type": "numeric"
+    },
+    "latitude": {
+        "type": "numeric"
+    },
+    "median_house_value": {
+        "type": "numeric"
+    },
+    "median_income": {
+        "type": "numeric"
+    },
+    "population": {
+        "type": "numeric"
+    },
+    "total_bedrooms": {
+        "type": "numeric"
+    },
+    "total_rooms": {
+        "type": "numeric"
+    }
+}

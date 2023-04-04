@@ -1,0 +1,61 @@
+{
+    "carat": {
+        "type": "numeric"
+    },
+    "clarity": {
+        "cardinality": 8,
+        "ordinal": true,
+        "type": "categorical",
+        "label": {
+            "I1": 0,
+            "SI2": 1,
+            "SI1": 2,
+            "VS2": 3,
+            "VS1": 4,
+            "VVS2": 5,
+            "VVS1": 6,
+            "IF": 7 
+        }
+    },
+    "color": {
+        "cardinality": 7,
+        "ordinal": true,
+        "type": "categorical",
+        "label": {
+            "D": 6,
+            "E": 5,
+            "F": 4,
+            "G": 3,
+            "H": 2,
+            "I": 1,
+            "J": 0
+        }
+    },
+    "cut": {
+        "cardinality": 5,
+        "ordinal": true,
+        "type": "categorical",
+        "label": {
+            "Fair": 0,
+            "Good": 1,
+            "Very Good": 2,
+            "Premium": 3,
+            "Ideal": 4
+        }
+    },
+    "depth": {
+        "type": "numeric"
+    },
+    "table": {
+        "type": "numeric"
+    },
+    "x": {
+        "type": "numeric"
+    },
+    "y": {
+        "type": "numeric"
+    },
+    "z": {
+        "type": "numeric"
+    }
+}

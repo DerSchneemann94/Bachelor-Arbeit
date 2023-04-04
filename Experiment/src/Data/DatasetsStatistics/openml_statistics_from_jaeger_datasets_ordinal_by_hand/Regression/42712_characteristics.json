@@ -1,0 +1,46 @@
+{
+    "feel_temp": {
+        "type": "numeric"
+    },
+    "holiday": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "hour": {
+        "type": "numeric"
+    },
+    "humidity": {
+        "type": "numeric"
+    },
+    "month": {
+        "type": "numeric"
+    },
+    "season": {
+        "cardinality": 4,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "temp": {
+        "type": "numeric"
+    },
+    "weather": {
+        "cardinality": 4,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "weekday": {
+        "type": "numeric"
+    },
+    "windspeed": {
+        "type": "numeric"
+    },
+    "workingday": {
+        "cardinality": 2,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "year": {
+        "type": "numeric"
+    }
+}

@@ -1,7 +1,0 @@
-still_alive:		cardinality-2,		ordinal-False
-pericardial:		cardinality-2,		ordinal-False
-alive_at_1:		cardinality-2,		ordinal-False
-features: 9
-instances: 17496
-ordinal_cardinality: []
-nominal_cardinality: ['2', '2', '2']

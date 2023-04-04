@@ -1,0 +1,17 @@
+{
+    "CRACK": {
+        "type": "numeric"
+    },
+    "DENSITY": {
+        "type": "numeric"
+    },
+    "NUB": {
+        "type": "numeric"
+    },
+    "RIDGE": {
+        "type": "numeric"
+    },
+    "WEIGHT": {
+        "type": "numeric"
+    }
+}

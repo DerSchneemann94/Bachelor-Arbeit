@@ -1,0 +1,17 @@
+{
+    "PitchRate": {
+        "type": "numeric"
+    },
+    "RollRate": {
+        "type": "numeric"
+    },
+    "currPitch": {
+        "type": "numeric"
+    },
+    "currRoll": {
+        "type": "numeric"
+    },
+    "diffRollRate": {
+        "type": "numeric"
+    }
+}

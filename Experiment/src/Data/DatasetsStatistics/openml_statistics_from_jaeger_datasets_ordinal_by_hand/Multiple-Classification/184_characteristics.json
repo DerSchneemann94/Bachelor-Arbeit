@@ -1,0 +1,32 @@
+{
+    "black_king_col": {
+        "cardinality": 8,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "black_king_row": {
+        "cardinality": 8,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "white_king_col": {
+        "cardinality": 4,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "white_king_row": {
+        "cardinality": 4,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "white_rook_col": {
+        "cardinality": 8,
+        "ordinal": false,
+        "type": "categorical"
+    },
+    "white_rook_row": {
+        "cardinality": 8,
+        "ordinal": false,
+        "type": "categorical"
+    }
+}
