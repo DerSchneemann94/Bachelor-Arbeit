@@ -13,7 +13,7 @@ results_timestamp = "2023-03-31_12.51"
 root = get_project_root()
 path_to_datasets_statistic = root / "src/Data/DatasetsStatistics/openml_statistics_from_jaeger_datasets_ordinal_by_hand"
 path_to_results = root / "results" / results_timestamp
-
+path_to_plotting_results = root / "plot/characteristics"
 
 
 task_types = [
@@ -79,7 +79,12 @@ if __name__ == "__main__":
 
         # Here we modify the tickangle of the xaxis, resulting in rotated labels.
         fig.update_layout(barmode='group', xaxis_tickangle=-45)
-        fig.show()
+        
+        path_to_plotting_results
+        if not path_to_plotting_results.exists():
+            path_to_plotting_results.mkdir(parents=True, exist_ok=True)
+        path = path_to_plotting_results / (task_type + "_plot.html")    
+        fig.write_html(path)
 
 
         

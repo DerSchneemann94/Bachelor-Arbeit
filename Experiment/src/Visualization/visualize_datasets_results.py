@@ -18,6 +18,8 @@ path_to_datasets_statistic = root / "src/Data/Datasets_statistics/openml_statist
 path_to_results = root / "results" / results_timestamp
 path_to_plotting_results = root / "plot"
 
+
+
 metrics = {
     "Binary-Classification": "F1_weighted",
     "Multiple-Classification": "F1_weighted",
@@ -133,25 +135,4 @@ if __name__ == "__main__":
         fig.write_html(path)
 
 
-        
-        # for openml_ids in dataframe["openml_ids"]:
-        #     encoder_performance_dataframe = dataframe.drop("openml_ids", axis=1)
-        #     fig = go.Figure()
-        #     for encoder in encoder_performance_dataframe:
-        #         fig.add_traces(go.Bar(
-        #             x=dataframe["openml_ids"],
-        #             y=dataframe[encoder],
-        #             name=encoder,
-        #             marker_color='indianred'
-        #         )).update_traces(   
-        #             marker={"line": {"width": 3, "color": "rgb(0,0,0)"}}
-        #         )     
-        #     row = math.ceil(plot_number / columns) 
-        #     column = (plot_number % columns) + 1
-        #     subplot.add_traces(fig, row, column)
-
-
-        # # Here we modify the tickangle of the xaxis, resulting in rotated labels.
-        # subplot.update_layout(barmode='group', xaxis_tickangle=-45)
-        # subplot.show()
-
+       
