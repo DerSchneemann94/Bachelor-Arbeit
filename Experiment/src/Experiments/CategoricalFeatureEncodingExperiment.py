@@ -7,12 +7,13 @@ import traceback
 from datetime import datetime
 from pathlib import Path
 from typing import Callable, Dict, List, Optional, Tuple
-from jenga.preprocessing.categorical_feature_encoder.CategoricalEncoder import Encoder
 from jenga.tasks.openml import OpenMLTask
 
 import joblib
 import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
 from Evaluation.Evaluation import EvaluationResult, MultipleColumnsAllMissingEvaluator, MultipleColumnsEvaluator, SingleColumnAllMissingEvaluator, SingleColumnEvaluator
+from PreprocessingPipeline.FeatureEncoder.FeatureEncoder import FeatureEncoder
 from utils import get_project_root
 
 
@@ -43,9 +44,9 @@ class CategoricalFeatureEncodingExperiment(object):
         self._strategies = strategies
         self._num_repetitions = num_repetitions
         self._categorical_feature_encoder_name = categorical_feature_encoder_name
-        self._categorical_feature_encoder = Encoder.getCategoricalEncoder(self._categorical_feature_encoder_name)   
+        self._categorical_feature_encoder = OneHotEncoder(handle_unknown="ignore")   
         self._numerical_feature_encoder_name = numerical_feature_encoder_name
-        self._numerical_feature_encoder = Encoder.getNumericalEncoder(self._numerical_feature_encoder_name) 
+        self._numerical_feature_encoder = FeatureEncoder.getNumericalEncoder(self._numerical_feature_encoder_name) 
         self._timestamp = timestamp
         self._result: Dict[int, Dict[str, Dict[float, Dict[str, EvaluationResult]]]] = dict()
 

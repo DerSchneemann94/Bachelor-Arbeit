@@ -1,0 +1,16 @@
+{
+    "easting": {
+        "type": "numeric"
+    },
+    "isns": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "northing": {
+        "type": "numeric"
+    },
+    "resistivity": {
+        "type": "numeric"
+    }
+}

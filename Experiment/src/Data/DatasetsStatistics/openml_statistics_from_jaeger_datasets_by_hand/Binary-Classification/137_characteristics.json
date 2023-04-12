@@ -1,0 +1,47 @@
+{
+    "bottom-left-square": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "bottom-middle-square": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "bottom-right-square": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "middle-left-square": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "middle-middle-square": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "middle-right-square": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "top-left-square": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "top-middle-square": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "top-right-square": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    }
+}

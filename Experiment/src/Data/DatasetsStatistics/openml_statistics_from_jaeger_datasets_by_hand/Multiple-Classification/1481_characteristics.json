@@ -1,0 +1,26 @@
+{
+    "V1": {
+        "cardinality": 4,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V2": {
+        "type": "numeric"
+    },
+    "V3": {
+        "cardinality": 8,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V4": {
+        "type": "numeric"
+    },
+    "V5": {
+        "cardinality": 8,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V6": {
+        "type": "numeric"
+    }
+}

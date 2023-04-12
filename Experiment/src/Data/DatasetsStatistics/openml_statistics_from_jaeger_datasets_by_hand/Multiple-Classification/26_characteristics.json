@@ -1,0 +1,49 @@
+{
+    "children": {
+        "cardinality": 4,
+        "subtype": "ordinal",
+        "type": "categorical",
+        "label": {"1":1,"2":2,"3":3,"more":4}
+    },
+    "finance": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "form": {
+        "cardinality": 4,
+        "subtype": "ordinal",
+        "type": "categorical",
+        "label": {"foster":1,"incomplete":2,"completed":3,"complete":4}
+    },
+    "has_nurs": {
+        "cardinality": 5,
+        "subtype": "ordinal",
+        "type": "categorical",
+        "label": {"proper":1,"less_proper":2,"improper":3,"critical":4,"very_crit":5}
+    },
+    "health": {
+        "cardinality": 3,
+        "subtype": "ordinal",
+        "type": "categorical",
+        "label": {"not_recom":1,"priority":2,"recommend":3}
+    },
+    "housing": {
+        "cardinality": 3,
+        "subtype": "ordinal",
+        "type": "categorical",
+        "label": {"critical":1,"less_conv":2,"convenient":3}
+    },
+    "parents": {
+        "cardinality": 3,
+        "subtype": "ordinal",
+        "type": "categorical",
+        "label": {"great_pret":1,"pretentious":2,"usual":3}
+    },
+    "social": {
+        "cardinality": 3,
+        "subtype": "ordinal",
+        "type": "categorical",
+        "label": {"problematic":1,"slightly_prob":2,"non_prob":3}
+    }
+}

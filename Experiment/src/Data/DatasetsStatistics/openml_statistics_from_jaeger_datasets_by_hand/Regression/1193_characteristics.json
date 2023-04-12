@@ -1,0 +1,43 @@
+{
+    "AGE": {
+        "type": "numeric"
+    },
+    "FTV": {
+        "cardinality": 6,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "HT": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "LOW": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "LWT": {
+        "type": "numeric"
+    },
+    "PTL": {
+        "cardinality": 4,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "RACE": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "SMOKE": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "UI": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    }
+}

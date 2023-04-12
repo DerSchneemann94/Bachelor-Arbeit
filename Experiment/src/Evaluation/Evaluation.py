@@ -147,7 +147,7 @@ class Evaluator(object):
             self._numerical_feature_encoder
             )        
         start_time = time.time()
-        model_categorial_feature_encoder = self._task.fit_model(feature_transformer, self._task.train_data, self._task.test_labels)            
+        model_categorial_feature_encoder = self._task.fit_model_feature_transformer(feature_transformer, self._task.train_data, self._task.test_labels)            
         elapsed_time = time.time() - start_time
         for _ in range(number_of_repetitions):
             # NOTE: masks are DataFrames => append expects Series

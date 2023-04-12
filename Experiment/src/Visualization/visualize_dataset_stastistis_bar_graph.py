@@ -33,7 +33,7 @@ def get_datset_statistic(results_path, characteristics_path, task_type):
         path_to_dataset_results = PathSearcher. get_list_of_dataset_paths(results_path / task_type / openml_id, "*_mean.csv")
         path_to_dataset_characteristic = PathSearcher.get_list_of_dataset_paths(characteristics_path / task_type, str(openml_id) + "_characteristics.json")[0]
         result = PandasDataFrameCreator.generate_dataframe_from_paths(path_to_dataset_results)
-        characteristic = DatasetStatisticDaoImpl.read_from_json(path_to_dataset_characteristic)
+        characteristic = DatasetStatisticDaoImpl.read_statistic_from_json(path_to_dataset_characteristic)
         statisitic = {
             "results": result,
             "characteristic": characteristic          

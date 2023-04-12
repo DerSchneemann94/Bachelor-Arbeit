@@ -1,0 +1,34 @@
+{
+    "Airline": {
+        "cardinality": 18,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "AirportFrom": {
+        "cardinality": 283,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "AirportTo": {
+        "cardinality": 285,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "DayOfWeek": {
+        "cardinality": 7,
+        "subtype": "cyclic",
+        "type": "categorical",
+        "label": {"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7}
+    },
+    "Flight": {
+        "cardinality": 5857,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "Length": {
+        "type": "numeric"
+    },
+    "Time": {
+        "type": "numeric"
+    }
+}

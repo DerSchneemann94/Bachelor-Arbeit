@@ -10,10 +10,10 @@ if experiment_path.exists():
 
 
 experiment = CategoricalFeatureEncodingExperiment(
-    task_id_class_tuples = [[26, OpenMLMultiClassClassificationTask]],
+    task_id_class_tuples = [[137, OpenMLMultiClassClassificationTask]],
     strategies=["single_single"],
     num_repetitions=2,
-    categorical_feature_encoder_name="one_hot_encode",
+    categorical_feature_encoder_name="one_hot",
     numerical_feature_encoder_name="scaling",
     timestamp="experiment_regression"
 )

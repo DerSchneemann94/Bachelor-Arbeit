@@ -2,7 +2,9 @@ import json
 from datetime import datetime
 import os
 from pathlib import Path
+import pandas as pd
 from typing import List
+from Data.DatabaseAccessor.OpenMLAccessor import OpenMLAccessor
 from Data.Datasets_internal.PandasDataFrameCreator import PandasDataFrameCreator
 from Data.Datasets_internal.PathSearcher import PathSearcher
 from Experiments.CategoricalFeatureEncodingExperiment_2 import CategoricalFeatureEncodingExperiment_2
@@ -11,9 +13,8 @@ from utils import get_project_root
 
 experiment_name = "2023-03-17_15.00"
 project_root = get_project_root()
-path_to_openml_datasets = "src/Data/categorical_datasets_from_data_imputation_paper"
+path_to_openml_datasets = "src/Data/DatasetsStatistics/openml_statistics_from_jaeger_datasets_by_hand"
 datasets_parent_path = project_root / path_to_openml_datasets
-dataset_path = PathSearcher.get_path_of_datasets_with_timestamp_if_possible(datasets_parent_path, experiment_name)
 # task_dict = {
 #     "Regression":ExternalDataMLRegressionTask,
 #     "Binary-Classification":ExternalDataBinaryClassificationTask,
@@ -37,13 +38,16 @@ numerical_feature_encoder_name="scaling"
 if __name__ == "__main__":
     datasets_causing_exceptions = []
     for task_type in task_dict.keys():
-        paths_to_data_set_csv = PathSearcher.get_list_of_dataset_paths(dataset_path / task_type, "*.csv")
+        paths_to_data_set_csv = PathSearcher.get_list_of_dataset_paths(datasets_parent_path / task_type, "*.json")
         for path in paths_to_data_set_csv:
             task_class = task_dict[task_type]
             filename = os.path.split(path)[1]
-            openml_id = filename.split(".")[0]
-            dataframe = PandasDataFrameCreator.generate_dataframe_from_paths(paths=path)
-            target_feature = dataframe.columns[-1]
+            openml_id = filename.split("_")[0]
+            dataframe = OpenMLAccessor.get_data_from_source(openml_id)
+            target_feature = dataframe.target_names[0]
+            data = dataframe.data
+            label = dataframe.target
+            dataframe = pd.concat([data, label], axis=1)
             data, labels = PandasDataFrameCreator.split_dataframe_into_data_and_labels(dataframe=dataframe, target=target_feature)
             experiment = CategoricalFeatureEncodingExperiment_2(
                     task_id_class_tuples = [[openml_id, task_class]],

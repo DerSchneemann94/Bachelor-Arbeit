@@ -1,0 +1,38 @@
+{
+    "x1": {
+        "type": "numeric"
+    },
+    "x10": {
+        "type": "numeric"
+    },
+    "x2": {
+        "type": "numeric"
+    },
+    "x3": {
+        "cardinality": 3,
+        "subtype": "ordinal",
+        "type": "categorical"
+    },
+    "x4": {
+        "type": "numeric"
+    },
+    "x5": {
+        "type": "numeric"
+    },
+    "x6": {
+        "type": "numeric"
+    },
+    "x7": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "x8": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "x9": {
+        "type": "numeric"
+    }
+}

@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 from Data.Datasets_internal.PandasDataFrameCreator import PandasDataFrameCreator
+from Experiments.CategoricalFeatureEncodingExperiment import CategoricalFeatureEncodingExperiment
 from Experiments.CategoricalFeatureEncodingExperiment_2 import CategoricalFeatureEncodingExperiment_2
 from jenga.tasks.ExternalDataTask import ExternalDataBinaryClassificationTask, ExternalDataMultiClassClassificationTask, ExternalDataMLRegressionTask
 from utils import get_project_root
@@ -34,7 +35,7 @@ for key in datasets.keys():
     dataframe = PandasDataFrameCreator.generate_dataframe_from_paths(paths=dataset_path)
     data, labels = PandasDataFrameCreator.split_dataframe_into_data_and_labels(dataframe=dataframe, target=dataset_metadata["target"])
     
-    experiment = CategoricalFeatureEncodingExperiment2(
+    experiment = CategoricalFeatureEncodingExperiment(
             task_id_class_tuples = [[task_name, task_class]],
             data=data,
             labels=labels,

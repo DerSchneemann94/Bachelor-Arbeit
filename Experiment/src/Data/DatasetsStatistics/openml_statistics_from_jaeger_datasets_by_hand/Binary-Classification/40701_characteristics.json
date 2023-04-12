@@ -1,0 +1,70 @@
+{
+    "account_length": {
+        "type": "numeric"
+    },
+    "area_code": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "international_plan": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "number_customer_service_calls": {
+        "cardinality": 10,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "number_vmail_messages": {
+        "type": "numeric"
+    },
+    "phone_number": {
+        "type": "numeric"
+    },
+    "state": {
+        "type": "numeric"
+    },
+    "total_day_calls": {
+        "type": "numeric"
+    },
+    "total_day_charge": {
+        "type": "numeric"
+    },
+    "total_day_minutes": {
+        "type": "numeric"
+    },
+    "total_eve_calls": {
+        "type": "numeric"
+    },
+    "total_eve_charge": {
+        "type": "numeric"
+    },
+    "total_eve_minutes": {
+        "type": "numeric"
+    },
+    "total_intl_calls": {
+        "type": "numeric"
+    },
+    "total_intl_charge": {
+        "type": "numeric"
+    },
+    "total_intl_minutes": {
+        "type": "numeric"
+    },
+    "total_night_calls": {
+        "type": "numeric"
+    },
+    "total_night_charge": {
+        "type": "numeric"
+    },
+    "total_night_minutes": {
+        "type": "numeric"
+    },
+    "voice_mail_plan": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "MGR_ID": {
+        "cardinality": 4243,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "RESOURCE": {
+        "cardinality": 7518,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "ROLE_CODE": {
+        "cardinality": 343,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "ROLE_DEPTNAME": {
+        "cardinality": 449,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "ROLE_FAMILY": {
+        "cardinality": 67,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "ROLE_FAMILY_DESC": {
+        "cardinality": 2358,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "ROLE_ROLLUP_1": {
+        "cardinality": 128,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "ROLE_ROLLUP_2": {
+        "cardinality": 177,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "ROLE_TITLE": {
+        "cardinality": 343,
+        "subtype": "nominal",
+        "type": "categorical"
+    }
+}

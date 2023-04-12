@@ -1,0 +1,53 @@
+{
+    "age": {
+        "type": "numeric"
+    },
+    "age_cat_25-45": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "age_cat_Greaterthan45": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "age_cat_Lessthan25": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "c_charge_degree_F": {
+        "type": "numeric"
+    },
+    "c_charge_degree_M": {
+        "type": "numeric"
+    },
+    "juv_fel_count": {
+        "type": "numeric"
+    },
+    "juv_misd_count": {
+        "type": "numeric"
+    },
+    "juv_other_count": {
+        "type": "numeric"
+    },
+    "priors_count": {
+        "type": "numeric"
+    },
+    "race_African-American": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "race_Caucasian": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "sex": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    }
+}

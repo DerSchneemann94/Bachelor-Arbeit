@@ -1,0 +1,72 @@
+{
+    "V1": {
+        "type": "numeric"
+    },
+    "V10": {
+        "type": "categorical",
+        "subtype": "cyclic",
+        "cardinality": 31,
+        "label": {"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12,"13":13,"14":14,"15":15,"16":16,"17":17,"18":18,"19":19,"20":20,"21":21,"22":22,"23":23,"24":24,"25":25,"26":26,"27":27,"28":28,"29":29,"30":30,"31":31}
+    },
+    "V11": {
+        "cardinality": 12,
+        "subtype": "cyclic",
+        "type": "categorical",
+        "label": {"jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,"jul":7,"aug":8,"sep":9,"oct":10,"nov":11,"dec":12}    
+    },
+    "V12": {
+        "type": "numeric"
+    },
+    "V13": {
+        "type": "numeric"
+    },
+    "V14": {
+        "type": "numeric"
+    },
+    "V15": {
+        "type": "numeric"
+    },
+    "V16": {
+        "cardinality": 4,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V2": {
+        "cardinality": 12,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V3": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V4": {
+        "cardinality": 4,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V5": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V6": {
+        "type": "numeric"
+    },
+    "V7": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V8": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V9": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    }
+}

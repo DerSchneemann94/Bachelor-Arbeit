@@ -1,0 +1,46 @@
+{
+    "animal": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "area": {
+        "type": "numeric"
+    },
+    "bathroom": {
+        "type": "numeric"
+    },
+    "city": {
+        "cardinality": 5,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "fire_insurance_(BRL)": {
+        "type": "numeric"
+    },
+    "floor": {
+        "cardinality": 35,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "furniture": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "hoa_(BRL)": {
+        "type": "numeric"
+    },
+    "parking_spaces": {
+        "type": "numeric"
+    },
+    "property_tax_(BRL)": {
+        "type": "numeric"
+    },
+    "rent_amount_(BRL)": {
+        "type": "numeric"
+    },
+    "rooms": {
+        "type": "numeric"
+    }
+}

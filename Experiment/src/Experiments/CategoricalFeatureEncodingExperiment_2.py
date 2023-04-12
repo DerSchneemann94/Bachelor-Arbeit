@@ -4,13 +4,13 @@ import os
 import re
 import traceback
 from Data.DatasetsStatistics.DatasetStatisticsCreator import DatasetStatisticsCreator
+from PreprocessingPipeline.FeatureEncoder.FeatureEncoder import FeatureEncoder
 from jenga.utils import set_seed
 import joblib
 import pandas as pd
 from datetime import datetime
 from pathlib import Path
 from typing import Callable, Dict, List, Optional, Tuple
-from jenga.preprocessing.categorical_feature_encoder.CategoricalEncoder import Encoder
 from jenga.tasks.openml import OpenMLTask
 from sklearn.base import BaseEstimator
 from utils import get_project_root
@@ -48,7 +48,7 @@ class CategoricalFeatureEncodingExperiment_2(object):
         self._categorical_feature_encoder_names: List[str] = categorical_feature_encoder_names
         self._categorical_feature_encoders = getCategoricalEncoders(self._categorical_feature_encoder_names)   
         self._numerical_feature_encoder_name = numerical_feature_encoder_name
-        self._numerical_feature_encoder = Encoder.getNumericalEncoder(self._numerical_feature_encoder_name) 
+        self._numerical_feature_encoder = FeatureEncoder.getNumericalEncoder(self._numerical_feature_encoder_name) 
         self._experiment_name = experiment_name
         self._result: Dict[int, Dict[str, Dict[float, Dict[str, EvaluationResult_without_baseline]]]] = dict()
         self._seed = seed
@@ -82,29 +82,28 @@ class CategoricalFeatureEncodingExperiment_2(object):
             for index in range(len(self._categorical_feature_encoders)):
                 categorical_feature_encoder = self._categorical_feature_encoders[index]
                 categorical_feature_encoder_name = self._categorical_feature_encoder_names[index]
-                for strategy in self._strategies:
-                    experiment_path = self._base_path / f"{task_id}" / f"{strategy}" / f"{categorical_feature_encoder_name}"
-                    try:
-                        evaluator = self.strategy_to_EvaluatorClass[strategy](
-                            task=task,
-                            path=experiment_path,
-                            categorical_feature_encoder=categorical_feature_encoder,
-                            categorical_feature_encoder_name=categorical_feature_encoder_name,
-                            numerical_feature_encoder=self._numerical_feature_encoder,
-                            numerical_feature_encoder_name=self._numerical_feature_encoder_name,
-                            seed=self._seed,
-                            number_of_repetitions=self._num_repetitions
-                            )
-                        evaluator.evaluate()
-                        result = evaluator._result
-                    except Exception as error:
-                        error = traceback.format_exc()
-                        experiment_path.mkdir(parents=True, exist_ok=True)
-                        Path(experiment_path / "error.txt").write_text(str(error))
-                        logger.exception(f"Tried to use {categorical_feature_encoder.__class__.__name__}")
-                        result = error
-                        self._result[task_id][strategy] = result
-                        raise error
+                experiment_path = self._base_path / f"{task_id}" / f"{categorical_feature_encoder_name}"
+                try:
+                    evaluator = SingleColumnEvaluator_without_Baseline(
+                        task=task,
+                        path=experiment_path,
+                        categorical_feature_encoder=categorical_feature_encoder,
+                        categorical_feature_encoder_name=categorical_feature_encoder_name,
+                        numerical_feature_encoder=self._numerical_feature_encoder,
+                        numerical_feature_encoder_name=self._numerical_feature_encoder_name,
+                        seed=self._seed,
+                        number_of_repetitions=self._num_repetitions
+                        )
+                    evaluator.evaluate()
+                    result = evaluator._result
+                except Exception as error:
+                    error = traceback.format_exc()
+                    experiment_path.mkdir(parents=True, exist_ok=True)
+                    Path(experiment_path / "error.txt").write_text(str(error))
+                    logger.exception(f"Tried to use {categorical_feature_encoder.__class__.__name__}")
+                    result = error
+                    self._result[task_id] = result
+                    raise error
 
         joblib.dump(self._result, Path(self._base_path / f"{task_id}" / "result.joblib"))
         Path(self._base_path / f"{task_id}" / "evaluation_parameters.json").write_text(
@@ -123,7 +122,7 @@ def getCategoricalEncoders(encoder_names: List[str]) -> List[BaseEstimator]:
     encoder_list = []
     for encoder_name in encoder_names:
         try:
-           encoder = Encoder.getCategoricalEncoder(encoder_name)
+           encoder = FeatureEncoder.getCategoricalEncoder(encoder_name)
         except:
             print("Enoder with Name:    " + encoder_name + " is not defined.")
         encoder_list.append(encoder)

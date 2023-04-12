@@ -145,7 +145,36 @@ class Task(ABC):
         return feature_transformation
 
 
-    def fit_model(self, feature_transformation: ColumnTransformer, train_data: Optional[pd.DataFrame] = None, train_labels: Optional[pd.Series] = None) -> BaseEstimator:
+    def fit_model(self, train_data: Optional[pd.DataFrame] = None, train_labels: Optional[pd.Series] = None) -> BaseEstimator:
+        """
+        Fits a model. If no data is given (default), it uses the task's train data and returns a model`. \
+            If data is given, it trains this data.
+
+        Args:
+            train_data (Optional[pd.DataFrame], optional): Data to train. Defaults to None.
+            train_labels (Optional[pd.Series], optional): Labels to train. Defaults to None.
+            feature_transformation: defines a ColumnTransformer as definded in sklearn library.
+
+        Returns:
+            BaseEstimator: Trained model
+        """
+
+        train_data = self.train_data.copy()
+        train_labels = self.train_labels.copy()
+        
+        param_grid, pipeline, scorer = self._get_pipeline_grid_scorer_tuple_model_only()
+        #refit = list(scorer.keys())[0]
+
+        model = pipeline.fit(train_data, train_labels)
+
+        #search = GridSearchCV(pipeline, param_grid, scoring=scorer, n_jobs=-1, refit=refit, error_score="raise")
+        #model = search.fit(train_data, train_labels).best_estimator_
+
+        return model
+
+
+
+    def fit_model_feature_transformer(self, feature_transformation: ColumnTransformer, train_data: Optional[pd.DataFrame] = None, train_labels: Optional[pd.Series] = None) -> BaseEstimator:
         """
         Fits a model. If no data is given (default), it uses the task's train data and returns a model`. \
             If data is given, it trains this data.
@@ -297,6 +326,24 @@ class Task(ABC):
 
         pass
 
+    
+    @abstractmethod
+    def _get_pipeline_grid_scorer_tuple_model_only(selfs) -> Tuple[Dict[str, object], Any, Dict[str, Any]]:
+        """
+        Forces child class to define task specific `Pipeline`, hyperparameter grid for HPO, and scorer for baseline model training.
+        This helps to reduce redundant code.
+
+        Args:
+            feature_transformation (ColumnTransformer): Basic preprocessing for columns. Given by `fit_baseline_model` that calls this method
+
+        Returns:
+            Tuple[Dict[str, object], Any, Dict[str, Any]]: Task specific parts to build baseline model
+        """
+
+        raise NotImplementedError
+
+
+
 
 class BinaryClassificationTask(Task):
 
@@ -356,6 +403,37 @@ class BinaryClassificationTask(Task):
 
         if self._get_task_type_of_data() != BINARY_CLASSIFICATION and not self.is_image_data:
             raise ValueError("Downloaded data is not a binary classification task.")
+
+
+    def _get_pipeline_grid_scorer_tuple_model_only(
+        self,
+    ) -> Tuple[Dict[str, object], Any, Dict[str, Any]]:
+        """
+        Binary classification specific default `Pipeline`, hyperparameter grid for HPO, and scorer for baseline model training.
+
+        Returns:
+            Tuple[Dict[str, object], Any, Dict[str, Any]]: Binary classification specific parts to build baseline model
+        """
+
+        param_grid = {
+            'learner__loss': ['log'],
+            'learner__penalty': ['l2'],
+            'learner__alpha': [0.00001, 0.0001, 0.001, 0.01]
+        }
+
+        pipeline = Pipeline(
+            [
+                ('learner', SGDClassifier(max_iter=1000, n_jobs=-1, random_state=self._seed))
+            ]
+        )
+
+        scorer = {
+            "F1": make_scorer(f1_score, average="macro")
+        }
+
+        return param_grid, pipeline, scorer
+
+
 
     def _get_pipeline_grid_scorer_tuple(
         self,
@@ -476,6 +554,36 @@ class MultiClassClassificationTask(Task):
         if self._get_task_type_of_data() != MULTI_CLASS_CLASSIFICATION and not self.is_image_data:
             raise ValueError("Downloaded data is not a multi-class classification task.")
 
+
+    def _get_pipeline_grid_scorer_tuple_model_only(
+        self,
+    ) -> Tuple[Dict[str, object], Any, Dict[str, Any]]:
+        """
+        Multi-class classification specific default `Pipeline`, hyperparameter grid for HPO, and scorer for baseline model training.
+
+        Returns:
+            Tuple[Dict[str, object], Any, Dict[str, Any]]: Multi-class classification specific parts to build baseline model
+        """
+
+        param_grid = {
+            'learner__loss': ['log'],
+            'learner__penalty': ['l2'],
+            'learner__alpha': [0.00001, 0.0001, 0.001, 0.01]
+        }
+
+        pipeline = Pipeline(
+            [
+                ('learner', SGDClassifier(max_iter=1000, n_jobs=-1, random_state=self._seed))
+            ]
+        )
+
+        scorer = {
+            "F1": make_scorer(f1_score, average="macro")
+        }
+
+        return param_grid, pipeline, scorer
+
+
     def _get_pipeline_grid_scorer_tuple(
         self,
         feature_transformation: ColumnTransformer
@@ -538,8 +646,8 @@ class MultiClassClassificationTask(Task):
         Returns:
             float: F1 score of given `predictions`
         """
-
         return f1_score(self.test_labels, predictions, average="micro"), f1_score(self.test_labels, predictions, average="macro"), f1_score(self.test_labels, predictions, average="weighted")
+
 
 
 class RegressionTask(Task):
@@ -599,6 +707,37 @@ class RegressionTask(Task):
 
         if self._get_task_type_of_data() != REGRESSION:
             raise ValueError("Downloaded data is not a regression task.")
+
+
+    def _get_pipeline_grid_scorer_tuple_model_only(
+        self,
+    ) -> Tuple[Dict[str, object], Any, Dict[str, Any]]:
+        """
+        Regression specific default `Pipeline`, hyperparameter grid for HPO, and scorer for baseline model training.
+
+        Returns:
+            Tuple[Dict[str, object], Any, Dict[str, Any]]: Regression specific parts to build baseline model
+        """
+
+        param_grid = {
+            'learner__loss': ['squared_error', 'huber'],
+            'learner__penalty': ['l2'],
+            'learner__alpha': [0.00001, 0.0001, 0.001, 0.01]
+        }
+
+        pipeline = Pipeline(
+            [
+                ('learner', SGDRegressor(max_iter=1000, random_state=self._seed))
+            ]
+        )
+
+        scorer = {
+            "MSE": make_scorer(mean_squared_error, greater_is_better=False),
+            "MAE": make_scorer(mean_absolute_error, greater_is_better=False)
+        }
+
+        return param_grid, pipeline, scorer
+
 
     def _get_pipeline_grid_scorer_tuple(
         self,

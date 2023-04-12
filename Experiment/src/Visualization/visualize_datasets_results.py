@@ -112,6 +112,9 @@ if __name__ == "__main__":
             single_encoder_performance = encoder_performance_dataframe_relative_to_baseline[encoder]
             hovertemplate = "<b>performance: </b> %{y} <br>"
             hovertemplate += "<b>encoder: </b> %{meta[0]} <br>"
+            hovertemplate += "<b>nominal_features: </b> %{meta[0]} <br>"
+            hovertemplate += "<b>ordinal_features: </b> %{meta[0]} <br>"
+            
             colors = []
             for value in single_encoder_performance:
                 color = 'green' if value >= 0 else 'red'

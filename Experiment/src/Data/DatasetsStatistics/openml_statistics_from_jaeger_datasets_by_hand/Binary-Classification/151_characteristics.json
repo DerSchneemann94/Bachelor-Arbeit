@@ -1,0 +1,29 @@
+{
+    "date": {
+        "type": "numeric"
+    },
+    "day": {
+        "cardinality": 7,
+        "subtype": "cyclic",
+        "type": "categorical",
+        "label": {"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7}
+    },
+    "nswdemand": {
+        "type": "numeric"
+    },
+    "nswprice": {
+        "type": "numeric"
+    },
+    "period": {
+        "type": "numeric"
+    },
+    "transfer": {
+        "type": "numeric"
+    },
+    "vicdemand": {
+        "type": "numeric"
+    },
+    "vicprice": {
+        "type": "numeric"
+    }
+}

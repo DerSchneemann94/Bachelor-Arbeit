@@ -1,0 +1,81 @@
+{
+    "V1": {
+        "cardinality": 62,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V10": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V11": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V12": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V13": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V14": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V15": {
+        "cardinality": 16,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V16": {
+        "type": "categorical",
+        "subtype": "ordinal",
+        "cardinality": 5,
+        "label": {"1":1,"2":2,"3":3,"4":4,"5":5}
+    },
+    "V2": {
+        "type": "numeric"
+    },
+    "V3": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V4": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V5": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V6": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V7": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V8": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "V9": {
+        "cardinality": 2,
+        "subtype": "nominal",
+        "type": "categorical"
+    }
+}

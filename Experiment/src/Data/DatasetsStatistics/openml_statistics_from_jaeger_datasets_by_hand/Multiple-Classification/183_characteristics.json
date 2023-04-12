@@ -1,0 +1,28 @@
+{
+    "Diameter": {
+        "type": "numeric"
+    },
+    "Height": {
+        "type": "numeric"
+    },
+    "Length": {
+        "type": "numeric"
+    },
+    "Sex": {
+        "cardinality": 3,
+        "subtype": "nominal",
+        "type": "categorical"
+    },
+    "Shell_weight": {
+        "type": "numeric"
+    },
+    "Shucked_weight": {
+        "type": "numeric"
+    },
+    "Viscera_weight": {
+        "type": "numeric"
+    },
+    "Whole_weight": {
+        "type": "numeric"
+    }
+}
