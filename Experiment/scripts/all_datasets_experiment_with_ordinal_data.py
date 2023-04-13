@@ -4,7 +4,7 @@ from pathlib import Path
 from Data.Datasets_internal.PandasDataFrameCreator import PandasDataFrameCreator
 from Experiments.CategoricalFeatureEncodingExperiment import CategoricalFeatureEncodingExperiment
 from Experiments.CategoricalFeatureEncodingExperiment_2 import CategoricalFeatureEncodingExperiment_2
-from jenga.tasks.ExternalDataTask import ExternalDataBinaryClassificationTask, ExternalDataMultiClassClassificationTask, ExternalDataMLRegressionTask
+from jenga.tasks.ExternalDataTask import ExternalDataBinaryClassificationTask, ExternalDataMultipleClassificationTask, ExternalDataMLRegressionTask
 from utils import get_project_root
 
 project_root = get_project_root()
@@ -15,7 +15,7 @@ datasets_metadata_path = project_root / "src/Data/Datasets_identify/DatasetsToAn
 task_dict = {
     "Regression":ExternalDataMLRegressionTask,
     "Binary-Classification":ExternalDataBinaryClassificationTask,
-    "Multiple-Classification":ExternalDataMultiClassClassificationTask
+    "Multiple-Classification":ExternalDataMultipleClassificationTask
 }
 
 datasets = json.loads(datasets_metadata_path.read_text())

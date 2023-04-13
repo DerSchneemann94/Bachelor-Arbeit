@@ -46,7 +46,7 @@ class CategoricalFeatureEncodingExperiment(object):
         self._categorical_feature_encoder_name = categorical_feature_encoder_name
         self._categorical_feature_encoder = OneHotEncoder(handle_unknown="ignore")   
         self._numerical_feature_encoder_name = numerical_feature_encoder_name
-        self._numerical_feature_encoder = FeatureEncoder.getNumericalEncoder(self._numerical_feature_encoder_name) 
+        self._numerical_feature_encoder = FeatureEncoder.get_numerical_encoder(self._numerical_feature_encoder_name) 
         self._timestamp = timestamp
         self._result: Dict[int, Dict[str, Dict[float, Dict[str, EvaluationResult]]]] = dict()
 

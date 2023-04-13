@@ -13,12 +13,14 @@ from Data.Datasets_internal.PathSearcher import PathSearcher
 class DatasetStatisticsCreator:
 
 
-    def create_dataset_statistic_from_dataframe(self, file_name: str, path: Path, dataframe: pd.DataFrame):
+    def create_dataset_statistic_from_dataframe_openml(self, path: Path, dataframe: pd.DataFrame, file_name: str = None):
         features: Dict[str, Feature] = {}
         for column in dataframe.columns: 
             features[dataframe[column].name] = FeatureObjectCreator.get_feature_object_from_pd_dataframe(dataframe[column])
         json_file = self._create_data_chacteristics_json(features)
-        self.safe_results(file_name, path, json_file)
+        if path is None:
+            return json_file
+        self.safe_results(file_name, path, json_file)            
 
 
     def safe_results(self, file_name: str, path: Path, json_file):
@@ -37,6 +39,14 @@ class DatasetStatisticsCreator:
         return dataset_statistic_json
     
 
+
+
+
+
+
+
+
+
     def get_datset_statistic(results_path, characteristics_path, task_type):
         datasets_statistics = {}
         #paths_to_datasets_results = PathSearcher.get_list_of_dataset_paths(results_path / task_type, "*_mean.csv")
@@ -52,3 +62,5 @@ class DatasetStatisticsCreator:
             }
             datasets_statistics[openml_id]= statisitic
         return datasets_statistics
+
+

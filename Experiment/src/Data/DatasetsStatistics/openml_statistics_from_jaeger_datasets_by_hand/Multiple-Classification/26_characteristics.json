@@ -26,7 +26,7 @@
         "cardinality": 3,
         "subtype": "ordinal",
         "type": "categorical",
-        "label": {"not_recom":1,"priority":2,"recommend":3}
+        "label": {"not_recom":1,"priority":2,"recommended":3}
     },
     "housing": {
         "cardinality": 3,
@@ -44,6 +44,6 @@
         "cardinality": 3,
         "subtype": "ordinal",
         "type": "categorical",
-        "label": {"problematic":1,"slightly_prob":2,"non_prob":3}
+        "label": {"problematic":1,"slightly_prob":2,"nonprob":3}
     }
 }

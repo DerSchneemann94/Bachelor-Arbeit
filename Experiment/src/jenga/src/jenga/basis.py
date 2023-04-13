@@ -163,7 +163,7 @@ class Task(ABC):
         train_labels = self.train_labels.copy()
         
         param_grid, pipeline, scorer = self._get_pipeline_grid_scorer_tuple_model_only()
-        #refit = list(scorer.keys())[0]
+        refit = list(scorer.keys())[0]
 
         model = pipeline.fit(train_data, train_labels)
 
@@ -423,6 +423,7 @@ class BinaryClassificationTask(Task):
 
         pipeline = Pipeline(
             [
+                ('numeric', StandardScaler()),
                 ('learner', SGDClassifier(max_iter=1000, n_jobs=-1, random_state=self._seed))
             ]
         )
@@ -573,6 +574,7 @@ class MultiClassClassificationTask(Task):
 
         pipeline = Pipeline(
             [
+                ('numeric', StandardScaler()),
                 ('learner', SGDClassifier(max_iter=1000, n_jobs=-1, random_state=self._seed))
             ]
         )
@@ -727,6 +729,7 @@ class RegressionTask(Task):
 
         pipeline = Pipeline(
             [
+                ('numeric', StandardScaler()),  
                 ('learner', SGDRegressor(max_iter=1000, random_state=self._seed))
             ]
         )

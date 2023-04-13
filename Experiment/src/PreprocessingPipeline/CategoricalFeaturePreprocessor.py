@@ -22,17 +22,20 @@ class CategoricalFeaturePreprocessor:
         return pipelinestate
 
 
-    def perform_preprocessing(dataframe: pd.DataFrame):
-        return
-    
+    def get_encoder_combination(self):
+        encoder_configuration = {}
+        for state in self.__processor_state:
+            data_type = state["data_type"]
+            encoder_index = state["current_state"]
+            encoder =  self.__preprocessing_configuration[data_type][encoder_index]
+            encoder_configuration[data_type] = encoder
+        return encoder_configuration
+
     
     def transformData(self, dataframe: pd.DataFrame):
         transformed_data_frames_list = []
         transformation_meta_data = {}
-        if self.__check_processor_state() is None:
-            return None
         dataframe = self.__transform(dataframe, transformed_data_frames_list, transformation_meta_data)
-        self.__adjust_processor_state()
         return dataframe
 
 
@@ -45,7 +48,6 @@ class CategoricalFeaturePreprocessor:
             dataframe_relevant_features = self.__extract_relevant_features(dataframe, self.__feature_characteristic, data_type)
             dataframe_relevant_features_list = [*dataframe_relevant_features_list, *dataframe_relevant_features]
             encoding_schemes = self.__get_relevant_encoding_schemes(dataframe_relevant_features.columns, self.__dataset_characteristic)
-            dataframe_relevant_features = dataframe_relevant_features.astype(str)
             transformed_data_frames_list.append(FeatureEncoder.transform_data(encoder_name, dataframe_relevant_features, encoding_schemes))
             transformation_meta_data[data_type] = encoder_name
         transformed_dataframe = pd.concat(transformed_data_frames_list, axis=1)
@@ -55,7 +57,7 @@ class CategoricalFeaturePreprocessor:
         return dataframe
 
 
-    def __check_processor_state(self):
+    def check_processor_state(self):
         last_index = len(self.__processor_state)-1
         if self.__processor_state[last_index]["max_state"] < self.__processor_state[last_index]["current_state"]:
             return None
@@ -63,7 +65,7 @@ class CategoricalFeaturePreprocessor:
             return True
 
 
-    def __adjust_processor_state(self):
+    def increment_processor_state(self):
         carry_bit = 1 
         last_index = len(self.__processor_state)-1
         for index in range(0, len(self.__processor_state)):

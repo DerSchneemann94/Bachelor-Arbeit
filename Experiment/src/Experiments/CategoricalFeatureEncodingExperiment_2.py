@@ -48,7 +48,7 @@ class CategoricalFeatureEncodingExperiment_2(object):
         self._categorical_feature_encoder_names: List[str] = categorical_feature_encoder_names
         self._categorical_feature_encoders = getCategoricalEncoders(self._categorical_feature_encoder_names)   
         self._numerical_feature_encoder_name = numerical_feature_encoder_name
-        self._numerical_feature_encoder = FeatureEncoder.getNumericalEncoder(self._numerical_feature_encoder_name) 
+        self._numerical_feature_encoder = FeatureEncoder.get_numerical_encoder(self._numerical_feature_encoder_name) 
         self._experiment_name = experiment_name
         self._result: Dict[int, Dict[str, Dict[float, Dict[str, EvaluationResult_without_baseline]]]] = dict()
         self._seed = seed
@@ -122,7 +122,7 @@ def getCategoricalEncoders(encoder_names: List[str]) -> List[BaseEstimator]:
     encoder_list = []
     for encoder_name in encoder_names:
         try:
-           encoder = FeatureEncoder.getCategoricalEncoder(encoder_name)
+           encoder = FeatureEncoder.get_categorical_encoder(encoder_name)
         except:
             print("Enoder with Name:    " + encoder_name + " is not defined.")
         encoder_list.append(encoder)

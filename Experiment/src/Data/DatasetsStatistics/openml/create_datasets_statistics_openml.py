@@ -39,7 +39,7 @@ if __name__ == "__main__":
         for openml_id in dataset.keys():
             try:
                 data, labels = fetch_openml(data_id=openml_id, as_frame=True, return_X_y=True, cache=False)
-                datasets_statistic.create_dataset_statistic_from_dataframe(openml_id, path, data)
+                datasets_statistic.create_dataset_statistic_from_dataframe_openml(openml_id, path, data)
             except:
                 unsuccessfull_datasets_ids.append(openml_id)
     (path_dataset_analysis_results / "unsuccessfull_datasets.txt").write_text(str(unsuccessfull_datasets_ids))

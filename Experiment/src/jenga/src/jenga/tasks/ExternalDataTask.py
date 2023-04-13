@@ -37,7 +37,7 @@ class ExternalDataMLRegressionTask(ExternalDataTask, RegressionTask):
     pass
 
 
-class ExternalDataMultiClassClassificationTask(ExternalDataTask, MultiClassClassificationTask):
+class ExternalDataMultipleClassificationTask(ExternalDataTask, MultiClassClassificationTask):
     pass
 
 

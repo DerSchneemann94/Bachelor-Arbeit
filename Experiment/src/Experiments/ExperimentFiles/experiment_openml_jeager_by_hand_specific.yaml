@@ -1,0 +1,17 @@
+datasets_path: src/Data/DatasetsStatistics/openml_statistics_from_jaeger_by_hand
+preprocessing:
+  categorical:
+    nominal: 
+      - one_hot
+      - hashing
+    ordinal: 
+      - ordinal
+    cyclic: 
+      - cyclic
+model: 
+  regression:
+    - SGDRegressor
+  binary_classification:
+    - SGDClassifier 
+  multiple_classification:
+    - SGDClassifier

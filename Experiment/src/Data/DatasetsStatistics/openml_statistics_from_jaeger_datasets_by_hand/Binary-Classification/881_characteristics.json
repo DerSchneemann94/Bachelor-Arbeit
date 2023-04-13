@@ -10,7 +10,7 @@
     },
     "x3": {
         "cardinality": 3,
-        "subtype": "ordinal",
+        "subtype": "nominal",
         "type": "categorical"
     },
     "x4": {

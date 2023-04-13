@@ -1,19 +1,16 @@
 import pandas as pd
-from category_encoders import OrdinalEncoder
-#from sklearn.preprocessing import OrdinalEncoder
+from category_encoders import HashingEncoder
 from PreprocessingPipeline.FeatureEncoder.EncoderInterface import EncoderInterface
 
 
-class OrdinalEncoderImpl(EncoderInterface):
+class HashEncoderImpl(EncoderInterface):
 
-    def __init__(self,handle_unknown="use_encoded_value", unknown_value=-1) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        self.handle_umknown=handle_unknown
-        self.unknown_value=unknown_value
 
 
     def transform_data(self, dataframe: pd.DataFrame, encoding_scheme):
-        encoder = OrdinalEncoder(cols = dataframe.columns[0],handle_unknown="error", mapping=[{"col": dataframe.columns[0],"mapping":encoding_scheme}])
+        encoder = HashingEncoder(return_df=True)
         encoder.fit(dataframe)
         feature_name = dataframe.columns[0]
         try:
@@ -23,7 +20,7 @@ class OrdinalEncoderImpl(EncoderInterface):
             return dataframe
         except Exception as error:
             raise error
-
+    
 
     def rename_column(self, feature_name: str, encoded_dataframe: pd.DataFrame):
         current_column_name = encoded_dataframe.columns[0]

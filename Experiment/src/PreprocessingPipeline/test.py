@@ -19,10 +19,10 @@ experiment_config = experiment_Reader.get_experiment_config()
 categorical_feature_encoder_names = experiment_config["preprocessing"]["categorical"]
 dataset_statistic_creator = DatasetStatisticsCreator()
 
-data = OpenMLAccessor.get_data_from_source(42712)
+data = OpenMLAccessor.get_data_from_source(1558)
 
 dataframe = data["data"]
-feature = dataframe["weekday"]
+feature = dataframe["V10"]
 
 value_collection = []
 for index in range(dataframe.index.size):

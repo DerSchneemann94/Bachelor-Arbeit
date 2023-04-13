@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 import pandas as pd
 
 from Data.DatasetsStatistics.FeatureAnalyzer import FeatureAnalyzer
@@ -7,8 +7,13 @@ from pathlib import Path
 class PandasDataFrameCreator:
 
     @staticmethod
-    def generate_dataframe_from_csv(csv_data):
-        pass
+    def generate_dataframe_from_path(path:Path):
+        try:
+            dataframe = pd.read_csv(path)
+            return dataframe
+        except Exception as error:
+            raise error
+        
 
 
     @staticmethod
@@ -41,31 +46,47 @@ class PandasDataFrameCreator:
         pass
 
 
+    @staticmethod
     def generate_dataframe_from_dataset_statistic(datasets_statistic):
         openml_ids = []
-        nominal_features = []
-        ordinal_features = []
-        numeric_features = []
-        dataframe_initialzier = {
-            "openml_ids": openml_ids,
-            "nominal_features": nominal_features,
-            "ordinal_features": ordinal_features,
-            "numeric_features": numeric_features
-        }    
+        features_charateristics = []
+        
+        dataframe_initialzier = {}    
         for openml_id in datasets_statistic.keys():
+            number_of_entries = len(openml_ids)
             dataset_statistic = datasets_statistic[openml_id]
             try:
-                nbr_nominal_features, nbr_ordinal_features, nbr_numeric_features = FeatureAnalyzer.get_number_of_feature_from_statistic(dataset_statistic["characteristic"]) 
-            except:
-                continue
-            nominal_features.append(nbr_nominal_features)
-            numeric_features.append(nbr_numeric_features)
-            ordinal_features.append(nbr_ordinal_features)
+                features_charateristics = FeatureAnalyzer.get_number_of_feature_from_statistic(dataset_statistic["dataset_characteristic"]) 
+                dataframe_initialzier = PandasDataFrameCreator.__update_statistic_dataframe(features_charateristics, dataframe_initialzier, number_of_entries)
+            except Exception as error:
+                raise error
             openml_ids.append(openml_id)
+        dataframe_initialzier["openml_ids"] = openml_ids     
         dataframe_performance = pd.DataFrame(dataframe_initialzier)
         return dataframe_performance
 
 
+    @staticmethod
+    def __update_statistic_dataframe(feature_types, dataframe_initializer_json, number_of_entries):
+        feature_types_keys: List = feature_types.keys()
+        dataframe_initializer_json_keys: List = list(dataframe_initializer_json.keys())
+        
+        for data_type in feature_types_keys:
+            number_of_features = len(feature_types[data_type])  
+            if data_type in dataframe_initializer_json.keys():
+                dataframe_initializer_json[data_type].append(number_of_features)
+                dataframe_initializer_json_keys.remove(data_type)
+            else:
+                dataframe_initializer_json[data_type] = [0] * number_of_entries    
+                dataframe_initializer_json[data_type].append(number_of_features)
+                    
+        for data_type in dataframe_initializer_json_keys:
+            dataframe_initializer_json[data_type].append(0)
+        return dataframe_initializer_json
+
+
+
+    @staticmethod
     def generate_dataframe_from_dataset_results(datasets_results, metric):
         openml_ids = []
         results_encoders = {}
