@@ -9,6 +9,10 @@ class EncoderInterface(ABC):
 
 
     @abstractmethod
-    def transform_data(dataframe: pd.DataFrame, encoding_scheme):
+    def transform_data_human_readable(dataframe: pd.DataFrame, encoding_scheme):
         raise NotImplementedError
 
+
+    @abstractmethod
+    def transform_data_compact(dataframe: pd.DataFrame, encoding_scheme):
+        raise NotImplementedError

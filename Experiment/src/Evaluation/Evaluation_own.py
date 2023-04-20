@@ -1,24 +1,23 @@
-import json
-import time
 import pandas as pd
 from jenga.utils import set_seed
 from pathlib import Path
 from statistics import mean, stdev
-from typing import Callable, Dict, List, Optional, Tuple
-from jenga.corruptions.generic import MissingValues
-from jenga.tasks.openml import OpenMLTask
+from typing import Dict, List, Optional
+from jenga.tasks.ExternalDataTask import ExternalDataTask
 from jenga.utils import BINARY_CLASSIFICATION, MULTI_CLASS_CLASSIFICATION, REGRESSION
 from numpy import nan
 from sklearn.metrics import f1_score, mean_absolute_error, mean_squared_error
 from sklearn.base import BaseEstimator
 from utils import get_project_root
+
+
 class EvaluationError(Exception):
     """Exception raised for errors in Evaluation classes"""
     pass
 
 
 class Evaluationresult_own(object):
-    def __init__(self, task: OpenMLTask):
+    def __init__(self, task: ExternalDataTask):
         self._task = task
         self._finalized = False
         self.results: List[pd.DataFrame] = []
@@ -91,7 +90,7 @@ class Evaluationresult_own(object):
 class Evaluator_own(object):
     def __init__(
         self,
-        task: OpenMLTask,
+        task: ExternalDataTask,
         path: Optional[Path] = None,
         seed: int = 42,
         
@@ -115,32 +114,3 @@ class Evaluator_own(object):
         result = result_temp.finalize()
         self._result = result
         return result
-
-
-    def _save_results(self):
-        if self._path is not None:
-            #print("Path:  ", self._path)
-            self._path.mkdir(parents=True, exist_ok=True)
-            #Mean results
-            if self._number_of_repetitions > 1:
-                self._result.downstream_performance.to_csv(self._path / f"downstream_performance_mean.csv")
-                # Standard deviation results
-                self._result.downstream_performance_std.to_csv(self._path / f"downstream_performance_std.csv")
-            Path(self._path / f"elapsed_train_time.json").write_text(json.dumps(
-                {
-                    "mean": self._result.elapsed_train_time,
-                    "std": self._result.elapsed_train_time_std
-               }
-            ))
-            results_path = self._path / "report for every experiment"
-            results_path.mkdir(parents=True, exist_ok=True)    
-            for index, (performance_data_frame, elapsed_train_time) in enumerate(
-                zip(
-                    self._result.downstream_performances,
-                    self._result.elapsed_train_times                    
-                )
-            ):
-                performance_data_frame.to_csv(results_path / f"downstream_performance_rep_{index}.csv")
-                Path(results_path / f"elapsed_train_time_rep_{index}.json").write_text(json.dumps(elapsed_train_time))
-
-

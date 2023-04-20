@@ -1,4 +1,5 @@
 import json
+from Data.DatasetsStatistics.FeatureAnalyzer import FeatureAnalyzer
 from Data.DatasetsStatistics.DatasetStatisticDao.DatasetStatisticDaoImpl import DatasetStatisticDaoImpl
 from Data.DatasetsStatistics.FeatureObjectCreator import FeatureObjectCreator
 from Data.DatasetsStatistics.Model.Feature import Feature
@@ -13,54 +14,83 @@ from Data.Datasets_internal.PathSearcher import PathSearcher
 class DatasetStatisticsCreator:
 
 
-    def create_dataset_statistic_from_dataframe_openml(self, path: Path, dataframe: pd.DataFrame, file_name: str = None):
+    @staticmethod
+    def create_dataset_statistic_from_dataframe_openml( dataframe: pd.DataFrame):
         features: Dict[str, Feature] = {}
         for column in dataframe.columns: 
             features[dataframe[column].name] = FeatureObjectCreator.get_feature_object_from_pd_dataframe(dataframe[column])
-        json_file = self._create_data_chacteristics_json(features)
-        if path is None:
-            return json_file
-        self.safe_results(file_name, path, json_file)            
+        json_file = DatasetStatisticsCreator.__create_data_chacteristics_json(features)
+        return json_file
+           
 
-
-    def safe_results(self, file_name: str, path: Path, json_file):
-        DatasetStatisticDaoImpl.write_json_statistic_to_file(path / (file_name + "_characteristics.json"), json_file)
-        
-
-    def _create_data_chacteristics_json(self, features: List[Feature]):
+    @staticmethod
+    def __create_data_chacteristics_json(features: List[Feature]):
         json = {}
         for feature_key in features.keys():
             json[feature_key] = features[feature_key].get_feature_contents()
         return json
 
-    
-    def create_dataset_statistic_from_file(self, path: Path):
+
+    @staticmethod
+    def create_dataset_statistic_from_file(path: Path):
         dataset_statistic_json = DatasetStatisticDaoImpl.read_statistic_from_json(path)
         return dataset_statistic_json
+
     
+    @staticmethod
+    def get_dataset_properties(datasets_statistic):
+        openml_ids = []
+        number_of_instances = []
+        number_of_features = []
+        dataframe_initialzier = {}    
+        for openml_id in datasets_statistic.keys():
+            try:
+                dataset_statistic = datasets_statistic[openml_id]
+
+            except Exception as error:
+                continue
+            openml_ids.append(openml_id)
+        dataframe_initialzier["openml_ids"] = openml_ids     
+        dataframe_performance = pd.DataFrame(dataframe_initialzier)
+        return dataframe_performance
 
 
+    @staticmethod
+    def generate_dataframe_statistic_from_dataset_statistic(datasets_statistic):
+        openml_ids = []
+        features_charateristics = []
+        datasets_instances = []
+        dataframe_initialzier = {}    
+        for openml_id in datasets_statistic.keys():
+            number_of_entries = len(openml_ids)
+            dataset_statistic = datasets_statistic[openml_id]
+            try:
+                features_charateristics = FeatureAnalyzer.get_number_of_feature_from_statistic(dataset_statistic["feature_characteristic"]) 
+                dataframe_initialzier = DatasetStatisticsCreator.__update_statistic_dataframe(features_charateristics, dataframe_initialzier, number_of_entries)
+            except Exception as error:
+                continue
+            openml_ids.append(openml_id)
+            instances = dataset_statistic["dataset_characteristic"]["instances"]
+            datasets_instances.append(instances)
+        dataframe_initialzier = {**{"openml_ids":openml_ids}, **{"instances": datasets_instances}, **dataframe_initialzier}     
+        dataframe_performance = pd.DataFrame(dataframe_initialzier)
+        return dataframe_performance
 
 
-
-
-
-
-
-    def get_datset_statistic(results_path, characteristics_path, task_type):
-        datasets_statistics = {}
-        #paths_to_datasets_results = PathSearcher.get_list_of_dataset_paths(results_path / task_type, "*_mean.csv")
-        openml_ids = PathSearcher.get_list_of_subdirectories(results_path / task_type)
-        for openml_id in openml_ids:
-            path_to_dataset_results = PathSearcher. get_list_of_dataset_paths(results_path / task_type / openml_id, "*_mean.csv")
-            path_to_dataset_characteristic = PathSearcher.get_list_of_dataset_paths(characteristics_path / task_type, str(openml_id) + "_characteristics.json")[0]
-            result = PandasDataFrameCreator.generate_dataframe_from_paths(path_to_dataset_results)
-            characteristic = DatasetStatisticDaoImpl.read_statistic_from_json(path_to_dataset_characteristic)
-            statisitic = {
-                "results": result,
-                "characteristic": characteristic          
-            }
-            datasets_statistics[openml_id]= statisitic
-        return datasets_statistics
-
-
+    @staticmethod
+    def __update_statistic_dataframe(feature_types, dataframe_initializer_json, number_of_entries):
+        feature_types_keys: List = feature_types.keys()
+        dataframe_initializer_json_keys: List = list(dataframe_initializer_json.keys())
+        
+        for data_type in feature_types_keys:
+            number_of_features = len(feature_types[data_type])  
+            if data_type in dataframe_initializer_json.keys():
+                dataframe_initializer_json[data_type].append(number_of_features)
+                dataframe_initializer_json_keys.remove(data_type)
+            else:
+                dataframe_initializer_json[data_type] = [0] * number_of_entries    
+                dataframe_initializer_json[data_type].append(number_of_features)
+                    
+        for data_type in dataframe_initializer_json_keys:
+            dataframe_initializer_json[data_type].append(0)
+        return dataframe_initializer_json

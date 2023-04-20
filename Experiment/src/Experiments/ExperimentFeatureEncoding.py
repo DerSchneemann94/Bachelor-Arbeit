@@ -1,16 +1,12 @@
-import json
 import logging
 import traceback
-import joblib
 import pandas as pd
 from jenga.tasks.ExternalDataTask import ExternalDataTask
-from Data.DatasetsStatistics.FeatureAnalyzer import FeatureAnalyzer
 from Evaluation.Evaluation_own import Evaluator_own
 from jenga.utils import set_seed
 from datetime import datetime
 from pathlib import Path
 from typing import Callable, Dict, List, Optional, Tuple
-from Safe_Load_Results.ResultsWriter import ResultsWriter
 from utils import get_project_root
 
 
@@ -70,7 +66,8 @@ class ExperimentFeatureEncoding(object):
                     "elapsed_train_time": self._elapsed_time,
                     "experiment_config": self._experiment_configuration,
                     "dataset_characteristic": self._dataset_characteristic,
-                    "test_data": self.task.test_data
+                    "test_data": self.task.test_data,
+                    "train_data": self.task.train_data
                 }
                 return result
                 

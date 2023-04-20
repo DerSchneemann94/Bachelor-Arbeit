@@ -23,3 +23,7 @@ class GraphObjectFactory:
         else:
             self.color_state[graph_type] = 0
         return self.color[self.color_state[graph_type]]    
+    
+
+
+    

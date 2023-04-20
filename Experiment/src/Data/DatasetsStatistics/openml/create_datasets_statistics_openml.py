@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from typing import Dict, List
+from Data.DatasetsStatistics.DatasetStatisticDao.DatasetStatisticDaoImpl import DatasetStatisticDaoImpl
 from Data.DatasetsStatistics.DatasetStatisticsCreator import DatasetStatisticsCreator
 import pandas as pd 
 import typer
@@ -27,7 +28,6 @@ datasets = {
 
 unsuccessfull_datasets_ids: List[str] = []
 
-datasets_statistic: DatasetStatisticsCreator = DatasetStatisticsCreator()
 
 
 if __name__ == "__main__":
@@ -39,7 +39,8 @@ if __name__ == "__main__":
         for openml_id in dataset.keys():
             try:
                 data, labels = fetch_openml(data_id=openml_id, as_frame=True, return_X_y=True, cache=False)
-                datasets_statistic.create_dataset_statistic_from_dataframe_openml(openml_id, path, data)
+                dataset_statistic = DatasetStatisticsCreator.create_dataset_statistic_from_dataframe_openml(openml_id, path, data)
+                DatasetStatisticDaoImpl.write_json_statistic_to_file(path / (openml_id + "_characteristics.json"), dataset_statistic)
             except:
                 unsuccessfull_datasets_ids.append(openml_id)
     (path_dataset_analysis_results / "unsuccessfull_datasets.txt").write_text(str(unsuccessfull_datasets_ids))

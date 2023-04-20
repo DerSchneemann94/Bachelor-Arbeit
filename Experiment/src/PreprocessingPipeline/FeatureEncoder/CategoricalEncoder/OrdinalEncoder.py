@@ -1,6 +1,5 @@
 import pandas as pd
 from category_encoders import OrdinalEncoder
-#from sklearn.preprocessing import OrdinalEncoder
 from PreprocessingPipeline.FeatureEncoder.EncoderInterface import EncoderInterface
 
 
@@ -12,8 +11,9 @@ class OrdinalEncoderImpl(EncoderInterface):
         self.unknown_value=unknown_value
 
 
-    def transform_data(self, dataframe: pd.DataFrame, encoding_scheme):
-        encoder = OrdinalEncoder(cols = dataframe.columns[0],handle_unknown="error", mapping=[{"col": dataframe.columns[0],"mapping":encoding_scheme}])
+    def transform_data_human_readable(self, dataframe: pd.DataFrame, encoding_scheme):
+        mapping = [{"col": dataframe.columns[0],"mapping":encoding_scheme}] if encoding_scheme is not None else None
+        encoder = OrdinalEncoder(cols = dataframe.columns[0],handle_unknown="error", mapping=mapping)
         encoder.fit(dataframe)
         feature_name = dataframe.columns[0]
         try:
@@ -29,3 +29,15 @@ class OrdinalEncoderImpl(EncoderInterface):
         current_column_name = encoded_dataframe.columns[0]
         dataframe = encoded_dataframe.rename(columns={current_column_name:feature_name})
         return dataframe
+    
+
+    def transform_data_compact(self, dataframe: pd.DataFrame, encoding_scheme):
+        mapping = [{"col": dataframe.columns[0],"mapping":encoding_scheme}] if encoding_scheme is not None else None
+        encoder = OrdinalEncoder(cols = dataframe.columns[0],handle_unknown="error", mapping=mapping)
+        encoder.fit(dataframe)
+        try:
+            encoded_dataframe = encoder.transform(dataframe)
+            encoded_dataframe = pd.DataFrame(encoded_dataframe)
+            return encoded_dataframe
+        except Exception as error:
+            raise error

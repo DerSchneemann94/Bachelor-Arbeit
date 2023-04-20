@@ -165,10 +165,10 @@ class Task(ABC):
         param_grid, pipeline, scorer = self._get_pipeline_grid_scorer_tuple_model_only()
         refit = list(scorer.keys())[0]
 
-        model = pipeline.fit(train_data, train_labels)
+        #model = pipeline.fit(train_data, train_labels)
 
-        #search = GridSearchCV(pipeline, param_grid, scoring=scorer, n_jobs=-1, refit=refit, error_score="raise")
-        #model = search.fit(train_data, train_labels).best_estimator_
+        search = GridSearchCV(pipeline, param_grid, scoring=scorer, n_jobs=-1, refit=refit, error_score="raise")
+        model = search.fit(train_data, train_labels).best_estimator_
 
         return model
 

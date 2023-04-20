@@ -40,7 +40,7 @@ class FeatureEncoder:
 
 
     @staticmethod
-    def transform_data(encoder_name: str, dataframe, encoding_schemes) -> pd.DataFrame:
+    def transform_data(encoder_name: str, dataframe, encoding_schemes, human_readable) -> pd.DataFrame:
         try: 
             encoder = FeatureEncoder.get_categorical_encoder(encoder_name)
         except:
@@ -51,12 +51,14 @@ class FeatureEncoder:
             encoding_scheme = encoding_schemes[feature_name]
             feature_vector = pd.DataFrame(dataframe[feature_name])
             feature_vector = feature_vector.astype(str)
-            data = encoder.transform_data(feature_vector, encoding_scheme)
+            if human_readable:
+                data = encoder.transform_data_human_readable(feature_vector, encoding_scheme)
+            else:
+                data = encoder.transform_data_compact(feature_vector, encoding_scheme)
             transformed_dataframe = pd.DataFrame(data)
             list_of_transformed_features.append(transformed_dataframe)
         transformed_dataframe = pd.concat(list_of_transformed_features, axis=1)
-        return transformed_dataframe         
-    
+        return transformed_dataframe
 
 
     

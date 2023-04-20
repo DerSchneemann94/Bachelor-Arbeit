@@ -26,3 +26,8 @@ unsicher ob welcher Typ merkmal ist:
 
 fehlerhaft Datensätze:
 42477 (x3 wertebereich: ist_ 0.0 .. 6.0 soll 1.0 .. 4.0)
+
+
+datasets that coulnt be trained:
+4135 - stack overflow
+42493 - stack overflow

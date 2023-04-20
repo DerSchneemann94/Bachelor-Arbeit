@@ -1,13 +1,6 @@
-import json
-import os
-from Data.Datasets_internal.PandasDataFrameCreator import PandasDataFrameCreator
-from Data.Datasets_internal.PathSearcher import PathSearcher
-from Data.DatasetsStatistics.DatasetStatisticDao.DatasetStatisticDaoImpl import DatasetStatisticDaoImpl
-from Data.DatasetsStatistics.DatasetStatisticTransformer import DatasetStatisticTransformer
+from Data.DatasetsStatistics.DatasetStatisticsCreator import DatasetStatisticsCreator
 import pandas as pd
 import plotly.graph_objects as go
-from pathlib import Path
-from typing import Dict, List
 from Visualization.GraphObjectFactory import GraphObjectFactory
 from Visualization.VisualizationDataCreator import VisualizationDataCreator
 from utils import get_project_root
@@ -30,11 +23,9 @@ if __name__ == "__main__":
     datasets_statistics = {}
     datasets_statistics_dataframes = {}
     for task_type in task_types:
-        datasets_statistics[task_type] = VisualizationDataCreator.get_datset_statistic(path_to_results, task_type)
-        datasets_statistics_dataframes[task_type] = PandasDataFrameCreator.generate_dataframe_from_dataset_statistic(datasets_statistics[task_type])
-    path_to_plotting_results = path_to_plotting_results / results_timestamp
-    if not path_to_plotting_results.exists():
-        path_to_plotting_results.mkdir(parents=True, exist_ok=True)
+        datasets_statistics[task_type] = VisualizationDataCreator.get_dataset_statistic(path_to_results, task_type)
+        datasets_statistics_dataframes[task_type] = DatasetStatisticsCreator.generate_dataframe_statistic_from_dataset_statistic(datasets_statistics[task_type])
+    
     
     for task_type in datasets_statistics_dataframes.keys():        
         dataframe: pd.DataFrame = datasets_statistics_dataframes[task_type]
@@ -50,6 +41,9 @@ if __name__ == "__main__":
         # Here we modify the tickangle of the xaxis, resulting in rotated labels.
         fig.update_layout(barmode='group', xaxis_tickangle=-45)
         
+        path_to_plotting_results = path_to_plotting_results / results_timestamp
+        if not path_to_plotting_results.exists():
+            path_to_plotting_results.mkdir(parents=True, exist_ok=True)
         path = path_to_plotting_results / (task_type + "_plot.html")    
         fig.write_html(path)
 

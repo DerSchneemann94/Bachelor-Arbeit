@@ -3,15 +3,13 @@ from typing import List
 from Data.DatasetsStatistics.DatasetStatisticDao.DatasetStatisticDaoImpl import DatasetStatisticDaoImpl
 
 
-class ResultsWriter:
+class ResultsDao:
     @staticmethod
     def safe_results(path: Path, result):
         if path is not None:
             path.mkdir(parents=True, exist_ok=True)
-            #Mean results
             performance = result["performance"] 
             performance.to_csv(path / f"downstream_performance_mean.csv")
-            #safe metadata
             elapsed_time = result["elapsed_train_time"]
             experiment_config = result["experiment_config"]
             DatasetStatisticDaoImpl.write_dataframe_statistic_to_file(path / "result.joblib", performance)

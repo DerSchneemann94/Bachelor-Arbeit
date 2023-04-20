@@ -2,9 +2,9 @@ datasets_path: src/Data/DatasetsStatistics/openml_statistics_from_jaeger_by_hand
 preprocessing:
   categorical:
     nominal: 
-      - one_hot
+      - cyclic
     ordinal: 
-      - ordinal
+      - cyclic
     cyclic: 
       - cyclic
 model: 
