@@ -38,35 +38,18 @@ class DatasetStatisticsCreator:
 
     
     @staticmethod
-    def get_dataset_properties(datasets_statistic):
-        openml_ids = []
-        number_of_instances = []
-        number_of_features = []
-        dataframe_initialzier = {}    
-        for openml_id in datasets_statistic.keys():
-            try:
-                dataset_statistic = datasets_statistic[openml_id]
-
-            except Exception as error:
-                continue
-            openml_ids.append(openml_id)
-        dataframe_initialzier["openml_ids"] = openml_ids     
-        dataframe_performance = pd.DataFrame(dataframe_initialzier)
-        return dataframe_performance
-
-
-    @staticmethod
     def generate_dataframe_statistic_from_dataset_statistic(datasets_statistic):
         openml_ids = []
-        features_charateristics = []
+        features_types_sorted = []
         datasets_instances = []
         dataframe_initialzier = {}    
         for openml_id in datasets_statistic.keys():
             number_of_entries = len(openml_ids)
             dataset_statistic = datasets_statistic[openml_id]
+            feature_characteristic = dataset_statistic["feature_characteristic"]
             try:
-                features_charateristics = FeatureAnalyzer.get_number_of_feature_from_statistic(dataset_statistic["feature_characteristic"]) 
-                dataframe_initialzier = DatasetStatisticsCreator.__update_statistic_dataframe(features_charateristics, dataframe_initialzier, number_of_entries)
+                features_types_sorted = FeatureAnalyzer.get_number_of_feature_from_statistic(feature_characteristic) 
+                dataframe_initialzier = DatasetStatisticsCreator.__update_statistic_dataframe(features_types_sorted, dataframe_initialzier, number_of_entries)
             except Exception as error:
                 continue
             openml_ids.append(openml_id)
@@ -81,7 +64,7 @@ class DatasetStatisticsCreator:
     def __update_statistic_dataframe(feature_types, dataframe_initializer_json, number_of_entries):
         feature_types_keys: List = feature_types.keys()
         dataframe_initializer_json_keys: List = list(dataframe_initializer_json.keys())
-        
+
         for data_type in feature_types_keys:
             number_of_features = len(feature_types[data_type])  
             if data_type in dataframe_initializer_json.keys():
@@ -94,3 +77,4 @@ class DatasetStatisticsCreator:
         for data_type in dataframe_initializer_json_keys:
             dataframe_initializer_json[data_type].append(0)
         return dataframe_initializer_json
+

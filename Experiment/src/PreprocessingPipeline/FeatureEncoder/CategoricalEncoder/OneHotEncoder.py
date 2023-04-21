@@ -10,7 +10,7 @@ class OneHotEncoderImpl(EncoderInterface):
         self.handle_unknown=handle_unknown
 
 
-    def transform_data_human_readable(self, dataframe: pd.DataFrame, encoding_scheme):
+    def transform_data_human_readable(self, dataframe: pd.DataFrame, labels: pd.Series, encoding_scheme):
         encoder = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
         encoder.fit(dataframe)
         feature_name = dataframe.columns[0]
@@ -23,7 +23,7 @@ class OneHotEncoderImpl(EncoderInterface):
             raise error
     
 
-    def transform_data_compact(self, dataframe: pd.DataFrame, encoding_scheme):
+    def transform_data_compact(self, dataframe: pd.DataFrame, labels: pd.Series, encoding_scheme):
         encoder = OneHotEncoder(handle_unknown="ignore", sparse_output=True)
         encoder.fit(dataframe)
         try:

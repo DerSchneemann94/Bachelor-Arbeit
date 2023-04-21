@@ -9,7 +9,7 @@ class HashEncoderImpl(EncoderInterface):
         super().__init__()
 
 
-    def transform_data_human_readable(self, dataframe: pd.DataFrame, encoding_scheme):
+    def transform_data_human_readable(self, dataframe: pd.DataFrame, labels: pd.Series, encoding_scheme):
         encoder = HashingEncoder(return_df=True)
         encoder.fit(dataframe)
         feature_name = dataframe.columns[0]
@@ -28,7 +28,7 @@ class HashEncoderImpl(EncoderInterface):
         return dataframe
     
 
-    def transform_data_compact(self, dataframe: pd.DataFrame, encoding_scheme):
+    def transform_data_compact(self, dataframe: pd.DataFrame, labels: pd.Series, encoding_scheme):
         encoder = HashingEncoder(return_df=True)
         encoder.fit(dataframe)
         try:

@@ -32,14 +32,14 @@ class CategoricalFeaturePreprocessor:
         return encoder_configuration
 
     
-    def transformData(self, dataframe: pd.DataFrame, human_readable: bool = False):
+    def transformData(self, dataframe: pd.DataFrame, labels:pd.Series, human_readable: bool = False):
         transformed_data_frames_list = []
         transformation_meta_data = {}
-        dataframe = self.__transform(dataframe, transformed_data_frames_list, transformation_meta_data, human_readable)
+        dataframe = self.__transform(dataframe, labels,transformed_data_frames_list, transformation_meta_data, human_readable)
         return dataframe
 
 
-    def __transform(self, dataframe, transformed_data_frames_list, transformation_meta_data, human_readable: bool):
+    def __transform(self, dataframe, labels:pd.Series,transformed_data_frames_list, transformation_meta_data, human_readable: bool):
         dataframe_relevant_features_list = []
         for preprocessor in self.__processor_state:
             encoder_index = preprocessor["current_state"]
@@ -48,7 +48,7 @@ class CategoricalFeaturePreprocessor:
             dataframe_relevant_features = self.__extract_relevant_features(dataframe, self.__feature_characteristic, data_type)
             dataframe_relevant_features_list = [*dataframe_relevant_features_list, *dataframe_relevant_features]
             encoding_schemes = self.__get_relevant_encoding_schemes(dataframe_relevant_features.columns, self.__dataset_characteristic)
-            transformed_data_frames_list.append(FeatureEncoder.transform_data(encoder_name, dataframe_relevant_features, encoding_schemes, human_readable))
+            transformed_data_frames_list.append(FeatureEncoder.transform_data(encoder_name, dataframe_relevant_features, labels, encoding_schemes, human_readable))
             transformation_meta_data[data_type] = encoder_name
         transformed_dataframe = pd.concat(transformed_data_frames_list, axis=1)
         for feature_name in dataframe_relevant_features_list:

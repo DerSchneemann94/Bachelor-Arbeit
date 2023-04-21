@@ -6,7 +6,6 @@ class FeatureAnalyzer:
     @staticmethod
     def get_number_of_feature_from_statistic(dataset_statistic) -> List[str]:
         #number_of_features = len(dataset_statistic.keys())
-
         feature_statistic = {}
         feature_composition = FeatureAnalyzer.get_composition_of_dataframe(dataset_statistic)
         for data_type in feature_composition:
@@ -45,3 +44,19 @@ class FeatureAnalyzer:
                 dataframe_composition[feature_type].append(feature_name)
         return dataframe_composition        
 
+
+    @staticmethod
+    def get_cardinality_of_dataframe(dataset_statistic):
+        cardinalities = {}
+        for feature_name in dataset_statistic.keys():
+            feature = dataset_statistic[feature_name]
+            if "subtype" not in feature:
+                continue
+            else:
+                feature_type = feature["subtype"]
+            cardinality = dataset_statistic[feature_name]["cardinality"]    
+            if feature_type not in cardinalities:
+                cardinalities[feature_type] = [cardinality]
+            else:
+                cardinalities[feature_type].append(cardinality)
+        return cardinalities        

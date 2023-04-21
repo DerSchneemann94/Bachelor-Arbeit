@@ -1,5 +1,6 @@
 from Data.DatasetsStatistics.DatasetStatisticsCreator import DatasetStatisticsCreator
 from ResultsEvaluator.ResultsEvaluator import ResultsEvaluator
+from Visualization.GraphObjectFactory import GraphObjectFactory
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from Visualization.VisualizationDataCreator import VisualizationDataCreator
@@ -8,12 +9,15 @@ from utils import get_project_root
 
 root = get_project_root()
 baseline = "one_hot"
-experiment_paths = ["experiment_one_hot", "experiment_ordinal"]
+experiment_paths = ["experiment_one_hot", "experiment_ordinal", "experiment_one_hot+ordinal+cyclic", "experiment_one_hot+ordinal+ordinal"]
 path_to_plotting_results = root / "plot/performance" / baseline
 
 name_mapping = {
     "experiment_one_hot" : "one_hot",
-    "experiment_ordinal" : "ordinal"
+    "experiment_ordinal" : "ordinal",
+    "experiment_one_hot+ordinal+cyclic": "one_hot+ordinal+cyclic",
+    "experiment_one_hot+ordinal+ordinal": "one_hot+ordinal+ordinal"
+     
 }
 
 metrics = {
@@ -27,8 +31,6 @@ task_types = [
     "Multiple-Classification",
     "Regression"
 ]
-
-
 
 
 unsuccessfull_datasets = []
@@ -55,31 +57,15 @@ if __name__ == "__main__":
             title=go.layout.Title(text=task_type))
         )
         hovertemplate = ""
-        counter = 1
-        base_meta = []
-        for data_type in statistic_dataframe.keys():
-            hovertemplate +=  "<b>{data_type}_features: </b> %{meta[counter]} <br>"
-            counter += 1
-            base_meta.append(statistic_dataframe[data_type].values)
+        graphfactory = GraphObjectFactory()
         for encoder in relative_performance_dataframe.columns:
-            single_encoder_performance = relative_performance_dataframe[encoder]
+            encoder_performance = relative_performance_dataframe[encoder]
             hovertemplate = "<b>performance: </b> %{y} <br>"
             hovertemplate += "<b>encoder: </b> %{meta[0]} <br>"
-            colors = []
-            base_meta = base_meta.insert(0, encoder)
-            for value in single_encoder_performance:
-                color = 'green' if value >= 0 else 'red'
-                colors.append(color)
-            fig.add_trace(go.Bar(
-                    x=openml_ids,
-                    y=single_encoder_performance,
-                    name=encoder,
-                    marker_color=colors,
-                    meta=base_meta
-                )).update_traces(   
-                    marker={"line": {"width": 1, "color": "rgb(0,0,0)"}},
-                    hovertemplate=hovertemplate
-                )
+            fig.add_trace(graphfactory.create_bar_object(openml_ids, relative_performance_dataframe[encoder], encoder, [encoder])).update_traces(   
+                marker={"line": {"width": 1, "color": "rgb(0,0,0)"}},
+                hovertemplate=hovertemplate,
+            )
         # Here we modify the tickangle of the xaxis, resulting in rotated labels.
         if not path_to_plotting_results.exists():
             path_to_plotting_results.mkdir(parents=True, exist_ok=True)

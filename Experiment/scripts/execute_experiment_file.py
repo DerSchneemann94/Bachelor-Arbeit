@@ -70,7 +70,7 @@ if __name__ == "__main__":
                     experiment_encoder_combination_log.append(experiment_encoder_combination)
                     experiment_config_copy = copy.deepcopy(experiment_config)
                     experiment_config_copy["preprocessing"]["categorical"] = experiment_encoder_combination
-                    dataframe_transformed = preprocessor.transformData(data,True)
+                    dataframe_transformed = preprocessor.transformData(data,labels,True)
                     preprocessor.increment_processor_state()
                     elapsed_time = time.time() - start_time
                     experiment = ExperimentFeatureEncoding(

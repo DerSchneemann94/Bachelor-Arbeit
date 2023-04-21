@@ -11,10 +11,10 @@ class CyclicEnoderImpl(EncoderInterface):
         self.handle_unknown=handle_unknown
 
     
-    def transform_data_human_readable(self, dataframe: pd.DataFrame, encoding_scheme):
+    def transform_data_human_readable(self, dataframe: pd.DataFrame, labels: pd.Series, encoding_scheme):
         number_of_values = len(encoding_scheme.keys())
         feature_name = dataframe.columns[0]
-        pretransformed_data = OrdinalEncoderImpl().transform_data_human_readable(dataframe, encoding_scheme)
+        pretransformed_data = OrdinalEncoderImpl().transform_data_human_readable(dataframe, labels,encoding_scheme)
         sin_column = copy.deepcopy(pretransformed_data)
         sin_column.rename(columns={feature_name:(feature_name+"_sin")}, inplace=True)
         cos_column = copy.deepcopy(pretransformed_data)
@@ -34,10 +34,10 @@ class CyclicEnoderImpl(EncoderInterface):
         return result
 
 
-    def transform_data_compact(self, dataframe: pd.DataFrame, encoding_scheme):
+    def transform_data_compact(self, dataframe: pd.DataFrame, labels: pd.Series, encoding_scheme):
         number_of_values = len(encoding_scheme.keys())
         feature_name = dataframe.columns[0]
-        pretransformed_data = OrdinalEncoderImpl().transform_data_compact(dataframe, encoding_scheme)
+        pretransformed_data = OrdinalEncoderImpl().transform_data_compact(dataframe, labels, encoding_scheme)
         sin_column = copy.deepcopy(pretransformed_data)
         sin_column.rename(columns={feature_name:(feature_name+"_sin")}, inplace=True)
         cos_column = copy.deepcopy(pretransformed_data)
