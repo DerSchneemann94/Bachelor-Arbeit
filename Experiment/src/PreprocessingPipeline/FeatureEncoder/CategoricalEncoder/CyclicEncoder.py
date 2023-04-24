@@ -4,6 +4,7 @@ import pandas as pd
 from PreprocessingPipeline.FeatureEncoder.CategoricalEncoder.OrdinalEncoder import OrdinalEncoderImpl
 from PreprocessingPipeline.FeatureEncoder.EncoderInterface import EncoderInterface
 
+#To-DO: implement lookup table for sin and cos sin values on calculation
 class CyclicEnoderImpl(EncoderInterface):
 
     def __init__(self, handle_unknown="ignore") -> None:

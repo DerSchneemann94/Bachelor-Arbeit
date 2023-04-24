@@ -3,8 +3,9 @@ import plotly.graph_objects as go
 class GraphObjectFactory:
 
     def __init__(self) -> None:
-        self.color = ["red","blue","green","yellow","black"]
+        self.color = ["red", "orange", "blue","green","yellow", "gray","black"]
         self.color_state = {}
+
 
     def create_bar_object(self, x_data, y_data, name, meta):
         color = self.__get_and_adjust_color("bar")
@@ -13,10 +14,11 @@ class GraphObjectFactory:
             y=y_data,
             name=name,
             marker_color=color,
-            meta=meta
+            meta=meta,
         )
         return bar
  
+
     def __get_and_adjust_color(self, graph_type): 
         graph_types = list(self.color_state.keys())
         if graph_type in graph_types:

@@ -9,15 +9,17 @@ from utils import get_project_root
 
 root = get_project_root()
 baseline = "one_hot"
-experiment_paths = ["experiment_one_hot", "experiment_ordinal", "experiment_one_hot+ordinal+cyclic", "experiment_one_hot+ordinal+ordinal"]
-path_to_plotting_results = root / "plot/performance" / baseline
+experiment_paths = ["experiment_hashing", "experiment_one_hot", "experiment_ordinal", "experiment_one_hot+ordinal+cyclic", "experiment_one_hot+ordinal+ordinal", "experiment_hasing+ordinal+cyclic", "experiment_hashing+ordinal+ordinal"]
+path_to_plotting_results = root / "plot/performance/bar_graph" / baseline
 
 name_mapping = {
+    "experiment_hashing": "hashing",
     "experiment_one_hot" : "one_hot",
     "experiment_ordinal" : "ordinal",
     "experiment_one_hot+ordinal+cyclic": "one_hot+ordinal+cyclic",
-    "experiment_one_hot+ordinal+ordinal": "one_hot+ordinal+ordinal"
-     
+    "experiment_one_hot+ordinal+ordinal": "one_hot+ordinal+ordinal",
+    "experiment_hashing+ordinal+ordinal": "hashing+ordinal+ordinal",
+    "experiment_hasing+ordinal+cyclic": "hasing+ordinal+cyclic"    
 }
 
 metrics = {
@@ -53,8 +55,49 @@ if __name__ == "__main__":
         relative_performance_dataframe =  ResultsEvaluator.generate_relative_improvement_to_baseline_performance(encoder_performance_dataframe, baseline)
         statistic_dataframe = DatasetStatisticsCreator.generate_dataframe_statistic_from_dataset_statistic(result)
         statistic_dataframe.drop(columns="openml_ids", inplace=True)
-        fig = go.Figure( layout=go.Layout(
-            title=go.layout.Title(text=task_type))
+        fig = go.Figure(layout=go.Layout(
+            title=go.layout.Title(text=task_type, font=dict(size=34)),
+            xaxis = dict(
+                title = 'openml_ids',
+                showgrid = True,
+                zeroline = True,
+                showline = True,
+                showticklabels = True,
+                gridwidth = 1,
+                titlefont = dict(
+                    family = 'Arial, sans-serif',
+                    size = 34,
+                    color = 'lightgrey'
+                ),
+                tickfont = dict(
+                family = 'Arial, sans-serif',
+                size = 34,
+                color = 'black'
+                ),
+            ),    
+            legend=dict(
+                font = dict(
+                    family = "Arial, sans-serif",
+                    size=34    
+                )
+            ),
+            yaxis = dict(
+                showgrid = True,
+                zeroline = True,
+                showline = True,
+                title = 'relative performance',
+                titlefont = dict(
+                    family = 'Arial, sans-serif',
+                    size = 34,
+                    color = 'lightgrey'
+                ),
+                showticklabels = True,
+                tickfont = dict(
+                family = 'Arial, sans-serif',
+                size = 34,
+                color = 'black'
+                ),
+            ))
         )
         hovertemplate = ""
         graphfactory = GraphObjectFactory()
@@ -72,3 +115,6 @@ if __name__ == "__main__":
         fig.update_layout(barmode='group', xaxis_tickangle=-45)
         path = path_to_plotting_results / (task_type + "_plot.html")
         fig.write_html(path)
+    
+    
+    

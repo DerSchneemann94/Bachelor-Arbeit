@@ -20,7 +20,6 @@ class ExperimentFeatureEncoding(object):
         dataset_characteristic: any,
         labels: pd.Series,
         task_id_class_tuples: List[Tuple[int, Callable[..., ExternalDataTask]]],
-        num_repetitions: int,
         elapsed_time: float,
         experiment_configuration: Dict,
         base_path: str = 'results',
@@ -32,7 +31,6 @@ class ExperimentFeatureEncoding(object):
         self._dataset_characteristic = dataset_characteristic
         self._labels = labels
         self._task_id_class_tuples = task_id_class_tuples
-        self._num_repetitions = num_repetitions
         self._experiment_name = experiment_name
         self._result: Dict[int, Dict[str, Dict[float, Dict[str, Evaluator_own]]]] = dict()
         self._seed = seed

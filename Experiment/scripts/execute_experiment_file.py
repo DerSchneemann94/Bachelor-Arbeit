@@ -34,8 +34,6 @@ experiment_config = experiment_Reader.get_experiment_config()
 categorical_feature_encoder_names = experiment_config["preprocessing"]["categorical"]
 
 experiment_name = datetime.now().strftime("%Y-%m-%d_%H.%M")
-number_of_repetions = 2
-numerical_feature_encoder_name="scaling"
 
 
 if __name__ == "__main__":
@@ -81,7 +79,6 @@ if __name__ == "__main__":
                         task_id_class_tuples = [[openml_id, task_class]],
                         encoded_data=dataframe_transformed,
                         labels=labels,
-                        num_repetitions=number_of_repetions,
                         experiment_name="experiment" + "_" + str(openml_id),
                         base_path=base_path,
                         seed=42

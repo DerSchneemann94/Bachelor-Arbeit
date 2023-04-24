@@ -2,11 +2,11 @@ datasets_path: src/Data/DatasetsStatistics/openml_statistics_from_jaeger_by_hand
 preprocessing:
   categorical:
     nominal: 
-      - glmm
+      - one_hot
     ordinal: 
-      - ordinal
+      - one_hot
     cyclic: 
-      - ordinal
+      - one_hot
 model: 
   regression:
     - SGDRegressor

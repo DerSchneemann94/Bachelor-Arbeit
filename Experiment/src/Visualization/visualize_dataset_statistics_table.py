@@ -59,14 +59,15 @@ if __name__ == "__main__":
             cells.append(dataframe[feature_name])
         fig = go.Figure(data=[go.Table(
         header=dict(values=list(dataframe.columns),
-            fill_color='paleturquoise', align='center'),
+            fill_color='lightgray', align='center'),
         cells=dict(values=cells,
-            fill_color='lavender',
+            fill_color='white',
             align='center'
             ))
         ])
           
         path_to_plotting_results = path_to_plotting_results
+        fig.update_layout(barmode='group', xaxis_tickangle=-45,width=1500, title_text=task_type)
         if not path_to_plotting_results.exists():
             path_to_plotting_results.mkdir(parents=True, exist_ok=True)
         path = path_to_plotting_results / (task_type + "_plot.html")    
