@@ -9,6 +9,8 @@ from sklearn.base import BaseEstimator
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import SGDClassifier, SGDRegressor
+from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
+
 from sklearn.metrics import (
     f1_score,
     make_scorer,
@@ -23,6 +25,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from .utils import BINARY_CLASSIFICATION, MULTI_CLASS_CLASSIFICATION, REGRESSION
 
 
+
 class Task(ABC):
     def __init__(
         self,
@@ -30,6 +33,8 @@ class Task(ABC):
         train_labels: pd.Series,
         test_data: pd.DataFrame,
         test_labels: pd.Series,
+        model_name: str,
+        ml_models: Dict,
         categorical_columns: List[str] = [],
         numerical_columns: List[str] = [],
         text_columns: List[str] = [],
@@ -37,6 +42,7 @@ class Task(ABC):
         seed: Optional[int] = 42,
         baseline_categorical_feature_encoder_name: str = "one_hot_encode",
         baseline_categorical_feature_encoder: BaseEstimator = OneHotEncoder,
+        
     ):
         """
         Abstract base class for all Tasks. It defines the interface and a fair amount of functionality, \
@@ -66,6 +72,8 @@ class Task(ABC):
         self.text_columns = text_columns
         self.is_image_data = is_image_data
         self._seed = seed
+        self._model_name = model_name
+        self._ml_models = ml_models
         self.baseline_categorical_feature_encoder_name = baseline_categorical_feature_encoder_name
         self.baseline_categorical_feature_encoder = baseline_categorical_feature_encoder
 
@@ -170,7 +178,7 @@ class Task(ABC):
         search = GridSearchCV(pipeline, param_grid, scoring=scorer, n_jobs=-1, refit=refit, error_score="raise")
         model = search.fit(train_data, train_labels).best_estimator_
 
-        return model
+        return model, model.get_params()
 
 
 
@@ -353,11 +361,12 @@ class BinaryClassificationTask(Task):
         train_labels: pd.Series,
         test_data: pd.DataFrame,
         test_labels: pd.Series,
+        model_name: str,
         categorical_columns: List[str] = [],
         numerical_columns: List[str] = [],
         text_columns: List[str] = [],
         is_image_data: bool = False,
-        seed: Optional[int] = 42
+        seed: Optional[int] = 42,
     ):
         """
         Class that represents a binary classification task. \
@@ -385,7 +394,12 @@ class BinaryClassificationTask(Task):
             numerical_columns=numerical_columns,
             text_columns=text_columns,
             is_image_data=is_image_data,
-            seed=seed
+            seed=seed,
+            model_name=model_name,
+            ml_models={
+                "SGD_svm": SGDClassifier(max_iter=1000, n_jobs=-1, random_state=seed),
+                "SGD_log_reg": SGDClassifier(max_iter=1000, n_jobs=-1, random_state=seed),
+            }
         )
 
         self._task_type = BINARY_CLASSIFICATION
@@ -415,16 +429,24 @@ class BinaryClassificationTask(Task):
             Tuple[Dict[str, object], Any, Dict[str, Any]]: Binary classification specific parts to build baseline model
         """
 
-        param_grid = {
-            'learner__loss': ['log'],
-            'learner__penalty': ['l2'],
-            'learner__alpha': [0.00001, 0.0001, 0.001, 0.01]
+        param_grid = { 
+            "SGD_log_reg": {
+                'learner__loss': ['log'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            },
+            "SGD_svm": {
+                'learner__loss': ['hinge'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            }
+            
         }
 
         pipeline = Pipeline(
             [
                 ('numeric', StandardScaler()),
-                ('learner', SGDClassifier(max_iter=1000, n_jobs=-1, random_state=self._seed))
+                ('learner', self._ml_models[self._model_name])
             ]
         )
 
@@ -432,7 +454,7 @@ class BinaryClassificationTask(Task):
             "F1": make_scorer(f1_score, average="macro")
         }
 
-        return param_grid, pipeline, scorer
+        return param_grid[self._model_name], pipeline, scorer
 
 
 
@@ -450,16 +472,23 @@ class BinaryClassificationTask(Task):
             Tuple[Dict[str, object], Any, Dict[str, Any]]: Binary classification specific parts to build baseline model
         """
 
-        param_grid = {
-            'learner__loss': ['log'],
-            'learner__penalty': ['l2'],
-            'learner__alpha': [0.00001, 0.0001, 0.001, 0.01]
+        param_grid = { 
+            "SGD_log_reg": {
+                'learner__loss': ['log'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            },
+            "SGD_svm": {
+                'learner__loss': ['hinge'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            }
         }
 
         pipeline = Pipeline(
             [
                 ('features', feature_transformation),
-                ('learner', SGDClassifier(max_iter=1000, n_jobs=-1, random_state=self._seed))
+                ('learner', self._ml_models[self._model_name])
             ]
         )
 
@@ -467,7 +496,7 @@ class BinaryClassificationTask(Task):
             "F1": make_scorer(f1_score, average="macro")
         }
 
-        return param_grid, pipeline, scorer
+        return param_grid[self._model_name], pipeline, scorer
 
     def get_baseline_performance(self) -> float:
         """
@@ -504,11 +533,12 @@ class MultiClassClassificationTask(Task):
         train_labels: pd.Series,
         test_data: pd.DataFrame,
         test_labels: pd.Series,
+        model_name: str,
         categorical_columns: List[str] = [],
         numerical_columns: List[str] = [],
         text_columns: List[str] = [],
         is_image_data: bool = False,
-        seed: Optional[int] = 42
+        seed: Optional[int] = 42,        
     ):
         """
         Class that represents a multi-class classification task. \
@@ -536,7 +566,12 @@ class MultiClassClassificationTask(Task):
             numerical_columns=numerical_columns,
             text_columns=text_columns,
             is_image_data=is_image_data,
-            seed=seed
+            seed=seed,
+            model_name=model_name,
+            ml_models={
+                "SGD_svm": SGDClassifier(max_iter=1000, n_jobs=-1, random_state=seed),
+                "SGD_log_reg": SGDClassifier(max_iter=1000, n_jobs=-1, random_state=seed),
+            }
         )
 
         self._task_type = MULTI_CLASS_CLASSIFICATION
@@ -566,16 +601,23 @@ class MultiClassClassificationTask(Task):
             Tuple[Dict[str, object], Any, Dict[str, Any]]: Multi-class classification specific parts to build baseline model
         """
 
-        param_grid = {
-            'learner__loss': ['log'],
-            'learner__penalty': ['l2'],
-            'learner__alpha': [0.00001, 0.0001, 0.001, 0.01]
+        param_grid = { 
+            "SGD_log_reg": {
+                'learner__loss': ['log'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            },
+            "SGD_svm": {
+                'learner__loss': ['hinge'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            }
         }
 
         pipeline = Pipeline(
             [
                 ('numeric', StandardScaler()),
-                ('learner', SGDClassifier(max_iter=1000, n_jobs=-1, random_state=self._seed))
+                ('learner', self._ml_models[self._model_name])
             ]
         )
 
@@ -583,7 +625,7 @@ class MultiClassClassificationTask(Task):
             "F1": make_scorer(f1_score, average="macro")
         }
 
-        return param_grid, pipeline, scorer
+        return param_grid[self._model_name], pipeline, scorer
 
 
     def _get_pipeline_grid_scorer_tuple(
@@ -600,16 +642,23 @@ class MultiClassClassificationTask(Task):
             Tuple[Dict[str, object], Any, Dict[str, Any]]: Multi-class classification specific parts to build baseline model
         """
 
-        param_grid = {
-            'learner__loss': ['log'],
-            'learner__penalty': ['l2'],
-            'learner__alpha': [0.00001, 0.0001, 0.001, 0.01]
+        param_grid = { 
+            "SGD_log_reg": {
+                'learner__loss': ['log'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            },
+            "SGD_svm": {
+                'learner__loss': ['hinge'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            }
         }
 
         pipeline = Pipeline(
             [
                 ('features', feature_transformation),
-                ('learner', SGDClassifier(max_iter=1000, n_jobs=-1, random_state=self._seed))
+                ('learner', self._ml_models[self._model_name])
             ]
         )
 
@@ -617,7 +666,7 @@ class MultiClassClassificationTask(Task):
             "F1": make_scorer(f1_score, average="macro")
         }
 
-        return param_grid, pipeline, scorer
+        return param_grid[self._model_name], pipeline, scorer
 
     def get_baseline_performance(self) -> float:
         """
@@ -660,11 +709,12 @@ class RegressionTask(Task):
         train_labels: pd.Series,
         test_data: pd.DataFrame,
         test_labels: pd.Series,
+        model_name: str,
         categorical_columns: List[str] = [],
         numerical_columns: List[str] = [],
         text_columns: List[str] = [],
         is_image_data: bool = False,
-        seed: Optional[int] = 42
+        seed: Optional[int] = 42,
     ):
         """
         Class that represents a regression task. Forces the `train_labels` and `test_labels` to be of a `numeric_dtype`.
@@ -691,10 +741,16 @@ class RegressionTask(Task):
             numerical_columns=numerical_columns,
             text_columns=text_columns,
             is_image_data=is_image_data,
-            seed=seed
+            seed=seed,
+            model_name=model_name,
+            ml_models={
+                "SGD_ridge": SGDRegressor(max_iter=1000, random_state=seed),
+                "SGD_huber": SGDRegressor(max_iter=1000, random_state=seed),
+            }
         )
 
         self._task_type = REGRESSION
+        
         #self._check_data()
 
     def _check_data(self):
@@ -722,15 +778,22 @@ class RegressionTask(Task):
         """
 
         param_grid = {
-            'learner__loss': ['squared_error', 'huber'],
-            'learner__penalty': ['l2'],
-            'learner__alpha': [0.00001, 0.0001, 0.001, 0.01]
+            "SGD_ridge": {
+                'learner__loss': ['squared_error'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            },
+            "SGD_huber": {
+                'learner__loss': ['huber'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            }
         }
 
         pipeline = Pipeline(
             [
                 ('numeric', StandardScaler()),  
-                ('learner', SGDRegressor(max_iter=1000, random_state=self._seed))
+                ('learner', self._ml_models[self._model_name])
             ]
         )
 
@@ -739,7 +802,7 @@ class RegressionTask(Task):
             "MAE": make_scorer(mean_absolute_error, greater_is_better=False)
         }
 
-        return param_grid, pipeline, scorer
+        return param_grid[self._model_name], pipeline, scorer
 
 
     def _get_pipeline_grid_scorer_tuple(
@@ -757,15 +820,22 @@ class RegressionTask(Task):
         """
 
         param_grid = {
-            'learner__loss': ['squared_error', 'huber'],
-            'learner__penalty': ['l2'],
-            'learner__alpha': [0.00001, 0.0001, 0.001, 0.01]
+            "SGD_ridge": {
+                'learner__loss': ['squared_error'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            },
+            "SGD_huber": {
+                'learner__loss': ['huber'],
+                'learner__penalty': ['l2'],
+                'learner__alpha': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]
+            }
         }
 
         pipeline = Pipeline(
             [
                 ('features', feature_transformation),
-                ('learner', SGDRegressor(max_iter=1000, random_state=self._seed))
+                ('learner', self._ml_models[self._model_name])
             ]
         )
 
@@ -774,7 +844,7 @@ class RegressionTask(Task):
             "MAE": make_scorer(mean_absolute_error, greater_is_better=False)
         }
 
-        return param_grid, pipeline, scorer
+        return param_grid[self._model_name], pipeline, scorer
 
     def get_baseline_performance(self) -> float:
         """

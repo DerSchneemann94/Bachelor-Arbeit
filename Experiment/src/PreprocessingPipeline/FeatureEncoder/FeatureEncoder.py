@@ -1,3 +1,6 @@
+from PreprocessingPipeline.FeatureEncoder.CategoricalEncoder.CatBoostEncoder import CatBoostEncoderImpl
+from PreprocessingPipeline.FeatureEncoder.CategoricalEncoder.DummyEncoder import DummyEncoderImpl
+from PreprocessingPipeline.FeatureEncoder.CategoricalEncoder.LeaveOneOutEncoder import LeaveOneOutEncoderImpl
 import pandas as pd
 from PreprocessingPipeline.FeatureEncoder.CategoricalEncoder.CyclicEncoder import CyclicEnoderImpl
 from PreprocessingPipeline.FeatureEncoder.CategoricalEncoder.OneHotEncoder import OneHotEncoderImpl
@@ -13,9 +16,12 @@ from sklearn.preprocessing import StandardScaler
 categorical_encoder_dict = {
     "ordinal" : OrdinalEncoderImpl(handle_unknown="use_encoded_value", unknown_value=-1),
     "one_hot" : OneHotEncoderImpl(handle_unknown="ignore"),
+    "dummy": DummyEncoderImpl(),
     "cyclic" : CyclicEnoderImpl(handle_unknown="ignore"),
     "hashing": HashEncoderImpl(),
     "glmm": GlmmEncoderImpl(),
+    "leave": LeaveOneOutEncoderImpl(),
+    "catboost": CatBoostEncoderImpl()
 }
 
 numerical_encoder_dict = {

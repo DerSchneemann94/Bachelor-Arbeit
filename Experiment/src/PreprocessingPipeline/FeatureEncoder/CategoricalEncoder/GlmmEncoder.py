@@ -1,3 +1,4 @@
+from PreprocessingPipeline.FeatureEncoder.CategoricalEncoder.OrdinalEncoder import OrdinalEncoderImpl
 import pandas as pd
 from category_encoders import GLMMEncoder, OrdinalEncoder, TargetEncoder
 from category_encoders.wrapper import PolynomialWrapper
@@ -13,11 +14,9 @@ class GlmmEncoderImpl(EncoderInterface):
     def transform_data_human_readable(self, dataframe: pd.DataFrame, labels: pd.Series, encoding_scheme):
         encoder = self.__determine_task_type_and_encoder(labels)
         feature_name = dataframe.columns[0]
-        if not pd.api.types.is_numeric_dtype(labels) and len(labels.dtype.categories) >= 2:
-            labels =  OrdinalEncoder().fit_transform(labels)
-            for index in labels.index:
-                labels.loc[index] = labels.loc[index] - 1   
-            
+        labels = pd.DataFrame(labels)
+        if not pd.api.types.is_numeric_dtype(labels[list(labels.columns)[0]]) and len(labels[list(labels.columns)[0]].unique()) >= 2:
+            labels =  OrdinalEncoderImpl().transform_data_human_readable(labels, None, None)  
         try:
             encoded_dataframe = encoder.fit_transform(dataframe, labels)
             encoded_dataframe = pd.DataFrame(encoded_dataframe)
@@ -49,7 +48,7 @@ class GlmmEncoderImpl(EncoderInterface):
             return GLMMEncoder(return_df=True, binomial_target=False)
         else:
             if len(labels.dtype.categories) > 2:
-                encoder = GLMMEncoder(return_df=True)
+                encoder = GLMMEncoder(return_df=True, binomial_target=True)
                 return PolynomialWrapper(encoder)
             else: 
                 return GLMMEncoder(return_df=True, binomial_target=True)

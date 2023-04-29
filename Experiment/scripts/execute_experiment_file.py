@@ -17,7 +17,7 @@ from jenga.tasks.ExternalDataTask import ExternalDataMLRegressionTask, ExternalD
 
 project_root = get_project_root()
 path_to_openml_datasets = "src/Data/DatasetsStatistics/openml_statistics_from_jaeger_datasets_by_hand"
-path_experiment = project_root / "src/Experiments/ExperimentFiles/experiment_openml_jeager_by_hand_specific.yaml"
+path_experiment = project_root / "src/Experiments/ExperimentFiles/experiment_openml_jaeger_by_hand.yaml"
 path_dataset_statistic = project_root / "src/Data/DatasetsStatistics/openml_statistics_from_jaeger_datasets_by_hand" 
 path_datasets_parent = project_root / path_to_openml_datasets
 
@@ -27,6 +27,7 @@ task_dict = {
     "Multiple-Classification":ExternalDataMultipleClassificationTask
 }
 
+
 dataset_exceptions = ["4135", "42493"]
 
 experiment_Reader = ExperimentReader(path_experiment)
@@ -34,7 +35,6 @@ experiment_config = experiment_Reader.get_experiment_config()
 categorical_feature_encoder_names = experiment_config["preprocessing"]["categorical"]
 
 experiment_name = datetime.now().strftime("%Y-%m-%d_%H.%M")
-
 
 if __name__ == "__main__":
     datasets_causing_exceptions = []
@@ -47,9 +47,9 @@ if __name__ == "__main__":
             if openml_id in dataset_exceptions:
                 continue
             dataframe = OpenMLAccessor.get_data_from_source(openml_id)
-            dataset_characteristic = DatasetStatisticsCreator.create_dataset_statistic_from_file(path_dataset_statistic / task_type / (str(openml_id) + "_characteristics.json"))
-            feature_statistic = FeatureAnalyzer.get_categorical_composition_of_dataframe(dataset_characteristic)
-            preprocessor = CategoricalFeaturePreprocessor(categorical_feature_encoder_names, feature_statistic, dataset_characteristic)
+            feature_characteristics = DatasetStatisticsCreator.create_dataset_statistic_from_file(path_dataset_statistic / task_type / (str(openml_id) + "_characteristics.json"))
+            feature_statistic = FeatureAnalyzer.get_categorical_composition_of_dataframe(feature_characteristics)
+            preprocessor = CategoricalFeaturePreprocessor(categorical_feature_encoder_names, feature_statistic, feature_characteristics)
             base_path = project_root / ("results/" + experiment_name + "/" + task_type + "/" + openml_id)
             if base_path.exists():
                 raise ValueError(f"Experiment already exist")
@@ -68,17 +68,19 @@ if __name__ == "__main__":
                     experiment_encoder_combination_log.append(experiment_encoder_combination)
                     experiment_config_copy = copy.deepcopy(experiment_config)
                     experiment_config_copy["preprocessing"]["categorical"] = experiment_encoder_combination
+                    model_name = experiment_config_copy["model"][task_type][0]
                     dataframe_transformed = preprocessor.transformData(data,labels,True)
                     preprocessor.increment_processor_state()
                     elapsed_time = time.time() - start_time
                     experiment = ExperimentFeatureEncoding(
-                        dataset_characteristic=dataset_characteristic,
+                        dataset_characteristic=feature_characteristics,
                         original_data=data,
                         experiment_configuration=experiment_config_copy["preprocessing"],
                         elapsed_time=elapsed_time,    
                         task_id_class_tuples = [[openml_id, task_class]],
                         encoded_data=dataframe_transformed,
                         labels=labels,
+                        model_name=model_name,
                         experiment_name="experiment" + "_" + str(openml_id),
                         base_path=base_path,
                         seed=42

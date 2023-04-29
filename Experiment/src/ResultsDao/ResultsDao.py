@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from typing import List
 from Data.DatasetsStatistics.DatasetStatisticDao.DatasetStatisticDaoImpl import DatasetStatisticDaoImpl
@@ -12,20 +13,16 @@ class ResultsDao:
             performance.to_csv(path / f"downstream_performance_mean.csv")
             elapsed_time = result["elapsed_train_time"]
             experiment_config = result["experiment_config"]
+            model_hyperparameter = result["model_hyperparameter"]
+            model_hyperparameter = {
+                'learner__loss': model_hyperparameter["learner__loss"],
+                'learner__penalty': model_hyperparameter['learner__penalty'],
+                'learner__alpha': model_hyperparameter["learner__alpha"]
+            }
             DatasetStatisticDaoImpl.write_dataframe_statistic_to_file(path / "result.joblib", performance)
-            DatasetStatisticDaoImpl.write_json_statistic_to_file(path / "experiment.json", {"elapsed_time":elapsed_time, "experiment_config":experiment_config})
-           
-                        
-            # results_path = path / "report for every experiment"
-            # results_path.mkdir(parents=True, exist_ok=True)    
-            # for index, (performance_data_frame, elapsed_train_time) in enumerate(
-            #     zip(
-            #         self._result.downstream_performances,
-            #         self._result.elapsed_train_times                    
-            #     )
-            # ):
-            #     performance_data_frame.to_csv(results_path / f"downstream_performance_rep_{index}.csv")
-            #     Path(results_path / f"elapsed_train_time_rep_{index}.json").write_text(json.dumps(elapsed_train_time))
+            DatasetStatisticDaoImpl.write_json_statistic_to_file(path / "experiment.json", {"elapsed_time":elapsed_time,
+                                                                                            "experiment_config":experiment_config,
+                                                                                            "model_hyperparameter": model_hyperparameter})
 
 
     @staticmethod

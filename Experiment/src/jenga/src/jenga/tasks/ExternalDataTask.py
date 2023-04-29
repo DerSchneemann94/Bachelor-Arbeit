@@ -11,7 +11,7 @@ from ..basis import (
 
 
 class ExternalDataTask(Task):
-    def __init__(self, data, labels, train_size: float = 0.8, seed: Optional[int] = 42):
+    def __init__(self, data, labels, train_size: float = 0.8, seed: Optional[int] = 42, model_name="sgd"):
         """
         Base class for task that get data from [OpenML](https://www.openml.org).
 
@@ -30,6 +30,7 @@ class ExternalDataTask(Task):
             test_labels=test_labels,
             is_image_data=False,
             seed=seed,
+            model_name=model_name
         )
 
 

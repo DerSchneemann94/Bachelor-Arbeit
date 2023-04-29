@@ -3,7 +3,7 @@ import plotly.graph_objects as go
 class GraphObjectFactory:
 
     def __init__(self) -> None:
-        self.color = ["red", "orange", "blue","green","yellow", "gray","black"]
+        self.color = ["yellow", "red", "orange", "blue", "cyan", "green", "Khaki ", "gray", "brown" , "black", "Lime", "Azure", "Beige", "indigo", "maroon", "navy", "MediumSlateBlue", "Tan", "Magenta"]
         self.color_state = {}
 
 

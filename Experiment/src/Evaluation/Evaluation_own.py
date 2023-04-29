@@ -106,11 +106,11 @@ class Evaluator_own(object):
     def evaluate(self):
         result = None 
         result_temp = Evaluationresult_own(self._task)
-        model = self._task.fit_model(self._task.train_data, self._task.test_labels)            
+        model, model_hyperparameter = self._task.fit_model(self._task.train_data, self._task.test_labels)            
         # NOTE: masks are DataFrames => append expects Series
         result_temp.append(
             model=model
         )
         result = result_temp.finalize()
         self._result = result
-        return result
+        return result, model_hyperparameter

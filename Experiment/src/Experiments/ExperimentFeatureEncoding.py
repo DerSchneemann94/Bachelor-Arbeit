@@ -21,6 +21,7 @@ class ExperimentFeatureEncoding(object):
         labels: pd.Series,
         task_id_class_tuples: List[Tuple[int, Callable[..., ExternalDataTask]]],
         elapsed_time: float,
+        model_name: str,
         experiment_configuration: Dict,
         base_path: str = 'results',
         experiment_name: Optional[str] = None,
@@ -37,6 +38,7 @@ class ExperimentFeatureEncoding(object):
         self._elapsed_time = elapsed_time
         self._experiment_configuration = experiment_configuration
         self._task = None
+        self._model_name = model_name
 
         project_root = get_project_root()
         self._base_path = project_root / base_path
@@ -52,20 +54,21 @@ class ExperimentFeatureEncoding(object):
     def run(self):
         for task_id, task_class in self._task_id_class_tuples:
             self._result[task_id] = {}
-            self.task:ExternalDataTask = task_class(seed=self._seed, data=self._encoded_data, labels=self._labels)
+            self.task:ExternalDataTask = task_class(seed=self._seed, data=self._encoded_data, labels=self._labels, model_name=self._model_name)
             try:
                 evaluator = Evaluator_own(
                     task=self.task,
                     seed=self._seed,
                 )
-                evalutation_result = evaluator.evaluate()
+                evalutation_result, model_hyperparameter = evaluator.evaluate()
                 result = {
                     "performance" : evalutation_result,
                     "elapsed_train_time": self._elapsed_time,
                     "experiment_config": self._experiment_configuration,
                     "dataset_characteristic": self._dataset_characteristic,
                     "test_data": self.task.test_data,
-                    "train_data": self.task.train_data
+                    "train_data": self.task.train_data,
+                    "model_hyperparameter": model_hyperparameter
                 }
                 return result
                 

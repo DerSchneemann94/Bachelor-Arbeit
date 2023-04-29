@@ -19,8 +19,11 @@ class OrdinalEncoderImpl(EncoderInterface):
         try:
             encoded_dataframe = encoder.transform(dataframe)
             encoded_dataframe = pd.DataFrame(encoded_dataframe)
-            dataframe = self.rename_column(feature_name, encoded_dataframe)
-            return dataframe
+            if 0 not in encoded_dataframe[encoded_dataframe.columns[0]].unique():
+                for index in encoded_dataframe.index:
+                    encoded_dataframe.loc[index] = encoded_dataframe.loc[index] - 1  
+            encoded_dataframe = self.rename_column(feature_name, encoded_dataframe)
+            return encoded_dataframe
         except Exception as error:
             raise error
 
